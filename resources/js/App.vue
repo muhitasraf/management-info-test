@@ -1,50 +1,53 @@
 <template>
-    <!-- Main sidebar -->
-    <div class="sidebar sidebar-dark sidebar-main sidebar-expand-lg">
+    <!-- Main navbar -->
+    <Navbar></Navbar>
+    <!-- /main navbar -->
 
-        <!-- Sidebar content -->
-        <Sidebar></Sidebar>
-        <!-- /sidebar content -->
+    <!-- Page content -->
+    <div class="page-content">
 
-    </div>
-    <!-- /main sidebar -->
+        <!-- Main sidebar -->
+        <div class="sidebar sidebar-dark sidebar-main sidebar-expand-lg">
 
-    <!-- Main content -->
-    <div class="content-wrapper">
+            <!-- Sidebar content -->
+            <Sidebar></Sidebar>
+            <!-- /sidebar content -->
 
-        <!-- Page header -->
-        <Header></Header>
-        <!-- /page header -->
+        </div>
+        <!-- /main sidebar -->
 
-        <!-- Inner content -->
-        <div class="content-inner">
+        <!-- Main content -->
+        <div class="content-wrapper">
 
-            <!-- Content area -->
-            <div class="content">
-                <!-- Basic card -->
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="mb-0">Basic card</h5>
-                    </div>
-                    <div class="card-body">
+            <!-- Page header -->
+            <Header></Header>
+            <!-- /page header -->
+
+            <!-- Inner content -->
+            <div class="content-inner">
+
+                <!-- Content area -->
+                <div class="content">
+                    <!-- Basic card -->
+                    <div class="card">
                         <router-view v-slot="{ Component }">
                             <component :is="Component" />
                         </router-view>
                     </div>
+                    <!-- /basic card -->
                 </div>
-                <!-- /basic card -->
-            </div>
-            <!-- /content area -->
+                <!-- /content area -->
 
-            <!-- Footer -->
-            <Footer></Footer>
-            <!-- /footer -->
+                <!-- Footer -->
+                <Footer></Footer>
+                <!-- /footer -->
+
+            </div>
+            <!-- /inner content -->
 
         </div>
-        <!-- /inner content -->
-
+        <!-- /main content -->
     </div>
-    <!-- /main content -->
 </template>
 
 <style>
@@ -59,6 +62,7 @@
 }
 </style>
 <script>
+    import Navbar from './partials/Navbar.vue'
     import Footer from './partials/Footer.vue'
     import Sidebar from './partials/Sidebar.vue'
     import Header from './partials/Header.vue'
@@ -67,7 +71,7 @@
         name: "App",
 
         components: {
-            Footer, Sidebar, Header,
+            Navbar, Footer, Sidebar, Header,
         }
     }
 </script>

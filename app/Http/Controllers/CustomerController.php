@@ -17,15 +17,15 @@ class CustomerController extends Controller
         //     'name' => 'required | unique:customer',
         // ]);
 
-        $customer_name = $request->input('customer_name');
-        $display_name = $request->input('display_name');
-        $status = $request->input('status');
-
         $customer = new Customer();
 
-        $customer->name = $customer_name;
-        $customer->display_name = $display_name;
-        $customer->status = $status;
+        $customer->name = $request->input('customer_name');
+        $customer->nid = $request->input('nid');
+        $customer->bin = $request->input('bid');
+        $customer->present_address = $request->input('present_address');
+        $customer->permanent_address = $request->input('permanent_address');
+        $customer->nid = $request->input('nid');
+        $customer->is_alive = $request->input('is_alive');
 
         $customer->save();
         return response()->json($customer);
