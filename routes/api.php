@@ -21,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('company',[CompanyController::class,'index']);
 Route::post('company/create',[CompanyController::class,'store']);
+Route::post('company/edit/{id}',[CompanyController::class,'edit']);
+Route::post('company/update/{id}',[CompanyController::class,'update']);
+Route::post('company/delete/{id}',[CompanyController::class,'destroy']);

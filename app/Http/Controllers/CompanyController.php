@@ -12,7 +12,7 @@ class CompanyController extends Controller
     }
 
     public function store(Request $request){
-        // dd($request->all());
+
         // $request->validate([
         //     'name' => 'required | unique:company',
         // ]);
@@ -28,6 +28,32 @@ class CompanyController extends Controller
         $company->status = $status;
 
         $company->save();
-        return response()->json( $company);
+        return response()->json($company);
+    }
+
+    public function edit($id){
+        $single_company = Company::where('id',$id)->first();
+        return response()->json($single_company);
+    }
+
+    public function update($id, Request $request){
+
+        $company = Company::find($id);
+        $company_name = $request->input('company_name');
+        $display_name = $request->input('display_name');
+        $status = $request->input('status');
+
+        $company->name = $company_name;
+        $company->display_name = $display_name;
+        $company->status = $status;
+        $company->save();
+        return response()->json($company);
+
+    }
+
+    public function destroy($id){
+        $company = Company::find($id);
+        $company->delete();
+        return response()->json($company);
     }
 }
