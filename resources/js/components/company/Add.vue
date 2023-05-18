@@ -1,70 +1,81 @@
 <template>
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6 pt-4">
+    <div class="card-header">
+        <h5 class="mb-0">Create Company</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
 
-            <!-- Vertical form -->
-            <div class="card">
+            <div class="col-md-6 pt-4">
 
-                <div class="card-body">
-                    <form @submit.prevent="submit">
-                        <div class="form-group">
-                            <label>Comapany Name</label>
-                            <input v-model="field.company_name" type="text" class="form-control company_name">
-                            <input v-model="company_id" type="hidden">
-                        </div>
+                <!-- Vertical form -->
+                <div class="card">
 
-                        <div class="form-group">
-                            <label>Display Name</label>
-                            <input v-model="field.display_name" type="text" class="form-control display_name">
-                        </div>
+                    <div class="card-body">
+                        <form @submit.prevent="submit">
+                            <div class="form-group">
+                                <label>Comapany Name</label>
+                                <input v-model="field.company_name" type="text" class="form-control company_name">
+                                <input v-model="company_id" type="hidden">
+                            </div>
 
-                        <div class="form-group">
-                            <label>Company Status</label>
-                            <select v-model="field.status" class="form-control status">
-                                <option value="1">Active</option>
-                                <option value="0">InActive</option>
-                            </select>
-                        </div>
-                        <span v-if="errors.company_name">{{ errors.company_name }}</span>
-                        <div class="text-right pt-1">
-                            <input type="hidden" v-model="submitStatus">
-                            <button type="submit" class="btn btn-primary">{{ ButtonText }}<i class="icon-paperplane ml-2"></i></button>
-                        </div>
-                    </form>
+                            <div class="form-group">
+                                <label>Display Name</label>
+                                <input v-model="field.display_name" type="text" class="form-control display_name">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Company Status</label>
+                                <select v-model="field.status" class="form-control status">
+                                    <option value="1">Active</option>
+                                    <option value="0">InActive</option>
+                                </select>
+                            </div>
+                            <span v-if="errors.company_name">{{ errors.company_name }}</span>
+                            <div class="text-right pt-1">
+                                <input type="hidden" v-model="submitStatus">
+                                <button type="submit" class="btn btn-primary">{{ ButtonText }}<i class="icon-paperplane ml-2"></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+                <!-- /vertical form -->
+
             </div>
-            <!-- /vertical form -->
 
         </div>
-        <div class="col-md-2"></div>
-    </div>
 
-    <div class="row">
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>SN</th>
-                        <th>Company Name</th>
-                        <th>Display Name</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(company, index) in companies" :key="company.id">
-                        <td>{{ index + 1 }}</td>
-                        <td>{{ company.name }}</td>
-                        <td>{{ company.display_name }}</td>
-                        <td>{{ company.status == 1 ? 'Active' : 'In-Active' }}</td>
-                        <td>
-                            <button @click="editCompany(company.id)" class="btn btn-sm btn-info mx-1">Edit</button>
-                            <button @click="deleteCompany(company.id)" class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="row">
+            <div class="col-md-12 pt-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>SN</th>
+                                        <th>Company Name</th>
+                                        <th>Display Name</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(company, index) in companies" :key="company.id">
+                                        <td>{{ index + 1 }}</td>
+                                        <td>{{ company.name }}</td>
+                                        <td>{{ company.display_name }}</td>
+                                        <td>{{ company.status == 1 ? 'Active' : 'In-Active' }}</td>
+                                        <td>
+                                            <button @click="editCompany(company.id)" class="btn btn-sm btn-info mx-1">Edit</button>
+                                            <button @click="deleteCompany(company.id)" class="btn btn-sm btn-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -93,7 +104,6 @@
                     .then((response)=>{
                         this.field = {};
                         this.errors = {};
-                        // this.$router.push({name: "Company"});
                         this.getCompany();
                     })
                     .catch((error)=>{

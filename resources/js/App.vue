@@ -7,13 +7,7 @@
     <div class="page-content">
 
         <!-- Main sidebar -->
-        <div class="sidebar sidebar-dark sidebar-main sidebar-expand-lg">
-
-            <!-- Sidebar content -->
-            <Sidebar></Sidebar>
-            <!-- /sidebar content -->
-
-        </div>
+        <Sidebar></Sidebar>
         <!-- /main sidebar -->
 
         <!-- Main content -->
@@ -29,7 +23,7 @@
                 <!-- Content area -->
                 <div class="content">
                     <!-- Basic card -->
-                    <div class="card">
+                    <div class="card p-1">
                         <router-view v-slot="{ Component }">
                             <component :is="Component" />
                         </router-view>
@@ -63,15 +57,15 @@
 </style>
 <script>
     import Navbar from './partials/Navbar.vue'
-    import Footer from './partials/Footer.vue'
-    import Sidebar from './partials/Sidebar.vue'
     import Header from './partials/Header.vue'
+    import Sidebar from './partials/Sidebar.vue'
+    import Footer from './partials/Footer.vue'
 
     export default {
         name: "App",
 
         components: {
-            Navbar, Footer, Sidebar, Header,
+            Navbar, Header, Sidebar, Footer,
         }
     }
 </script>

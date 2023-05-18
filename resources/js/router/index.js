@@ -17,10 +17,10 @@ export const routes = [
     { name: 'Company', path: '/company', component: Company },
     { name: 'CompanyCreate', path: '/company/create', component: CompanyCreate },
     // {  name: 'EditCompany', path: '/company/edit/:id', component: EditCompany },
-    
+
     { name: 'Customer', path: '/customer', component: Customer },
     { name: 'CustomerCreate', path: '/customer/create', component: CustomerCreate },
-    { name: 'EditCustomer', path: '/customer/edit/:id', component: EditCustomer }
+    { name: 'EditCustomer', path: '/customer/edit/:id', component: CustomerCreate }
 ];
 
 const router = createRouter({

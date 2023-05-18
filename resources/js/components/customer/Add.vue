@@ -14,7 +14,6 @@
                 <div class="card">
 
                     <div class="card-body">
-
                         <form @submit.prevent="submit">
                             <div class="row g-3">
                                 <div class="col">
@@ -88,12 +87,16 @@
                                 </div>
                                 <div class="col">
                                     <label>Is Alive</label>
-                                    <input type="text" v-model="field.is_alive" class="form-control" placeholder="">
+                                    <select v-model="field.is_alive" name="is_alive" class="form-select">
+                                        <option value="" disabled>Please select one</option>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
                                 </div>
                             </div>
                             <span v-if="errors.company_name">{{ errors.company_name }}</span>
                             <div class="text-right pt-1">
-                                <button type="submit" class="btn btn-primary">Submit<i class="icon-paperplane ml-2"></i></button>
+                                <button type="submit" class="btn btn-primary">{{ buttonText }}<i class="icon-paperplane ml-2"></i></button>
                             </div>
                         </form>
                     </div>
@@ -106,27 +109,52 @@
     </div>
 </template>
 
+<style>
+
+</style>
+
 <script>
     export default{
         data() {
             return {
                 field : {},
                 errors : {},
+                buttonText : '',
+                id : '',
             };
+        },
+        mounted(){
+            this.id = this.$route.params.id ?? ''
+            console.log('id m='+this.id)
+            this.buttonText = this.id == '' ? 'Insert' : 'Update'
+            // if(this.id==''){
+            //     this.buttonText = 'Insert'
+            // }else{
+            //     this.buttonText = 'Update'
+            // }
+            axios
+            .post("/api/customer/edit/"+this.id)
+            .then((response)=>{
+                console.log(response.data)
+                this.field.customer_name = response.data.name
+            })
+            .catch((error)=>{
+                console.log(error);
+            });
         },
         methods :{
             submit(){
-                //console.log(this.field)
-                axios
-                .post("/api/customer/create", this.field)
-                .then((response)=>{
-                    this.field = {};
-                    this.errors = {};
-                    this.$router.push({name: "Customer"});
-                })
-                .catch((error)=>{
-                    console.log(error);
-                });
+                this.id != '' ? this.createUpdate("/api/customer/update/"+this.id, this.field)
+                : this.createUpdate("/api/customer/create", this.field);
+                // if(this.id){
+                //     this.createUpdate("/api/customer/update/"+this.id, this.field);
+                // }else{
+                //     this.createUpdate("/api/customer/create", this.field);
+                // }
+
+            },
+            createUpdate(url, params){
+
             },
         },
     }
