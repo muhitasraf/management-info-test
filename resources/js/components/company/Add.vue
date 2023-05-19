@@ -26,6 +26,7 @@
                             <div class="form-group">
                                 <label>Company Status</label>
                                 <select v-model="field.status" class="form-control status">
+                                    <option disabled value="">Select Status</option>
                                     <option value="1">Active</option>
                                     <option value="0">InActive</option>
                                 </select>
@@ -85,10 +86,12 @@
     export default{
         data() {
             return {
-                field : {},
+                field : {
+                    status : '',
+                },
                 errors : {},
                 'companies' : [],
-                'ButtonText' : 'Submit',
+                'ButtonText' : 'Insert',
                 'submitStatus' : '0',
                 'company_id' : '',
             };
@@ -115,7 +118,7 @@
                     .then((response)=>{
                         this.field = {};
                         this.errors = {};
-                        this.ButtonText = 'Submit'
+                        this.ButtonText = 'Insert'
                         this.submitStatus = 0;
                         this.getCompany();
                     })

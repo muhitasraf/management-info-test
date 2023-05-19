@@ -1,57 +1,24 @@
 <template>
     <div class="card-header">
-        <h5 class="mb-0">Create Company</h5>
+        <h5 class="mb-0">Single Customer</h5>
     </div>
     <div class="card-body">
-        <router-link to="/customer/create">
+        <router-link to="/customer">
             <button class="btn btn-sm btn-info">Customer List</button>
         </router-link>
         <div class="table-responsive mt-2">
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>SN</th>
-                        <th>Customer Name</th>
-                        <th>NID</th>
-                        <th>BIN</th>
-                        <th>Present Address</th>
-                        <th>Permanent Address</th>
-                        <th>Mobile Office</th>
-                        <th>Mobile Home</th>
-                        <th>DOB</th>
-                        <th>Father</th>
-                        <th>Mother</th>
-                        <th>Spouse</th>
-                        <th>No of child</th>
-                        <th>Occupation</th>
-                        <th>Is alive</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(customer, index) in customers" :key="customer.id">
-                        <td>{{ index + 1 }}</td>
-                        <td>{{ customer.name }}</td>
-                        <td>{{ customer.nid }}</td>
-                        <td>{{ customer.bin }}</td>
-                        <td>{{ customer.present_address }}</td>
-                        <td>{{ customer.permanent_address }}</td>
-                        <td>{{ customer.mobile }}</td>
-                        <td>{{ customer.mobile_1 }}</td>
-                        <td>{{ customer.DOB }}</td>
-                        <td>{{ customer.father }}</td>
-                        <td>{{ customer.mother }}</td>
-                        <td>{{ customer.spouse }}</td>
-                        <td>{{ customer.no_of_child }}</td>
-                        <td>{{ customer.occupation }}</td>
-                        <td>{{ customer.is_alive }}</td>
-                        <td>
-                            <router-link :to="'/customer/edit/'+customer.id"> <button class="btn btn-sm btn-info mx-1">Edit</button></router-link>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <p>Name: {{ customers.name }}</p>
+            <p>NID: {{ customers.nid }}</p>
+            <p>BIN: {{ customers.bin }}</p>
+            <p>Present Address: {{ customers.present_address }}</p>
+            <p>Permanent Add: {{ customers.permanent_address }}</p>
+            <p>Mobile: {{ customers.mobile }}</p>
+            <p>Father: {{ customers.father }}</p>
+            <p>Mother: {{ customers.mother }}</p>
+            <p>DOB: {{ customers.DBO }}</p>
+            <p>Spouse: {{ customers.spouse }}</p>
+            <p>No Of Child: {{ customers.no_of_child }}</p>
+            <p>Occupation: {{ customers.occupation }}</p>
         </div>
     </div>
 </template>
@@ -65,7 +32,7 @@
         },
         mounted(){
             axios
-            .get("/api/customer")
+            .post("/api/customer/view/"+this.$route.params.id)
             .then((response)=>{
                 this.customers = response.data
             })

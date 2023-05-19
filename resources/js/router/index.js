@@ -6,8 +6,9 @@ import Home from '../pages/Home.vue';
 import Company from '../components/company/Show.vue';
 import CompanyCreate from '../components/company/Add.vue';
 
-import Customer from '../components/customer/Show.vue';
+import CustomerList from '../components/customer/List.vue';
 import CustomerCreate from '../components/customer/Add.vue';
+import ViewCustomer from '../components/customer/Show.vue';
 import EditCustomer from '../components/customer/Edit.vue';
 
 
@@ -18,9 +19,10 @@ export const routes = [
     { name: 'CompanyCreate', path: '/company/create', component: CompanyCreate },
     // {  name: 'EditCompany', path: '/company/edit/:id', component: EditCompany },
 
-    { name: 'Customer', path: '/customer', component: Customer },
+    { name: 'CustomerList', path: '/customer', component: CustomerList },
     { name: 'CustomerCreate', path: '/customer/create', component: CustomerCreate },
-    { name: 'EditCustomer', path: '/customer/edit/:id', component: CustomerCreate }
+    { name: 'ViewCustomer', path: '/customer/view/:id', component: ViewCustomer },
+    { name: 'EditCustomer', path: '/customer/edit/:id', component: EditCustomer }
 ];
 
 const router = createRouter({

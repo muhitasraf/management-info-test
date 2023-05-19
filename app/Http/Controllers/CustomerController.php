@@ -16,19 +16,31 @@ class CustomerController extends Controller
         // $request->validate([
         //     'name' => 'required | unique:customer',
         // ]);
-
+        // dd($request->input('customer_name'));
         $customer = new Customer();
 
         $customer->name = $request->input('customer_name');
         $customer->nid = $request->input('nid');
-        $customer->bin = $request->input('bid');
+        $customer->bin = $request->input('bin');
         $customer->present_address = $request->input('present_address');
         $customer->permanent_address = $request->input('permanent_address');
-        $customer->nid = $request->input('nid');
+        $customer->mobile = $request->input('mobile');
+        $customer->mobile_1 = $request->input('mobile_1');
+        $customer->DOB = $request->input('DOB');
+        $customer->father = $request->input('father');
+        $customer->mother = $request->input('mother');
+        $customer->spouse = $request->input('spouse');
+        $customer->no_of_child = $request->input('no_of_child');
+        $customer->occupation = $request->input('occupation');
         $customer->is_alive = $request->input('is_alive');
 
         $customer->save();
         return response()->json($customer);
+    }
+
+    public function show($id){
+        $single_customer = Customer::where('id',$id)->first();
+        return response()->json($single_customer);
     }
 
     public function edit($id){
@@ -39,13 +51,20 @@ class CustomerController extends Controller
     public function update($id, Request $request){
 
         $customer = Customer::find($id);
-        $customer_name = $request->input('customer_name');
-        $display_name = $request->input('display_name');
-        $status = $request->input('status');
-
-        $customer->name = $customer_name;
-        $customer->display_name = $display_name;
-        $customer->status = $status;
+        $customer->name = $request->input('customer_name');
+        $customer->nid = $request->input('nid');
+        $customer->bin = $request->input('bin');
+        $customer->present_address = $request->input('present_address');
+        $customer->permanent_address = $request->input('permanent_address');
+        $customer->mobile = $request->input('mobile');
+        $customer->mobile_1 = $request->input('mobile_1');
+        $customer->DOB = $request->input('DOB');
+        $customer->father = $request->input('father');
+        $customer->mother = $request->input('mother');
+        $customer->spouse = $request->input('spouse');
+        $customer->no_of_child = $request->input('no_of_child');
+        $customer->occupation = $request->input('occupation');
+        $customer->is_alive = $request->input('is_alive');
         $customer->save();
         return response()->json($customer);
 

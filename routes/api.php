@@ -28,6 +28,7 @@ Route::post('company/delete/{id}',[CompanyController::class,'destroy']);
 
 Route::get('customer',[CustomerController::class,'index']);
 Route::post('customer/create',[CustomerController::class,'store']);
+Route::post('customer/view/{id}',[CustomerController::class,'show']);
 Route::post('customer/edit/{id}',[CustomerController::class,'edit']);
 Route::post('customer/update/{id}',[CustomerController::class,'update']);
 Route::post('customer/delete/{id}',[CustomerController::class,'destroy']);
