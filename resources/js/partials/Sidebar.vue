@@ -55,8 +55,32 @@
                     <li class="nav-item nav-item-submenu">
                         <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Supplier</span></a>
                         <ul class="nav-group-sub collapse">
-                            <li class="nav-item"><router-link to="/customer/create" class="nav-item nav-link">Cteate</router-link></li>
-                            <li class="nav-item"><router-link to="/customer" class="nav-item nav-link">List</router-link></li>
+                            <li class="nav-item"><router-link to="/supplier/create" class="nav-item nav-link">Cteate</router-link></li>
+                            <li class="nav-item"><router-link to="/supplier" class="nav-item nav-link">List</router-link></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Employee</span></a>
+                        <ul class="nav-group-sub collapse">
+                            <li class="nav-item"><router-link to="/employee/create" class="nav-item nav-link">Cteate</router-link></li>
+                            <li class="nav-item"><router-link to="/employee" class="nav-item nav-link">List</router-link></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Employee Salary</span></a>
+                        <ul class="nav-group-sub collapse">
+                            <li class="nav-item"><router-link to="/employee/create" class="nav-item nav-link">Cteate</router-link></li>
+                            <li class="nav-item"><router-link to="/employee" class="nav-item nav-link">List</router-link></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Units</span></a>
+                        <ul class="nav-group-sub collapse">
+                            <li class="nav-item"><router-link to="/unit/create" class="nav-item nav-link">Cteate</router-link></li>
+                            <li class="nav-item"><router-link to="/unit" class="nav-item nav-link">List</router-link></li>
                         </ul>
                     </li>
                     <!-- /layout -->
