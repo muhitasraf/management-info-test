@@ -61,6 +61,30 @@
                     </li>
 
                     <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Division</span></a>
+                        <ul class="nav-group-sub collapse">
+                            <li class="nav-item"><router-link to="/division/create" class="nav-item nav-link">Cteate</router-link></li>
+                            <li class="nav-item"><router-link to="/division" class="nav-item nav-link">List</router-link></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Department</span></a>
+                        <ul class="nav-group-sub collapse">
+                            <li class="nav-item"><router-link to="/department/create" class="nav-item nav-link">Cteate</router-link></li>
+                            <li class="nav-item"><router-link to="/department" class="nav-item nav-link">List</router-link></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Designation</span></a>
+                        <ul class="nav-group-sub collapse">
+                            <li class="nav-item"><router-link to="/designation/create" class="nav-item nav-link">Cteate</router-link></li>
+                            <li class="nav-item"><router-link to="/designation" class="nav-item nav-link">List</router-link></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item nav-item-submenu">
                         <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Employee</span></a>
                         <ul class="nav-group-sub collapse">
                             <li class="nav-item"><router-link to="/employee/create" class="nav-item nav-link">Cteate</router-link></li>

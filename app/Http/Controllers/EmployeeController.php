@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
+use App\Models\Designation;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
@@ -38,7 +40,9 @@ class EmployeeController extends Controller
     }
 
     public function show($id){
-        $single_employee = Employee::where('id',$id)->first();
+        $departments = Department::get();
+        $desigmation = Designation::get();
+        $single_employee = Employee::where('id',$id)->leftJoin()->first();
         return response()->json($single_employee);
     }
 

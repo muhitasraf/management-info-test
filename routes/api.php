@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DesignationController;
+use App\Http\Controllers\DistrictController;
+use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
@@ -55,3 +59,27 @@ Route::post('unit/create',[UnitController::class,'store']);
 Route::get('unit/edit/{id}',[UnitController::class,'edit']);
 Route::post('unit/update/{id}',[UnitController::class,'update']);
 Route::post('unit/delete/{id}',[UnitController::class,'destroy']);
+
+Route::get('designation',[DesignationController::class,'index']);
+Route::post('designation/create',[DesignationController::class,'store']);
+Route::get('designation/edit/{id}',[DesignationController::class,'edit']);
+Route::post('designation/update/{id}',[DesignationController::class,'update']);
+Route::post('designation/delete/{id}',[DesignationController::class,'destroy']);
+
+Route::get('department',[DepartmentController::class,'index']);
+Route::post('department/create',[DepartmentController::class,'store']);
+Route::get('department/edit/{id}',[DepartmentController::class,'edit']);
+Route::post('department/update/{id}',[DepartmentController::class,'update']);
+Route::post('department/delete/{id}',[DepartmentController::class,'destroy']);
+
+Route::get('district',[DistrictController::class,'index']);
+Route::post('district/create',[DistrictController::class,'store']);
+Route::get('district/edit/{id}',[DistrictController::class,'edit']);
+Route::post('district/update/{id}',[DistrictController::class,'update']);
+Route::post('district/delete/{id}',[DistrictController::class,'destroy']);
+
+Route::get('division',[DivisionController::class,'index']);
+Route::post('division/create',[DivisionController::class,'store']);
+Route::get('division/edit/{id}',[DivisionController::class,'edit']);
+Route::post('division/update/{id}',[DivisionController::class,'update']);
+Route::post('division/delete/{id}',[DivisionController::class,'destroy']);
