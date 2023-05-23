@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('unions', function (Blueprint $table) {
             $table->id();
             $table->string('name',150);
-            $table->integer('district_id');
+            $table->integer('thana_id');
             $table->timestamps();
         });
     }

@@ -1,31 +1,31 @@
 <template>
     <div class="card-header">
-        <h5 class="mb-0">Create District</h5>
+        <h5 class="mb-0">Create Thana</h5>
     </div>
     <div class="card-body">
         <div class="row">
             <div class="d-grid gap-2 d-md-block">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#districtModal">Add New District</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#thanaModal">Add New Thana</button>
             </div>
 
-            <div class="modal fade" id="districtModal" tabindex="-1" aria-labelledby="districtModalLabel" aria-hidden="true" ref="myModalRef">
+            <div class="modal fade" id="thanaModal" tabindex="-1" aria-labelledby="thanaModalLabel" aria-hidden="true" ref="myModalRef">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form @submit.prevent="submit">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="districtModalLabel">Create District</h5>
+                                <h5 class="modal-title" id="thanaModalLabel">Create thana</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="mb-1">
-                                    <label for="district" class="col-form-label">District Name:</label>
-                                    <input type="text" v-model="fields.district" class="form-control" id="district" placeholder="District Name">
+                                    <label for="thana" class="col-form-label">thana Name:</label>
+                                    <input type="text" v-model="fields.thana" class="form-control" id="thana" placeholder="thana Name">
                                 </div>
                                 <div class="mb-1">
-                                    <label for="division_id" class="col-form-label">Division:</label>
-                                    <select v-model="fields.division_id" class="form-control division_id" id="division_id">
-                                        <option disabled value="">Select Division</option>
-                                        <option v-for="division in divisions" v-bind:value="division.id">{{ division.name }}</option>
+                                    <label for="district_id" class="col-form-label">District:</label>
+                                    <select v-model="fields.district_id" class="form-control district_id" id="district_id">
+                                        <option disabled value="">Select District</option>
+                                        <option v-for="district in districts" v-bind:value="district.id">{{ district.name }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -48,19 +48,19 @@
                                 <thead>
                                     <tr>
                                         <th>SN</th>
-                                        <th>District Name</th>
-                                        <th>Division Name</th>
+                                        <th>thana Name</th>
+                                        <th>district Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(district, index) in districts" :key="district.id">
+                                    <tr v-for="(thana, index) in thanas" :key="thana.id">
                                         <td>{{ index + 1 }}</td>
-                                        <td>{{ district.district_name }}</td>
-                                        <td>{{ district.division_name }}</td>
+                                        <td>{{ thana.thana_name }}</td>
+                                        <td>{{ thana.district_name }}</td>
                                         <td>
-                                            <button @click="editDistrict(district.id)" class="btn btn-sm btn-info mx-1" data-bs-toggle="modal" data-bs-target="#districtModal">Edit</button>
-                                            <button @click="deleteDistrict(district.id)" class="btn btn-sm btn-danger">Delete</button>
+                                            <button @click="editThana(thana.id)" class="btn btn-sm btn-info mx-1" data-bs-toggle="modal" data-bs-target="#thanaModal">Edit</button>
+                                            <button @click="deleteThana(thana.id)" class="btn btn-sm btn-danger">Delete</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -79,19 +79,19 @@
         data() {
             return {
                 fields : {
-                    division_id: '',
+                    district_id: '',
                 },
                 errors : {},
+                'thanas' : [],
                 'districts' : [],
-                'divisions' : [],
                 'ButtonText' : 'Insert',
                 'submitStatus' : '0',
-                'district_id' : '',
+                'thana_id' : '',
             };
         },
         created() {
+            this.getThana();
             this.getDistrict();
-            this.getDivisionId();
         },
         mounted(){
 
@@ -101,65 +101,66 @@
             submit(){
                 if(this.submitStatus==0){
                     axios
-                    .post("/api/district/create", this.fields)
+                    .post("/api/thana/create", this.fields)
                     .then((response)=>{
                         this.fields = {};
                         this.errors = {};
-                        // $('#districtModal').modal('hide');
+                        // $('#thanaModal').modal('hide');
                         document.getElementById('close').click();
-                        this.getDistrict();
+                        this.getThana();
                     })
                     .catch((error)=>{
                         console.log(error);
                     });
                 }else{
                     axios
-                    .post("/api/district/update/"+this.district_id, this.fields)
+                    .post("/api/thana/update/"+this.thana_id, this.fields)
                     .then((response)=>{
-                        // $('#districtModal').modal('hide');
+                        // $('#thanaModal').modal('hide');
                         document.getElementById('close').click();
                         this.fields = {};
-                        this.fields.division_id = ''
+                        this.fields.district_id = ''
                         this.errors = {};
                         this.ButtonText = 'Insert'
                         this.submitStatus = 0;
-                        this.getDistrict();
+                        this.getThana();
                     })
                     .catch((error)=>{
                         console.log(error);
                     });
                 }
             },
-            getDistrict(){
+            getThana(){
                 axios
-                .get("/api/district")
+                .get("/api/thana")
                 .then((response)=>{
-                    this.districts = response.data
+                    this.thanas = response.data
+                    console.log(this.thanas)
                 })
                 .catch((error)=>{
                     console.log(error);
                 });
             },
-            editDistrict(id){
+            editThana(id){
                 axios
-                .get("/api/district/edit/"+id)
+                .get("/api/thana/edit/"+id)
                 .then((response)=>{
-                    this.fields.district = response.data.name
-                    this.fields.division_id = response.data.division_id
+                    this.fields.thana = response.data.name
+                    this.fields.district_id = response.data.district_id
                     this.ButtonText = 'Update'
                     this.submitStatus = 1;
-                    this.district_id = response.data.id
+                    this.thana_id = response.data.id
                 })
                 .catch((error)=>{
                     console.log(error);
                 });
             },
-            deleteDistrict(id){
+            deleteThana(id){
                 if(confirm("Do you really want to delete?")){
                     axios
-                    .post("/api/district/delete/"+id)
+                    .post("/api/thana/delete/"+id)
                     .then((response)=>{
-                        this.getDistrict();
+                        this.getThana();
                     })
                     .catch((error)=>{
                         console.log(error);
@@ -168,13 +169,13 @@
             },
             clearInput(){
                 this.fields = {}
-                this.fields.division_id = ''
+                this.fields.district_id = ''
             },
-            getDivisionId(){
+            getDistrict(){
                 axios
-                .get("/api/get_data/divisions")
+                .get("/api/get_data/districts")
                 .then((response)=>{
-                     this.divisions = response.data
+                    this.districts = response.data
                 })
                 .catch((error)=>{
                     console.log(error);

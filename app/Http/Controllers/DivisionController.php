@@ -21,6 +21,7 @@ class DivisionController extends Controller
     }
 
     public function edit($id){
+        return $id; exit;
         $single_division = Division::where('id',$id)->first();
         return response()->json($single_division);
     }

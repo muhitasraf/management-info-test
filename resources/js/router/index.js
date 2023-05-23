@@ -36,6 +36,14 @@ import CreateDistrict from '../components/address/district/Add.vue';
 import Division from '../components/address/division/Show.vue';
 import CreateDivision from '../components/address/division/Add.vue';
 
+import Thana from '../components/address/thana/Show.vue';
+import CreateThana from '../components/address/thana/Add.vue';
+
+import Union from '../components/address/union/Show.vue';
+import CreateUnion from '../components/address/union/Add.vue';
+
+import CreateMowza from '../components/address/mowza/Add.vue';
+
 export const routes = [
     { name: 'Home', path: '/', component: Home },
 
@@ -74,6 +82,14 @@ export const routes = [
 
     { name: 'Division', path: '/division', component: Division },
     { name: 'CreateDivision', path: '/division/create', component: CreateDivision },
+
+    { name: 'Thana', path: '/thana', component: Thana },
+    { name: 'CreateThana', path: '/thana/create', component: CreateThana },
+
+    { name: 'Union', path: '/union', component: Union },
+    { name: 'CreateUnion', path: '/union/create', component: CreateUnion },
+
+    { name: 'CreateMowza', path: '/mowza/create', component: CreateMowza },
 ];
 
 const router = createRouter({

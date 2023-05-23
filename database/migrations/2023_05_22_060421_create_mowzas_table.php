@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name',150);
             $table->integer('division_id');
             $table->integer('district_id');
-            $table->integer('union_id');
             $table->integer('thana_id');
+            $table->integer('union_id');
             $table->timestamps();
         });
     }

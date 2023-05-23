@@ -16,7 +16,7 @@ class CompanyController extends Controller
         // $request->validate([
         //     'name' => 'required | unique:company',
         // ]);
-        
+
         $company = new Company();
 
         $company->name = $request->input('company_name');

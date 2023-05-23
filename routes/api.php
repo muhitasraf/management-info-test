@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommonController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DepartmentController;
@@ -7,7 +8,10 @@ use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\MowzaController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\ThanaController;
+use App\Http\Controllers\UnionController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -83,3 +87,25 @@ Route::post('division/create',[DivisionController::class,'store']);
 Route::get('division/edit/{id}',[DivisionController::class,'edit']);
 Route::post('division/update/{id}',[DivisionController::class,'update']);
 Route::post('division/delete/{id}',[DivisionController::class,'destroy']);
+
+Route::get('thana',[ThanaController::class,'index']);
+Route::post('thana/create',[ThanaController::class,'store']);
+Route::get('thana/edit/{id}',[ThanaController::class,'edit']);
+Route::post('thana/update/{id}',[ThanaController::class,'update']);
+Route::post('thana/delete/{id}',[ThanaController::class,'destroy']);
+
+Route::get('union',[UnionController::class,'index']);
+Route::post('union/create',[UnionController::class,'store']);
+Route::get('union/edit/{id}',[UnionController::class,'edit']);
+Route::post('union/update/{id}',[UnionController::class,'update']);
+Route::post('union/delete/{id}',[UnionController::class,'destroy']);
+
+Route::get('mowza',[MowzaController::class,'index']);
+Route::post('mowza/create',[MowzaController::class,'store']);
+Route::get('mowza/edit/{id}',[MowzaController::class,'edit']);
+Route::post('mowza/update/{id}',[MowzaController::class,'update']);
+Route::post('mowza/delete/{id}',[MowzaController::class,'destroy']);
+
+Route::get('get_data/{table}/{column}/{id}',[CommonController::class,'getData']);
+Route::get('get_data/{table}/{column}',[CommonController::class,'getData']);
+Route::get('get_data/{table}',[CommonController::class,'getData']);

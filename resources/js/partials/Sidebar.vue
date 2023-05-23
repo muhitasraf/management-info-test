@@ -69,6 +69,38 @@
                     </li>
 
                     <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link"><i class="ph-layout"></i> <span>District</span></a>
+                        <ul class="nav-group-sub collapse">
+                            <li class="nav-item"><router-link to="/district/create" class="nav-item nav-link">Cteate</router-link></li>
+                            <li class="nav-item"><router-link to="/district" class="nav-item nav-link">List</router-link></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Thana</span></a>
+                        <ul class="nav-group-sub collapse">
+                            <li class="nav-item"><router-link to="/thana/create" class="nav-item nav-link">Cteate</router-link></li>
+                            <li class="nav-item"><router-link to="/thana" class="nav-item nav-link">List</router-link></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Union</span></a>
+                        <ul class="nav-group-sub collapse">
+                            <li class="nav-item"><router-link to="/union/create" class="nav-item nav-link">Cteate</router-link></li>
+                            <li class="nav-item"><router-link to="/union" class="nav-item nav-link">List</router-link></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Mowza</span></a>
+                        <ul class="nav-group-sub collapse">
+                            <li class="nav-item"><router-link to="/mowza/create" class="nav-item nav-link">Cteate</router-link></li>
+                            <li class="nav-item"><router-link to="/mowza" class="nav-item nav-link">List</router-link></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item nav-item-submenu">
                         <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Department</span></a>
                         <ul class="nav-group-sub collapse">
                             <li class="nav-item"><router-link to="/department/create" class="nav-item nav-link">Cteate</router-link></li>
