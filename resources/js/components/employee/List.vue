@@ -48,15 +48,15 @@
                             <td>{{ employee.permanent_address }}</td>
                             <td>{{ employee.personal_mobile }}</td>
                             <td>{{ employee.office_mobile }}</td>
-                            <td>{{ employee.status == 1 ? "Yes" : "No" }}</td>
-                            <td>
+                            <td>{{ employee.status == 1 ? "Active" : "In-Active" }}</td>
+                            <td class="text-center">
                                 <router-link :to="'/employee/view/'+employee.id">
-                                    <button class="btn btn-sm btn-info mx-1">View</button>
+                                    <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-eye"></i></button>
                                 </router-link>
                                 <router-link :to="'/employee/edit/'+employee.id">
-                                    <button class="btn btn-sm btn-info mx-1">Edit</button>
+                                    <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-pencil"></i></button>
                                 </router-link>
-                                <button @click="deleteEmployee(employee.id)" class="btn btn-sm btn-danger">Delete</button>
+                                <button @click="deleteEmployee(employee.id)" class="btn btn-sm btn-danger"><i class="ph ph-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>

@@ -44,6 +44,11 @@ import CreateUnion from '../components/address/union/Add.vue';
 
 import CreateMowza from '../components/address/mowza/Add.vue';
 
+import CreateEmployeeSalary from '../components/employee_salary/Add.vue';
+
+import Booking from '../components/booking/Show.vue';
+import CreateBooking from '../components/booking/Add.vue';
+
 export const routes = [
     { name: 'Home', path: '/', component: Home },
 
@@ -90,6 +95,11 @@ export const routes = [
     { name: 'CreateUnion', path: '/union/create', component: CreateUnion },
 
     { name: 'CreateMowza', path: '/mowza/create', component: CreateMowza },
+
+    { name: 'CreateEmployeeSalary', path: '/employee_salary/create', component: CreateEmployeeSalary },
+
+    { name: 'Booking', path: '/booking', component: Booking },
+    { name: 'CreateBooking', path: '/booking/create', component: CreateBooking },
 ];
 
 const router = createRouter({

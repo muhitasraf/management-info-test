@@ -22,13 +22,19 @@
                                 </div>
                                 <div class="col">
                                     <label>Designation</label>
-                                    <input type="text" v-model="fields.designation" class="form-control" placeholder="Designation" aria-label="Designation">
+                                    <select v-model="fields.designation_id" name="designation_id" class="form-select designation_id">
+                                        <option value="" disabled>Please select one</option>
+                                        <option v-for="designation in designations" v-bind:value="designation.id">{{ designation.name }}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row g-3">
                                 <div class="col">
                                     <label>Department</label>
-                                    <input type="text" v-model="fields.department" class="form-control" placeholder="Department" aria-label="Department">
+                                    <select v-model="fields.department_id" name="department_id" class="form-select department_id">
+                                        <option value="" disabled>Please select one</option>
+                                        <option v-for="department in departments" v-bind:value="department.id">{{ department.name }}</option>
+                                    </select>
                                 </div>
                                 <div class="col">
                                     <label>Code</label>
@@ -118,26 +124,51 @@
             return {
                 fields : {
                     status : '',
+                    designation_id : '',
+                    department_id : '',
                 },
                 errors : {},
+                departments : [] ,
+                designations : [],
             };
         },
         mounted(){
-
+            this.getDepartment();
+            this.getDesignation();
         },
         methods :{
             submit(){
                 axios
-                    .post("/api/employee/create", this.fields)
-                    .then((response)=>{
-                        this.fields = {};
-                        this.errors = {};
-                        this.$router.push('/employee');
-                    })
-                    .catch((error)=>{
-                        console.log(error);
-                    });
-            }
+                .post("/api/employee/create", this.fields)
+                .then((response)=>{
+                    this.fields = {};
+                    this.errors = {};
+                    this.$router.push('/employee');
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
+            },
+            getDepartment(){
+                axios
+                .get("/api/department")
+                .then((response)=>{
+                    this.departments = response.data
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
+            },
+            getDesignation(){
+                axios
+                .get("/api/designation")
+                .then((response)=>{
+                    this.designations = response.data
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
+            },
         },
     }
 </script>

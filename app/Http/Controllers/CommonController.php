@@ -16,7 +16,6 @@ class CommonController extends Controller
                 $data = DB::select("SELECT * FROM $table");
             }
         }
-
         return response()->json($data);
     }
 }

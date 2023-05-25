@@ -1,13 +1,10 @@
 <template>
     <div class="card-header">
-        <h5 class="mb-0">Edit Employee</h5>
+        <h5 class="mb-0">Create Employee Salary</h5>
     </div>
     <div class="card-body">
         <router-link to="/employee">
-            <button class="btn btn-sm btn-info mx-1">Employee List</button>
-        </router-link>
-        <router-link to="/employee/create">
-            <button class="btn btn-sm btn-info">Create Employee</button>
+            <button class="btn btn-sm btn-info">Salary List</button>
         </router-link>
         <div class="row">
 
@@ -20,7 +17,7 @@
                         <form @submit.prevent="submit">
                             <div class="row g-3">
                                 <div class="col">
-                                    <label>Employee Name</label>
+                                    <label>Employee Code</label>
                                     <input type="text" v-model="fields.employee_name" class="form-control" placeholder="Employee Name" aria-label="Employee Name">
                                 </div>
                                 <div class="col">
@@ -104,7 +101,7 @@
                             </div>
                             <span v-if="errors.employee_name">{{ errors.employee_name }}</span>
                             <div class="text-right pt-1">
-                                <button type="submit" class="btn btn-primary">Update<i class="icon-paperplane ml-2"></i></button>
+                                <button type="submit" class="btn btn-primary">Insert<i class="icon-paperplane ml-2"></i></button>
                             </div>
                         </form>
                     </div>
@@ -131,43 +128,18 @@
                     department_id : '',
                 },
                 errors : {},
-                employee_id : '',
                 departments : [] ,
                 designations : [],
             };
         },
-        created(){
-
-        },
         mounted(){
             this.getDepartment();
             this.getDesignation();
-            this.employee_id = this.$route.params.id ?? ''
-            axios
-            .get("/api/employee/edit/"+this.employee_id)
-            .then((response)=>{
-                this.fields.employee_name = response.data.name
-                this.fields.designation_id = response.data.designation
-                this.fields.department_id = response.data.department
-                this.fields.code = response.data.code
-                this.fields.father = response.data.father
-                this.fields.mother = response.data.mother
-                this.fields.spouse = response.data.spouse
-                this.fields.no_of_child = response.data.no_of_child
-                this.fields.present_address = response.data.present_address
-                this.fields.permanent_address = response.data.permanent_address
-                this.fields.personal_mobile = response.data.personal_mobile
-                this.fields.office_mobile = response.data.office_mobile
-                this.fields.status = response.data.status
-            })
-            .catch((error)=>{
-                console.log(error);
-            });
         },
         methods :{
             submit(){
                 axios
-                .post("/api/employee/update/"+this.employee_id, this.fields)
+                .post("/api/employee/create", this.fields)
                 .then((response)=>{
                     this.fields = {};
                     this.errors = {};

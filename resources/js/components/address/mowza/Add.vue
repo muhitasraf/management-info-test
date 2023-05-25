@@ -21,24 +21,24 @@
                                     <label for="mowza" class="col-form-label">Mowza Name:</label>
                                     <input type="text" v-model="fields.mowza" class="form-control" id="mowza" placeholder="Mowza Name">
                                 </div>
-                                <!-- <div class="mb-1">
+                                <div class="mb-1">
                                     <label for="division_id" class="col-form-label">Division:</label>
-                                    <select v-model="fields.division_id" class="form-control division_id" id="division_id">
+                                    <select v-model="fields.division_id" @change="getDistrict($event.target.value)" class="form-control division_id" id="division_id">
                                         <option disabled value="">Select Division</option>
                                         <option v-for="division in divisions" v-bind:value="division.id">{{ division.name }}</option>
                                     </select>
-                                </div> -->
+                                </div>
                                 <div class="mb-1">
                                     <label for="district_id" class="col-form-label">District:</label>
-                                    <select v-model="fields.district_id" class="form-control district_id" id="district_id">
+                                    <select v-model="fields.district_id" @change="getThana($event.target.value)" class="form-control district_id" id="district_id">
                                         <option disabled value="">Select District</option>
                                         <option v-for="district in districts" v-bind:value="district.id">{{ district.name }}</option>
                                     </select>
                                 </div>
-                                <!-- <div class="mb-1">
+                                <div class="mb-1">
                                     <label for="thana_id" class="col-form-label">Thana:</label>
-                                    <select v-model="fields.thana_id" class="form-control thana_id" id="thana_id">
-                                        <option disabled value="">Select District</option>
+                                    <select v-model="fields.thana_id" @change="getUnion($event.target.value)" class="form-control thana_id" id="thana_id">
+                                        <option disabled value="">Select Thana</option>
                                         <option v-for="thana in thanas" v-bind:value="thana.id">{{ thana.name }}</option>
                                     </select>
                                 </div>
@@ -48,7 +48,7 @@
                                         <option disabled value="">Select Union</option>
                                         <option v-for="union in unions" v-bind:value="union.id">{{ union.name }}</option>
                                     </select>
-                                </div> -->
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" @click="clearInput()" id="close" data-bs-dismiss="modal">Close</button>
@@ -86,7 +86,7 @@
                                         <td>{{ mowza.thana_name }}</td>
                                         <td>{{ mowza.union_name }}</td>
                                         <td>
-                                            <button @click="editMowza(mowza.id)" class="btn btn-sm btn-info mx-1" data-bs-toggle="modal" data-bs-target="#mowzaModal">Edit</button>
+                                            <button @click="editMowza(mowza.id, mowza.division_id, mowza.district_id, mowza.thana_id)" class="btn btn-sm btn-info mx-1" data-bs-toggle="modal" data-bs-target="#mowzaModal">Edit</button>
                                             <button @click="deleteMowza(mowza.id)" class="btn btn-sm btn-danger">Delete</button>
                                         </td>
                                     </tr>
@@ -106,28 +106,28 @@
         data() {
             return {
                 fields : {
+                    division_id: '',
                     district_id: '',
+                    thana_id: '',
+                    union_id: '',
                 },
                 errors : {},
                 'mowzas' : [],
+                'divisions' : [],
                 'districts' : [],
+                'thanas' : [],
+                'unions' : [],
                 'ButtonText' : 'Insert',
                 'submitStatus' : '0',
                 'mowza_id' : '',
-                'data1' : [],
             };
         },
         created() {
             this.getMowza();
-            // this.getDistrict();
-            // this.districts =  this.getData("/api/get_data/districts")
-            // console.log(this.districts)
+            this.getDivision();
         },
         mounted(){
-            this.getData("/api/get_data/districts").then(function(result){
-                console.log(result)
-            })
-            console.log(this.districts)
+            this.getDivision();
         },
         methods :{
 
@@ -168,18 +168,24 @@
                 .get("/api/mowza")
                 .then((response)=>{
                     this.mowzas = response.data
-                    // console.log(this.mowzas)
                 })
                 .catch((error)=>{
                     console.log(error);
                 });
             },
-            editMowza(id){
+            editMowza(id, division_id, district_id, thana_id){
+
+                this.getDistrict(division_id);
+                this.getThana(district_id);
+                this.getUnion(thana_id);
                 axios
                 .get("/api/mowza/edit/"+id)
-                .then((response)=>{
+                .then(response=>{
                     this.fields.mowza = response.data.name
+                    this.fields.division_id = response.data.division_id
                     this.fields.district_id = response.data.district_id
+                    this.fields.thana_id = response.data.thana_id
+                    this.fields.union_id = response.data.union_id
                     this.ButtonText = 'Update'
                     this.submitStatus = 1;
                     this.mowza_id = response.data.id
@@ -202,32 +208,61 @@
             },
             clearInput(){
                 this.fields = {}
+                this.fields.division_id = ''
                 this.fields.district_id = ''
+                this.fields.thana_id = ''
+                this.fields.union_id = ''
+                this.districts = []
+                this.thanas = []
+                this.unions = []
+                this.ButtonText = 'Insert'
             },
-            // getDistrict(){
-            //     axios
-            //     .get("/api/get_data/districts")
-            //     .then((response)=>{
-            //         this.districts = response.data
-            //     })
-            //     .catch((error)=>{
-            //         console.log(error);
-            //     });
-            // },
-            getData: async function (url){
-                var output = '';
-                await axios
-                .get(url)
+
+            getDivision(){
+                axios
+                .get("/api/get_data/divisions")
                 .then((response)=>{
-                    // console.log(response.data)
-                    // this.districts = response.data
-                    output = response.data
+                    this.divisions = response.data
                 })
                 .catch((error)=>{
                     console.log(error);
                 });
-                return output
+            },
+
+            getDistrict(id){
+                axios
+                .get("/api/get_data/districts/division_id/"+id)
+                .then((response)=>{
+                    this.districts = response.data
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
+            },
+
+            getThana(id){
+                axios
+                .get("/api/get_data/thanas/district_id/"+id)
+                .then((response)=>{
+                    this.thanas = response.data
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
+            },
+
+            getUnion(id){
+                axios
+                .get("/api/get_data/unions/thana_id/"+id)
+                .then((response)=>{
+                    this.unions = response.data
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
             },
         },
     }
+
+
 </script>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
@@ -105,6 +106,12 @@ Route::post('mowza/create',[MowzaController::class,'store']);
 Route::get('mowza/edit/{id}',[MowzaController::class,'edit']);
 Route::post('mowza/update/{id}',[MowzaController::class,'update']);
 Route::post('mowza/delete/{id}',[MowzaController::class,'destroy']);
+
+Route::get('booking',[BookingController::class,'index']);
+Route::post('booking/create',[BookingController::class,'store']);
+Route::get('booking/edit/{id}',[BookingController::class,'edit']);
+Route::post('booking/update/{id}',[BookingController::class,'update']);
+Route::post('booking/delete/{id}',[BookingController::class,'destroy']);
 
 Route::get('get_data/{table}/{column}/{id}',[CommonController::class,'getData']);
 Route::get('get_data/{table}/{column}',[CommonController::class,'getData']);

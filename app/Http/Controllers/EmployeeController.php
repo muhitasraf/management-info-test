@@ -6,15 +6,23 @@ use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
     public function index(){
-        return response()->json(Employee::get());
+        $sql = "SELECT ei.id, ei.name, ei.code, ei.father, ei.mother,ei.spouse, ei.no_of_child, ei.present_address, ei.permanent_address,
+                ei.personal_mobile, ei.office_mobile, ei.status, dp.name department, dg.name designation
+                FROM employee_info ei
+                LEFT JOIN departments dp ON ei.department = dp.id
+                LEFT JOIN designations dg ON ei.designation = dg.id";
+        $mowza = DB::select($sql);
+        return response()->json($mowza);
     }
 
     public function store(Request $request){
 
+        // dd($request);
         // $request->validate([
         //     'name' => 'required | unique:employee',
         // ]);
@@ -22,8 +30,8 @@ class EmployeeController extends Controller
         $employee = new Employee();
 
         $employee->name = $request->input('employee_name');
-        $employee->designation = $request->input('designation');
-        $employee->department = $request->input('department');
+        $employee->designation = $request->input('designation_id');
+        $employee->department = $request->input('department_id');
         $employee->code = $request->input('code');
         $employee->father = $request->input('father');
         $employee->mother = $request->input('mother');
@@ -40,8 +48,6 @@ class EmployeeController extends Controller
     }
 
     public function show($id){
-        $departments = Department::get();
-        $desigmation = Designation::get();
         $single_employee = Employee::where('id',$id)->leftJoin()->first();
         return response()->json($single_employee);
     }
@@ -55,8 +61,8 @@ class EmployeeController extends Controller
 
         $employee = Employee::find($id);
         $employee->name = $request->input('employee_name');
-        $employee->designation = $request->input('designation');
-        $employee->department = $request->input('department');
+        $employee->designation = $request->input('designation_id');
+        $employee->department = $request->input('department_id');
         $employee->code = $request->input('code');
         $employee->father = $request->input('father');
         $employee->mother = $request->input('mother');
