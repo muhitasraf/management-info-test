@@ -18,87 +18,57 @@
                             <div class="row g-3">
                                 <div class="col">
                                     <label>Employee Code</label>
-                                    <input type="text" v-model="fields.employee_name" class="form-control" placeholder="Employee Name" aria-label="Employee Name">
+                                    <input type="text" v-model="fields.emp_code" @keyup.enter="getEmployee($event.target.value)" class="form-control" placeholder="Employee Code">
                                 </div>
                                 <div class="col">
-                                    <label>Designation</label>
-                                    <select v-model="fields.designation_id" name="designation_id" class="form-select designation_id">
-                                        <option value="" disabled>Please select one</option>
-                                        <option v-for="designation in designations" v-bind:value="designation.id">{{ designation.name }}</option>
-                                    </select>
+                                    <label>Employee Name</label>
+                                    <input type="text" v-model="fields.employee_name" class="form-control" placeholder="Employee Name">
                                 </div>
                             </div>
                             <div class="row g-3">
                                 <div class="col">
-                                    <label>Department</label>
-                                    <select v-model="fields.department_id" name="department_id" class="form-select department_id">
-                                        <option value="" disabled>Please select one</option>
-                                        <option v-for="department in departments" v-bind:value="department.id">{{ department.name }}</option>
-                                    </select>
+                                    <label>Gross</label>
+                                    <input type="text" v-model="fields.gross" class="form-control" placeholder="Gross">
                                 </div>
                                 <div class="col">
-                                    <label>Code</label>
-                                    <input type="text" v-model="fields.code" class="form-control" placeholder="Code" aria-label="Code">
+                                    <label>Basic</label>
+                                    <input type="text" v-model="fields.basic" class="form-control" placeholder="Basic">
                                 </div>
                             </div>
 
                             <div class="row g-3">
                                 <div class="col">
-                                    <label>Father</label>
-                                    <input type="text" v-model="fields.father" class="form-control" placeholder="Father" aria-label="Father">
+                                    <label>House Rent</label>
+                                    <input type="text" v-model="fields.house_rent" class="form-control" placeholder="House Rent">
                                 </div>
                                 <div class="col">
-                                    <label>Mother</label>
-                                    <input type="text" v-model="fields.mother" class="form-control" placeholder="Mother" aria-label="Mother">
+                                    <label>medical</label>
+                                    <input type="text" v-model="fields.medical" class="form-control" placeholder="Medical">
                                 </div>
                             </div>
 
                             <div class="row g-3">
                                 <div class="col">
-                                    <label>Spouse</label>
-                                    <input type="text" v-model="fields.spouse" class="form-control" placeholder="Spouse" aria-label="Spouse">
+                                    <label>Conveyance</label>
+                                    <input type="text" v-model="fields.conveyance" class="form-control" placeholder="Conveyance">
                                 </div>
                                 <div class="col">
-                                    <label>No of child</label>
-                                    <input type="text" v-model="fields.no_of_child" class="form-control" placeholder="No Of Child">
+                                    <label>Allowance</label>
+                                    <input type="text" v-model="fields.allowance" class="form-control" placeholder="allowance">
                                 </div>
                             </div>
 
                             <div class="row g-3">
                                 <div class="col">
-                                    <label>Present Address</label>
-                                    <input type="text" v-model="fields.present_address" class="form-control" placeholder="Present Address" aria-label="Present Address">
+                                    <label>TA</label>
+                                    <input type="text" v-model="fields.TA" class="form-control" placeholder="TA">
                                 </div>
                                 <div class="col">
-                                    <label>Permanent Address</label>
-                                    <input type="text" v-model="fields.permanent_address" class="form-control" placeholder="Permanent Address" aria-label="Permanent Address">
+                                    <label>Mobile</label>
+                                    <input type="text" v-model="fields.mobile" class="form-control" placeholder="Mobile">
                                 </div>
                             </div>
 
-                            <div class="row g-3">
-
-                                <div class="col">
-                                    <label>Personal Mobile</label>
-                                    <input type="text" v-model="fields.personal_mobile" class="form-control" placeholder="Personal Mobile" aria-label="Personal Mobile">
-                                </div>
-                                <div class="col">
-                                    <label>Office Mobile</label>
-                                    <input type="text" v-model="fields.office_mobile" class="form-control" placeholder="Office Mobile" aria-label="Office Mobile">
-                                </div>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col">
-                                    <label>Status</label>
-                                    <select v-model="fields.status" name="status" class="form-select">
-                                        <option value="" disabled>Please select one</option>
-                                        <option value="1">Active</option>
-                                        <option value="0">In-Active</option>
-                                    </select>
-                                </div>
-                                <div class="col">
-
-                                </div>
-                            </div>
                             <span v-if="errors.employee_name">{{ errors.employee_name }}</span>
                             <div class="text-right pt-1">
                                 <button type="submit" class="btn btn-primary">Insert<i class="icon-paperplane ml-2"></i></button>
@@ -122,48 +92,35 @@
     export default{
         data() {
             return {
-                fields : {
-                    status : '',
-                    designation_id : '',
-                    department_id : '',
-                },
+                fields : {},
                 errors : {},
-                departments : [] ,
-                designations : [],
+                employee_name : '',
             };
         },
         mounted(){
-            this.getDepartment();
-            this.getDesignation();
+            this.getEmployee();
         },
         methods :{
             submit(){
                 axios
-                .post("/api/employee/create", this.fields)
+                .post("/api/employee_salary/store", this.fields)
                 .then((response)=>{
                     this.fields = {};
                     this.errors = {};
-                    this.$router.push('/employee');
+                    this.$router.push('/employee_salary');
                 })
                 .catch((error)=>{
                     console.log(error);
                 });
             },
-            getDepartment(){
+            getEmployee(code){
+
                 axios
-                .get("/api/department")
+                .get("/api/get_data/employee_info/code/"+code)
                 .then((response)=>{
-                    this.departments = response.data
-                })
-                .catch((error)=>{
-                    console.log(error);
-                });
-            },
-            getDesignation(){
-                axios
-                .get("/api/designation")
-                .then((response)=>{
-                    this.designations = response.data
+                    // this.employee_name = response.data[0]['name']
+                    // console.log(this.employee_name)
+                    this.fields.employee_name = response.data[0]['name']
                 })
                 .catch((error)=>{
                     console.log(error);

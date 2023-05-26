@@ -41,10 +41,10 @@
                                                 {{ ++k }}
                                             </td>
                                             <td>
-                                                {{ booking.customer }}
+                                                {{ booking.customer_name }}
                                             </td>
                                             <td style="width: 10%;">
-                                                {{ booking.unit }}
+                                                {{ booking.unit_name }}
                                             </td>
                                             <td>
                                                 {{ booking.qty }}

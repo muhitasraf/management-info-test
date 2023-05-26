@@ -4,14 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
     public function index(){
-        return response()->json(Booking::all()) ;
+        $sql = "SELECT b.*, c.name customer_name, u.name unit_name FROM bookings b
+                LEFT JOIN customers c ON c.id = b.customer
+                LEFT JOIN units u ON u.id = b.unit";
+        $data = DB::select($sql);
+        return response()->json($data);
     }
     public function store(Request $request){
-        // dd($request->all());
+
         $req_data = $request->all();
 
         $data = [];

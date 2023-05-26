@@ -120,12 +120,10 @@
         },
         methods :{
             submit(){
-                console.log(this.bookings);
                 axios
                 .post("/api/booking/create",this.bookings)
                 .then((response)=>{
-                    console.log(response.data)
-                    // this.customers = response.data
+                    this.$router.push('/booking');
                 })
                 .catch((error)=>{
                     console.log(error);
