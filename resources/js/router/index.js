@@ -54,8 +54,8 @@ import ViewBooking from '../components/booking/Show.vue';
 import EditBooking from '../components/booking/Edit.vue';
 
 export const routes = [
-    { name: 'Home', path: '/', component: Home },
-    { name: 'Login', path: '/login', component: Login },
+    { name: 'Home', path: '/', component: Home, meta : {requiresAuth:true} },
+    { name: 'Login', path: '/login', component: Login, meta : {requiresGuest:true} },
 
     { name: 'Company', path: '/company', component: Company },
     { name: 'CompanyCreate', path: '/company/create', component: CompanyCreate },
@@ -114,5 +114,19 @@ const router = createRouter({
     history: createWebHistory(),
     routes: routes,
 });
+
+
+router.beforeEach((to, from){
+    const authenticated = localStorage.getItem('authenticated');
+    if(to.meta.requiresGuest && authenticated){
+        return {
+            name : "Home"
+        };
+    }else if(to.meta.requiresAuth && !authenticated){
+        return {
+            name : "Login"
+        };
+    }
+})
 
 export default router;

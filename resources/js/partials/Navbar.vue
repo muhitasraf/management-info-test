@@ -27,7 +27,7 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="navbar-nav-link rounded dropdown-toggle" data-bs-toggle="dropdown">Dropdown</a>
                         <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Action</a>
+                            <a href="#" @click="logout" class="dropdown-item">Logout</a>
                             <a href="#" class="dropdown-item">Another action</a>
                             <a href="#" class="dropdown-item">Something else here</a>
                             <a href="#" class="dropdown-item">One more line</a>
@@ -58,13 +58,39 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end">
-                        <a href="#" class="dropdown-item">Action</a>
-                        <a href="#" class="dropdown-item">Another action</a>
-                        <a href="#" class="dropdown-item">Something else here</a>
-                        <a href="#" class="dropdown-item">One more line</a>
+                        <a href="#" @click="logout" class="dropdown-item">Logout</a>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
 </template>
+
+<script>
+    export default{
+        data() {
+            return {
+                fields : {},
+                errors : {},
+            };
+        },
+        mounted(){
+
+        },
+        methods :{
+            logout(){
+                axios
+                .post("/api/logout", this.fields)
+                .then((response)=>{
+                    this.$router.push({name : 'Home'});
+                    // localStorage.setItem('authenticated','false');
+                    this.$emit('updateSidebar');
+                })
+                .catch((error)=>{
+                    this.errors = error.response.data.errors;
+                    console.log(this.errors);
+                });
+            },
+        },
+    }
+</script>

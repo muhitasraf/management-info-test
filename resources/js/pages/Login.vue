@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="text-center">
-                        <a href="login_password_recover.html">Forgot password?</a>
+                        <a href="">Forgot password?</a>
                     </div>
                 </div>
             </div>
@@ -66,12 +66,12 @@
             submit(){
                 axios
                 .post("/api/login", this.fields)
-                .then((response)=>{
-                    this.errors = {};
-                    this.$router.push('/');
+                .then(()=>{
+                    this.$router.push({name : 'Home'});
+                    localStorage.setItem('authenticated','true');
+                    this.$emit('updateSidebar');
                 })
                 .catch((error)=>{
-
                     this.errors = error.response.data.errors;
                     console.log(this.errors);
                 });

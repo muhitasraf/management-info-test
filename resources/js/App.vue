@@ -24,7 +24,7 @@
                 <div v-if="isLogin==true" class="content">
                     <!-- Basic card -->
                     <div class="card p-1">
-                        <router-view v-slot="{ Component }">
+                        <router-view @update-sidebar="updateSidebar" v-slot="{ Component }">
                             <component :is="Component" />
                         </router-view>
                     </div>
@@ -59,8 +59,20 @@
                 isLogin : false,
             };
         },
+        mounted(){
+            if(localStorage.getItem('authenticated')){
+                this.isLogin = true;
+            }else{
+                this.isLogin = false;
+            }
+        },
         components: {
             Navbar, Header, Sidebar, Footer, Login,
+        },
+        method : {
+            updateSidebar(){
+                this.isLogin = !this.isLogin
+            }
         }
     }
 </script>
