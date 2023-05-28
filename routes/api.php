@@ -9,6 +9,7 @@ use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployeeSalaryController;
 use App\Http\Controllers\MowzaController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ThanaController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\UnionController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('login',[AuthenticatedSessionController::class,'store']);
 
 Route::get('company',[CompanyController::class,'index']);
 Route::post('company/create',[CompanyController::class,'store']);
@@ -109,9 +113,17 @@ Route::post('mowza/delete/{id}',[MowzaController::class,'destroy']);
 
 Route::get('booking',[BookingController::class,'index']);
 Route::post('booking/create',[BookingController::class,'store']);
+Route::get('booking/view/{id}',[BookingController::class,'show']);
 Route::get('booking/edit/{id}',[BookingController::class,'edit']);
 Route::post('booking/update/{id}',[BookingController::class,'update']);
 Route::post('booking/delete/{id}',[BookingController::class,'destroy']);
+
+Route::get('employee_salary',[EmployeeSalaryController::class,'index']);
+Route::post('employee_salary/create',[EmployeeSalaryController::class,'store']);
+Route::post('employee_salary/view/{id}',[EmployeeSalaryController::class,'show']);
+Route::get('employee_salary/edit/{id}',[EmployeeSalaryController::class,'edit']);
+Route::post('employee_salary/update/{id}',[EmployeeSalaryController::class,'update']);
+Route::post('employee_salary/delete/{id}',[EmployeeSalaryController::class,'destroy']);
 
 Route::get('get_data/{table}/{column}/{id}',[CommonController::class,'getData']);
 Route::get('get_data/{table}/{column}',[CommonController::class,'getData']);

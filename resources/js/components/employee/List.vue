@@ -84,7 +84,6 @@
                 .get("/api/employee")
                 .then((response)=>{
                     this.employees = response.data
-                    console.log(this.employees)
                 })
                 .catch((error)=>{
                     console.log(error);

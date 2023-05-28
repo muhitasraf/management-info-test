@@ -21,7 +21,6 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">#</th>
                                                     <th scope="col">Customer</th>
                                                     <th scope="col">Unit</th>
                                                     <th scope="col text-right">Quantity</th>
@@ -33,39 +32,36 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr v-for="(booking, k) in bookings" :key="k">
-                                                    <td scope="row" class="trashIconContainer">
-                                                        <i class="ph ph-trash" @click="deleteRow(k, booking)"></i>
-                                                    </td>
+                                                <tr>
                                                     <td>
-                                                        <select class="form-control" v-model="booking.customer" id="customer">
+                                                        <select class="form-control" v-model="bookings.customer" id="customer">
                                                             <option value="">Select Unit</option>
-                                                            <option v-for="customer in customers" v-bind:value="customer.id">{{ customer.name }}</option>
+                                                            <option v-for="customers in all_customers" v-bind:value="customers.id">{{ customers.name }}</option>
                                                         </select>
                                                     </td>
                                                     <td style="width: 10%;">
-                                                        <select class="form-control" v-model="booking.unit" id="unit">
+                                                        <select class="form-control" v-model="bookings.unit" id="unit">
                                                             <option value="">Select Unit</option>
                                                             <option v-for="units in all_units" v-bind:value="units.id">{{ units.name }}</option>
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control text-right" type="number" v-model="booking.qty" @keyup="getTotalPrice(booking)">
+                                                        <input class="form-control text-right" type="number" v-model="bookings.qty" @keyup="getTotalPrice($event.target.value)">
                                                     </td>
                                                     <td>
-                                                        <input class="form-control text-right" type="number" v-model="booking.unit_price" @keyup="getTotalPrice(booking)">
+                                                        <input class="form-control text-right" type="number" v-model="bookings.unit_price" @keyup="getTotalPrice($event.target.value)">
                                                     </td>
                                                     <td>
-                                                        <input readonly class="form-control text-right" type="number" v-model="booking.total_price" >
+                                                        <input readonly class="form-control text-right" type="number" v-model="bookings.total_price" >
                                                     </td>
                                                     <td>
-                                                        <input class="form-control text-right" type="number" v-model="booking.booked_amt" @keyup="getTotalPrice(booking)" :readonly="readonly === 'yes'">
+                                                        <input class="form-control text-right" type="number" v-model="bookings.booked_amt" @keyup="getRemaningAmt($event.target.value)">
                                                     </td>
                                                     <td>
-                                                        <input class="form-control text-right" type="date" v-model="booking.booked_date">
+                                                        <input class="form-control text-right" type="date" v-model="bookings.booked_date">
                                                     </td>
                                                     <td>
-                                                        <input readonly class="form-control text-right" type="number" v-model="booking.remaining_amt" >
+                                                        <input readonly class="form-control text-right" type="number" v-model="bookings.remaining_amt" >
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -73,14 +69,10 @@
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
-                                <div class="col-md-12 mb-2 mt-2">
-                                    <button type='button' class="btn btn-info" @click="addNewRow">
-                                        <i class="fas fa-plus-circle"></i> Add
-                                    </button>
-                                </div>
-                                <div class="col mb-4 text-center">
+
+                                <div class="col mb-4 text-center pt-3">
                                     <button type='button' class="btn btn-success submit_btn invoice-save-bottom" @click="submit">
-                                        <i class="far fa-save"></i> Save
+                                        <i class="far fa-save"></i> Update
                                     </button>
                                 </div>
                             </div>
@@ -96,30 +88,49 @@
     export default{
         data() {
             return {
-                bookings : [{
+                bookings : {
                     customer : '',
                     unit : '',
-                    qty : '',
-                    unit_price : '',
-                    total_price : '',
-                    booked_amt : '',
-                    booked_date : '',
-                    remaining_amt : '',
-                }],
+                    // qty : '',
+                    // unit_price : '',
+                    // total_price : '',
+                    // booked_amt : '',
+                    // booked_date : '',
+                    // remaining_amt : '',
+                },
                 all_units : [],
-                customers : [],
+                all_customers : [],
                 errors : {},
-                readonly : 'yes',
             };
         },
         mounted(){
             this.getUnit();
             this.getCustomer();
+            this.booking_id = this.$route.params.id ?? ''
+            axios
+            .get("/api/booking/edit/"+this.booking_id)
+            .then((response)=>{
+
+                this.bookings.customer = response.data.customer
+                this.bookings.unit = response.data.unit
+                this.bookings.qty = response.data.qty
+                this.bookings.unit_price = response.data.unit_price
+                this.bookings.total_price = response.data.total_price
+                this.bookings.booked_amt = response.data.booked_amt
+                this.bookings.booked_date = response.data.booked_date
+                this.bookings.remaining_amt = response.data.remaining_amt
+
+            })
+            .catch((error)=>{
+                console.log(error);
+            });
         },
         methods :{
             submit(){
+                console.log(this.bookings);
+                this.booking_id = this.$route.params.id ?? ''
                 axios
-                .post("/api/booking/create",this.bookings)
+                .post("/api/booking/update/"+this.booking_id,this.bookings)
                 .then((response)=>{
                     this.$router.push('/booking');
                 })
@@ -127,22 +138,17 @@
                     console.log(error);
                 });
             },
-            getTotalPrice(booking){
-                booking.total_price = booking.unit_price * booking.qty;
-                if(booking.qty != '' && booking.unit_price != ''){
-                    booking.remaining_amt = booking.booked_amt == '' ? booking.total_price : ( booking.total_price - booking.booked_amt);
-                    this.readonly = 'no';
-                }else{
-                    booking.remaining_amt  = '';
-                    this.readonly = 'yes';
-                }
+            getTotalPrice(){
+                this.bookings.total_price = this.bookings.unit_price * this.bookings.qty
             },
-
+            getRemaningAmt(){
+                this.bookings.remaining_amt = this.bookings.total_price - this.bookings.booked_amt
+            },
             getUnit(){
                 axios
                 .get("/api/unit")
                 .then((response)=>{
-                    this.all_units = response.data;
+                    this.all_units = response.data
                 })
                 .catch((error)=>{
                     console.log(error);
@@ -152,31 +158,12 @@
                 axios
                 .get("/api/customer")
                 .then((response)=>{
-                    this.customers = response.data;
+                    this.all_customers = response.data
                 })
                 .catch((error)=>{
                     console.log(error);
                 });
             },
-            addNewRow() {
-                this.bookings.push({
-                    customer : '',
-                    unit : '',
-                    qty : '',
-                    unit_price : '',
-                    total_price : '',
-                    booked_amt : '',
-                    booked_date : '',
-                    remaining_amt : '',
-                });
-            },
-            deleteRow(index, booking) {
-                var idx = this.bookings.indexOf(booking);
-                if (idx > -1) {
-                    this.bookings.splice(idx, 1);
-                }
-            },
-
         },
     }
 </script>

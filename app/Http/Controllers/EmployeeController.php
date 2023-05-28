@@ -48,7 +48,7 @@ class EmployeeController extends Controller
     }
 
     public function show($id){
-        $single_employee = Employee::where('id',$id)->leftJoin()->first();
+        $single_employee = Employee::where('id',$id)->first();
         return response()->json($single_employee);
     }
 

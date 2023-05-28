@@ -2,6 +2,7 @@
 import {createWebHistory, createRouter} from "vue-router";
 
 import Home from '../pages/Home.vue';
+import Login from '../pages/Login.vue';
 
 import Company from '../components/company/Show.vue';
 import CompanyCreate from '../components/company/Add.vue';
@@ -44,13 +45,17 @@ import CreateUnion from '../components/address/union/Add.vue';
 
 import CreateMowza from '../components/address/mowza/Add.vue';
 
+import EmployeeSalary from '../components/employee_salary/List.vue';
 import CreateEmployeeSalary from '../components/employee_salary/Add.vue';
 
-import Booking from '../components/booking/Show.vue';
+import Booking from '../components/booking/List.vue';
 import CreateBooking from '../components/booking/Add.vue';
+import ViewBooking from '../components/booking/Show.vue';
+import EditBooking from '../components/booking/Edit.vue';
 
 export const routes = [
     { name: 'Home', path: '/', component: Home },
+    { name: 'Login', path: '/login', component: Login },
 
     { name: 'Company', path: '/company', component: Company },
     { name: 'CompanyCreate', path: '/company/create', component: CompanyCreate },
@@ -96,10 +101,13 @@ export const routes = [
 
     { name: 'CreateMowza', path: '/mowza/create', component: CreateMowza },
 
+    { name: 'EmployeeSalary', path: '/employee_salary', component: EmployeeSalary },
     { name: 'CreateEmployeeSalary', path: '/employee_salary/create', component: CreateEmployeeSalary },
 
     { name: 'Booking', path: '/booking', component: Booking },
     { name: 'CreateBooking', path: '/booking/create', component: CreateBooking },
+    { name: 'ViewBooking', path: '/booking/view/:id', component: ViewBooking },
+    { name: 'EditBooking', path: '/booking/edit/:id', component: EditBooking },
 ];
 
 const router = createRouter({

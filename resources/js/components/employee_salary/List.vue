@@ -1,10 +1,11 @@
+
 <template>
     <div class="card-header">
-        <h5 class="mb-0">Create Booking</h5>
+        <h5 class="mb-0">Create Employee Salary</h5>
     </div>
     <div class="card-body">
-        <router-link to="/booking">
-            <button class="btn btn-sm btn-info">Booking List</button>
+        <router-link to="/employee">
+            <button class="btn btn-sm btn-info">Salary List</button>
         </router-link>
         <div class="row">
 
@@ -14,47 +15,40 @@
                 <div class="card">
 
                     <div class="card-body">
+
                         <div class="row">
                             <div class="col">
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Customer</th>
-                                                <th scope="col">Unit</th>
-                                                <th scope="col text-right">Quantity</th>
-                                                <th scope="col text-right">Unit Price</th>
-                                                <th scope="col text-right">Total Price</th>
-                                                <th scope="col text-right">Booked Amount</th>
-                                                <th scope="col text-right">Booked Date</th>
-                                                <th scope="col text-right">Remaining Amount</th>
+                                                <th scope="col">Emp Name</th>
+                                                <th scope="col">Gross</th>
+                                                <th scope="col text-right">Basic</th>
+                                                <th scope="col text-right">Houserent</th>
+                                                <th scope="col text-right">conveyance</th>
+                                                <th scope="col text-right">allowance</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <tr v-for="employee_sal in employee_salary">
                                                 <td>
-                                                    {{ all_customers.customer_name }}
+                                                    {{ employee_sal.name }}
                                                 </td>
                                                 <td style="width: 10%;">
-                                                    {{ all_customers.unit_name }}
+                                                    {{ employee_sal.gross }}
                                                 </td>
                                                 <td>
-                                                    {{ all_customers.qty }}
+                                                    {{ employee_sal.basic }}
                                                 </td>
                                                 <td>
-                                                    {{ all_customers.unit_price }}
+                                                    {{ employee_sal.house_rent }}
                                                 </td>
                                                 <td>
-                                                    {{ all_customers.total_price }}
+                                                    {{ employee_sal.conveyance }}
                                                 </td>
                                                 <td>
-                                                    {{ all_customers.booked_amt }}
-                                                </td>
-                                                <td>
-                                                    {{ all_customers.booked_date }}
-                                                </td>
-                                                <td>
-                                                    {{ all_customers.remaining_amt }}
+                                                    {{ employee_sal.allowance }}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -64,24 +58,30 @@
                         </div>
                     </div>
                 </div>
+                <!-- /vertical form -->
+
             </div>
+            <div class="col-md-2"></div>
         </div>
     </div>
 </template>
+
+<style>
+
+</style>
 
 <script>
     export default{
         data() {
             return {
-                all_customers : '',
+                employee_salary : '',
             };
         },
         mounted(){
-            this.booking_id = this.$route.params.id ?? ''
             axios
-            .get("/api/booking/view/"+this.booking_id)
+            .get("/api/employee_salary")
             .then((response)=>{
-                this.all_customers = response.data[0]
+                this.employee_salary = response.data;
             })
             .catch((error)=>{
                 console.log(error);
