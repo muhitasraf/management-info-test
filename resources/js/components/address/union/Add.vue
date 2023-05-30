@@ -107,6 +107,7 @@
                         this.errors = {};
                         // $('#unionModal').modal('hide');
                         document.getElementById('close').click();
+                        toastr.success('Successfully Created.');
                         this.getUnion();
                     })
                     .catch((error)=>{
@@ -123,6 +124,7 @@
                         this.errors = {};
                         this.ButtonText = 'Insert'
                         this.submitStatus = 0;
+                        toastr.success('Successfully Updated.');
                         this.getUnion();
                     })
                     .catch((error)=>{
@@ -159,6 +161,7 @@
                     axios
                     .post("/api/union/delete/"+id)
                     .then((response)=>{
+                        toastr.error('Successfully Deleted.');
                         this.getUnion();
                     })
                     .catch((error)=>{

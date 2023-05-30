@@ -107,6 +107,7 @@
                         // $('#departmentModal').modal('hide');
                         document.getElementById('close').click();
                         this.getDepartment();
+                        toastr.success('Successfully Created.');
                     })
                     .catch((error)=>{
                         console.log(error);
@@ -122,6 +123,7 @@
                         this.errors = {};
                         this.ButtonText = 'Insert'
                         this.submitStatus = 0;
+                        toastr.success('Successfully Updated.');
                         this.getDepartment();
                     })
                     .catch((error)=>{
@@ -158,6 +160,7 @@
                     axios
                     .post("/api/department/delete/"+id)
                     .then((response)=>{
+                        toastr.error('Successfully Deleted.');
                         this.getDepartment();
                     })
                     .catch((error)=>{

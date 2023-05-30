@@ -45,14 +45,14 @@
                         <td>{{ customer.no_of_child }}</td>
                         <td>{{ customer.occupation }}</td>
                         <td>{{ customer.is_alive == 1 ? "Yes" : "No" }}</td>
-                        <td>
+                        <td class="text-center">
                             <router-link :to="'/customer/view/'+customer.id">
-                                <button class="btn btn-sm btn-info mx-1">View</button>
+                                <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-eye"></i></button>
                             </router-link>
                             <router-link :to="'/customer/edit/'+customer.id">
-                                <button class="btn btn-sm btn-info mx-1">Edit</button>
+                                <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-pencil"></i></button>
                             </router-link>
-                            <button @click="deleteCustomer(customer.id)" class="btn btn-sm btn-danger">Delete</button>
+                            <button @click="deleteCustomer(customer.id)" class="btn btn-sm btn-danger"><i class="ph ph-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -87,6 +87,7 @@
                     axios
                     .post("/api/customer/delete/"+customer_id)
                     .then((response)=>{
+                        toastr.error('Successfully Deleted.');
                         this.getCustomer();
                     })
                     .catch((error)=>{

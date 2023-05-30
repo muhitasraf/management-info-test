@@ -133,6 +133,7 @@
                 .post("/api/booking/update/"+this.booking_id,this.bookings)
                 .then((response)=>{
                     this.$router.push('/booking');
+                    toastr.success('Successfully Updated.');
                 })
                 .catch((error)=>{
                     console.log(error);

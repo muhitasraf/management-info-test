@@ -36,6 +36,14 @@
                     </li>
 
                     <!-- Layout -->
+
+                    <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link"><i class="ph-layout"></i> <span>User</span></a>
+                        <ul class="nav-group-sub collapse">
+                            <li class="nav-item"><router-link to="/user" class="nav-item nav-link">List</router-link></li>
+                        </ul>
+                    </li>
+
                     <li class="nav-item nav-item-submenu">
                         <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Company</span></a>
                         <ul class="nav-group-sub collapse">

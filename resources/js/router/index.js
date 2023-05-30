@@ -7,6 +7,8 @@ import Login from '../pages/Login.vue';
 import Company from '../components/company/Show.vue';
 import CompanyCreate from '../components/company/Add.vue';
 
+import User from '../components/user/List.vue';
+
 import CustomerList from '../components/customer/List.vue';
 import CustomerCreate from '../components/customer/Add.vue';
 import ViewCustomer from '../components/customer/Show.vue';
@@ -47,6 +49,8 @@ import CreateMowza from '../components/address/mowza/Add.vue';
 
 import EmployeeSalary from '../components/employee_salary/List.vue';
 import CreateEmployeeSalary from '../components/employee_salary/Add.vue';
+import ViewEmployeeSalary from '../components/employee_salary/Show.vue';
+import EditEmployeeSalary from '../components/employee_salary/Edit.vue';
 
 import Booking from '../components/booking/List.vue';
 import CreateBooking from '../components/booking/Add.vue';
@@ -57,57 +61,61 @@ export const routes = [
     { name: 'Home', path: '/', component: Home, meta : {requiresAuth:true} },
     { name: 'Login', path: '/login', component: Login, meta : {requiresGuest:true} },
 
-    { name: 'Company', path: '/company', component: Company },
-    { name: 'CompanyCreate', path: '/company/create', component: CompanyCreate },
+    { name: 'Company', path: '/company', component: Company, meta : {requiresAuth:true} },
+    { name: 'CompanyCreate', path: '/company/create', component: CompanyCreate, meta : {requiresAuth:true} },
     // {  name: 'EditCompany', path: '/company/edit/:id', component: EditCompany },
 
-    { name: 'CustomerList', path: '/customer', component: CustomerList },
-    { name: 'CustomerCreate', path: '/customer/create', component: CustomerCreate },
-    { name: 'ViewCustomer', path: '/customer/view/:id', component: ViewCustomer },
-    { name: 'EditCustomer', path: '/customer/edit/:id', component: EditCustomer },
+    { name: 'User', path: '/user', component: User, meta : {requiresAuth:true} },
 
-    { name: 'SupplierList', path: '/supplier', component: SupplierList },
-    { name: 'CreateSupplier', path: '/supplier/create', component: CreateSupplier },
-    { name: 'ViewSupplier', path: '/supplier/view/:id', component: ViewSupplier },
-    { name: 'EditSupplier', path: '/supplier/edit/:id', component: EditSupplier },
+    { name: 'CustomerList', path: '/customer', component: CustomerList, meta : {requiresAuth:true} },
+    { name: 'CustomerCreate', path: '/customer/create', component: CustomerCreate, meta : {requiresAuth:true} },
+    { name: 'ViewCustomer', path: '/customer/view/:id', component: ViewCustomer, meta : {requiresAuth:true} },
+    { name: 'EditCustomer', path: '/customer/edit/:id', component: EditCustomer, meta : {requiresAuth:true} },
 
-    { name: 'EmployeeList', path: '/employee', component: EmployeeList },
-    { name: 'CreateEmployee', path: '/employee/create', component: CreateEmployee },
-    { name: 'ViewEmployee', path: '/employee/view/:id', component: ViewEmployee },
+    { name: 'SupplierList', path: '/supplier', component: SupplierList, meta : {requiresAuth:true} },
+    { name: 'CreateSupplier', path: '/supplier/create', component: CreateSupplier, meta : {requiresAuth:true} },
+    { name: 'ViewSupplier', path: '/supplier/view/:id', component: ViewSupplier, meta : {requiresAuth:true} },
+    { name: 'EditSupplier', path: '/supplier/edit/:id', component: EditSupplier, meta : {requiresAuth:true} },
+
+    { name: 'EmployeeList', path: '/employee', component: EmployeeList, meta : {requiresAuth:true} },
+    { name: 'CreateEmployee', path: '/employee/create', component: CreateEmployee, meta : {requiresAuth:true} },
+    { name: 'ViewEmployee', path: '/employee/view/:id', component: ViewEmployee, meta : {requiresAuth:true} },
     { name: 'EditEmployee', path: '/employee/edit/:id', component: EditEmployee },
 
-    { name: 'Unit', path: '/unit', component: Unit },
-    { name: 'CreateUnit', path: '/unit/create', component: CreateUnit },
+    { name: 'Unit', path: '/unit', component: Unit, meta : {requiresAuth:true} },
+    { name: 'CreateUnit', path: '/unit/create', component: CreateUnit, meta : {requiresAuth:true} },
     // { name: 'ViewEmployee', path: '/unit/view/:id', component: ViewUnit },
     // { name: 'EditUnit', path: '/unit/edit/:id', component: EditUnit }
 
-    { name: 'Designation', path: '/designation', component: Designation },
-    { name: 'CreateDesignation', path: '/designation/create', component: CreateDesignation },
+    { name: 'Designation', path: '/designation', component: Designation, meta : {requiresAuth:true} },
+    { name: 'CreateDesignation', path: '/designation/create', component: CreateDesignation, meta : {requiresAuth:true} },
 
-    { name: 'Department', path: '/department', component: Department },
-    { name: 'CreateDepartment', path: '/department/create', component: CreateDepartment },
+    { name: 'Department', path: '/department', component: Department, meta : {requiresAuth:true} },
+    { name: 'CreateDepartment', path: '/department/create', component: CreateDepartment, meta : {requiresAuth:true} },
 
-    { name: 'District', path: '/district', component: District },
-    { name: 'CreateDistrict', path: '/district/create', component: CreateDistrict },
+    { name: 'District', path: '/district', component: District, meta : {requiresAuth:true} },
+    { name: 'CreateDistrict', path: '/district/create', component: CreateDistrict, meta : {requiresAuth:true} },
 
-    { name: 'Division', path: '/division', component: Division },
-    { name: 'CreateDivision', path: '/division/create', component: CreateDivision },
+    { name: 'Division', path: '/division', component: Division, meta : {requiresAuth:true} },
+    { name: 'CreateDivision', path: '/division/create', component: CreateDivision, meta : {requiresAuth:true} },
 
-    { name: 'Thana', path: '/thana', component: Thana },
-    { name: 'CreateThana', path: '/thana/create', component: CreateThana },
+    { name: 'Thana', path: '/thana', component: Thana, meta : {requiresAuth:true} },
+    { name: 'CreateThana', path: '/thana/create', component: CreateThana, meta : {requiresAuth:true} },
 
-    { name: 'Union', path: '/union', component: Union },
-    { name: 'CreateUnion', path: '/union/create', component: CreateUnion },
+    { name: 'Union', path: '/union', component: Union, meta : {requiresAuth:true} },
+    { name: 'CreateUnion', path: '/union/create', component: CreateUnion, meta : {requiresAuth:true} },
 
-    { name: 'CreateMowza', path: '/mowza/create', component: CreateMowza },
+    { name: 'CreateMowza', path: '/mowza/create', component: CreateMowza, meta : {requiresAuth:true} },
 
-    { name: 'EmployeeSalary', path: '/employee_salary', component: EmployeeSalary },
-    { name: 'CreateEmployeeSalary', path: '/employee_salary/create', component: CreateEmployeeSalary },
+    { name: 'EmployeeSalary', path: '/employee_salary', component: EmployeeSalary, meta : {requiresAuth:true} },
+    { name: 'CreateEmployeeSalary', path: '/employee_salary/create', component: CreateEmployeeSalary, meta : {requiresAuth:true} },
+    { name: 'ViewEmployeeSalary', path: '/employee_salary/view/:id', component: ViewEmployeeSalary, meta : {requiresAuth:true} },
+    { name: 'EditEmployeeSalary', path: '/employee_salary/edit/:id', component: EditEmployeeSalary },
 
-    { name: 'Booking', path: '/booking', component: Booking },
-    { name: 'CreateBooking', path: '/booking/create', component: CreateBooking },
-    { name: 'ViewBooking', path: '/booking/view/:id', component: ViewBooking },
-    { name: 'EditBooking', path: '/booking/edit/:id', component: EditBooking },
+    { name: 'Booking', path: '/booking', component: Booking, meta : {requiresAuth:true} },
+    { name: 'CreateBooking', path: '/booking/create', component: CreateBooking, meta : {requiresAuth:true} },
+    { name: 'ViewBooking', path: '/booking/view/:id', component: ViewBooking, meta : {requiresAuth:true} },
+    { name: 'EditBooking', path: '/booking/edit/:id', component: EditBooking, meta : {requiresAuth:true} },
 ];
 
 const router = createRouter({
@@ -116,17 +124,18 @@ const router = createRouter({
 });
 
 
-router.beforeEach((to, from){
-    const authenticated = localStorage.getItem('authenticated');
-    if(to.meta.requiresGuest && authenticated){
+router.beforeEach((to, from) => {
+    const authenticated = localStorage.getItem("authenticated");
+
+    if (to.meta.requiresGuest && authenticated) {
         return {
-            name : "Home"
+            name: "Home",
         };
-    }else if(to.meta.requiresAuth && !authenticated){
+    } else if (to.meta.requiresAuth && !authenticated) {
         return {
-            name : "Login"
+            name: "Login",
         };
     }
-})
+});
 
 export default router;

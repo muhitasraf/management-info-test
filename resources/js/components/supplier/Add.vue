@@ -134,6 +134,7 @@
                         this.fields = {};
                         this.errors = {};
                         this.$router.push('/supplier');
+                        toastr.success('Successfully Deleted.');
                     })
                     .catch((error)=>{
                         console.log(error);

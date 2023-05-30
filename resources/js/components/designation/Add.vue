@@ -104,6 +104,7 @@
                         this.fields = {};
                         this.errors = {};
                         $('#designationModal').modal('hide');
+                        toastr.success('Successfully Created.');
                         this.getDesignation();
                     })
                     .catch((error)=>{
@@ -118,6 +119,7 @@
                         this.errors = {};
                         this.ButtonText = 'Insert'
                         this.submitStatus = 0;
+                        toastr.success('Successfully Updated.');
                         this.getDesignation();
                     })
                     .catch((error)=>{
@@ -154,6 +156,7 @@
                     axios
                     .post("/api/designation/delete/"+id)
                     .then((response)=>{
+                        toastr.error('Successfully Deleted.');
                         this.getDesignation();
                     })
                     .catch((error)=>{

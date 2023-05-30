@@ -45,14 +45,14 @@
                         <td>{{ supplier.no_of_child }}</td>
                         <td>{{ supplier.occupation }}</td>
                         <td>{{ supplier.is_alive == 1 ? "Yes" : "No" }}</td>
-                        <td>
+                        <td class="text-center">
                             <router-link :to="'/supplier/view/'+supplier.id">
-                                <button class="btn btn-sm btn-info mx-1">View</button>
+                                <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-eye"></i></button>
                             </router-link>
                             <router-link :to="'/supplier/edit/'+supplier.id">
-                                <button class="btn btn-sm btn-info mx-1">Edit</button>
+                                <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-pencil"></i></button>
                             </router-link>
-                            <button @click="deleteSupplier(supplier.id)" class="btn btn-sm btn-danger">Delete</button>
+                            <button @click="deleteSupplier(supplier.id)" class="btn btn-sm btn-danger"><i class="ph ph-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>

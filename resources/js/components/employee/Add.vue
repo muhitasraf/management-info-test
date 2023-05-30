@@ -143,6 +143,7 @@
                 .then((response)=>{
                     this.fields = {};
                     this.errors = {};
+                    toastr.success('Successfully Created.');
                     this.$router.push('/employee');
                 })
                 .catch((error)=>{

@@ -15,9 +15,11 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ThanaController;
 use App\Http\Controllers\UnionController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
+use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('user/list',[UserController::class,'index']);
+Route::get('user/edit/{id}',[UserController::class,'edit']);
+Route::post('user/update/{id}',[UserController::class,'update']);
+Route::post('user/delete/{id}',[UserController::class,'destroy']);
+
+Route::post('resister',[RegisteredUserController::class,'store']);
 Route::post('login',[AuthenticatedSessionController::class,'store']);
 Route::post('logout',[AuthenticatedSessionController::class,'destroy']);
 

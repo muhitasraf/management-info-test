@@ -4,8 +4,8 @@
         <h5 class="mb-0">Create Employee Salary</h5>
     </div>
     <div class="card-body">
-        <router-link to="/employee">
-            <button class="btn btn-sm btn-info">Salary List</button>
+        <router-link to="/employee_salary/create">
+            <button class="btn btn-sm btn-info">Salary Create</button>
         </router-link>
         <div class="row">
 
@@ -28,6 +28,7 @@
                                                 <th scope="col text-right">Houserent</th>
                                                 <th scope="col text-right">conveyance</th>
                                                 <th scope="col text-right">allowance</th>
+                                                <th scope="col text-right">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -49,6 +50,16 @@
                                                 </td>
                                                 <td>
                                                     {{ employee_sal.allowance }}
+                                                </td>
+
+                                                <td class="text-center">
+                                                    <router-link :to="'/employee_salary/view/'+employee_sal.id">
+                                                        <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-eye"></i></button>
+                                                    </router-link>
+                                                    <router-link :to="'/employee_salary/edit/'+employee_sal.id">
+                                                        <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-pencil"></i></button>
+                                                    </router-link>
+                                                    <button @click="deleteEmployee(employee_sal.id)" class="btn btn-sm btn-danger"><i class="ph ph-trash"></i></button>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -78,17 +89,32 @@
             };
         },
         mounted(){
-            axios
-            .get("/api/employee_salary")
-            .then((response)=>{
-                this.employee_salary = response.data;
-            })
-            .catch((error)=>{
-                console.log(error);
-            });
+            this.getEmployeeSalary();
         },
         methods :{
-
+            deleteEmployee(employee_id){
+                if(confirm("Do you really want to delete?")){
+                    axios
+                    .post("/api/employee_salary/delete/"+employee_id)
+                    .then((response)=>{
+                        this.getEmployeeSalary();
+                        toastr.error('Successfully Deleted.');
+                    })
+                    .catch((error)=>{
+                        console.log(error);
+                    });
+                }
+            },
+            getEmployeeSalary(){
+                axios
+                .get("/api/employee_salary")
+                .then((response)=>{
+                    this.employee_salary = response.data;
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
+            },
         },
     }
 </script>

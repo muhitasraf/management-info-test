@@ -158,6 +158,7 @@
                         this.fields = {};
                         this.errors = {};
                         this.$router.push('/supplier');
+                        toastr.success('Successfully Updated.');
                     })
                     .catch((error)=>{
                         console.log(error);

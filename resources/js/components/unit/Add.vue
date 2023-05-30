@@ -108,6 +108,7 @@
                     .then((response)=>{
                         this.field = {};
                         this.errors = {};
+                        toastr.success('Successfully Created.');
                         this.getUnit();
                     })
                     .catch((error)=>{
@@ -121,6 +122,7 @@
                         this.errors = {};
                         this.ButtonText = 'Insert'
                         this.submitStatus = 0;
+                        toastr.success('Successfully Updated.');
                         this.getUnit();
                     })
                     .catch((error)=>{
@@ -158,6 +160,7 @@
                     axios
                     .post("/api/unit/delete/"+id)
                     .then((response)=>{
+                        toastr.error('Successfully Deleted.');
                         this.getUnit();
                     })
                     .catch((error)=>{

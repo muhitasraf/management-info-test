@@ -96,6 +96,7 @@
                     .post("/api/employee/delete/"+employee_id)
                     .then((response)=>{
                         this.getEmployee();
+                        toastr.error('Successfully Deleted.');
                     })
                     .catch((error)=>{
                         console.log(error);

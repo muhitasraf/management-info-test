@@ -140,6 +140,7 @@
                         this.errors = {};
                         // $('#mowzaModal').modal('hide');
                         document.getElementById('close').click();
+                        toastr.success('Successfully Created.');
                         this.getMowza();
                     })
                     .catch((error)=>{
@@ -156,6 +157,7 @@
                         this.errors = {};
                         this.ButtonText = 'Insert'
                         this.submitStatus = 0;
+                        toastr.success('Successfully Updated.');
                         this.getMowza();
                     })
                     .catch((error)=>{
@@ -199,6 +201,7 @@
                     axios
                     .post("/api/mowza/delete/"+id)
                     .then((response)=>{
+                        toastr.error('Successfully Deleted.');
                         this.getmowza();
                     })
                     .catch((error)=>{

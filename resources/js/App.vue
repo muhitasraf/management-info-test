@@ -1,20 +1,20 @@
 <template>
     <!-- Main navbar -->
-    <Navbar v-if="isLogin==true" ></Navbar>
+    <Navbar v-if="isLogin==true"></Navbar>
     <!-- /main navbar -->
 
     <!-- Page content -->
     <div class="page-content">
 
         <!-- Main sidebar -->
-        <Sidebar v-if="isLogin==true" ></Sidebar>
+        <Sidebar v-if="isLogin==true"></Sidebar>
         <!-- /main sidebar -->
 
         <!-- Main content -->
         <div class="content-wrapper">
 
             <!-- Page header -->
-            <Header v-if="isLogin==true" ></Header>
+            <Header v-if="isLogin==true"></Header>
             <!-- /page header -->
 
             <!-- Inner content -->
@@ -24,17 +24,17 @@
                 <div v-if="isLogin==true" class="content">
                     <!-- Basic card -->
                     <div class="card p-1">
-                        <router-view @update-sidebar="updateSidebar" v-slot="{ Component }">
+                        <router-view v-slot="{ Component }">
                             <component :is="Component" />
                         </router-view>
                     </div>
                     <!-- /basic card -->
                 </div>
-                <Login v-if="isLogin==false"></Login>
+                <Login v-else></Login>
                 <!-- /content area -->
 
                 <!-- Footer -->
-                <Footer v-if="isLogin==true" ></Footer>
+                <Footer v-if="isLogin==true"></Footer>
                 <!-- /footer -->
 
             </div>
@@ -70,9 +70,7 @@
             Navbar, Header, Sidebar, Footer, Login,
         },
         method : {
-            updateSidebar(){
-                this.isLogin = !this.isLogin
-            }
+
         }
     }
 </script>

@@ -125,6 +125,7 @@
                     axios
                     .post("/api/booking/delete/"+booking_id)
                     .then((response)=>{
+                        toastr.error('Successfully Deleted.');
                         this.getBooking();
                     })
                     .catch((error)=>{

@@ -107,6 +107,7 @@
                         this.errors = {};
                         // $('#districtModal').modal('hide');
                         document.getElementById('close').click();
+                        toastr.success('Successfully Created.');
                         this.getDistrict();
                     })
                     .catch((error)=>{
@@ -123,6 +124,7 @@
                         this.errors = {};
                         this.ButtonText = 'Insert'
                         this.submitStatus = 0;
+                        toastr.success('Successfully Updated.');
                         this.getDistrict();
                     })
                     .catch((error)=>{
@@ -159,6 +161,7 @@
                     axios
                     .post("/api/district/delete/"+id)
                     .then((response)=>{
+                        toastr.error('Successfully Deleted.');
                         this.getDistrict();
                     })
                     .catch((error)=>{

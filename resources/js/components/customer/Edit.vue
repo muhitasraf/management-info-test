@@ -130,7 +130,6 @@
             axios
             .post("/api/customer/edit/"+this.customer_id)
             .then((response)=>{
-                console.log(response.data)
                 this.field.customer_name = response.data.name
                 this.field.nid = response.data.nid
                 this.field.bin = response.data.bin
@@ -158,6 +157,7 @@
                         this.field = {};
                         this.errors = {};
                         this.$router.push('/customer');
+                        toastr.success('Successfully Updated.');
                     })
                     .catch((error)=>{
                         console.log(error);

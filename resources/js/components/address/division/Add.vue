@@ -97,6 +97,7 @@
                         this.errors = {};
                         // $('#divisionModal').modal('hide');
                         document.getElementById('close').click();
+                        toastr.success('Successfully Created.');
                         this.getDivision();
                     })
                     .catch((error)=>{
@@ -113,6 +114,7 @@
                         this.errors = {};
                         this.ButtonText = 'Insert'
                         this.submitStatus = 0;
+                        toastr.success('Successfully Updated.');
                         this.getDivision();
                     })
                     .catch((error)=>{
@@ -148,6 +150,7 @@
                     axios
                     .post("/api/division/delete/"+id)
                     .then((response)=>{
+                        toastr.error('Successfully Deleted.');
                         this.getDivision();
                     })
                     .catch((error)=>{

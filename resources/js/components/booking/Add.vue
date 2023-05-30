@@ -122,6 +122,7 @@
                 .post("/api/booking/create",this.bookings)
                 .then((response)=>{
                     this.$router.push('/booking');
+                    toastr.success('Successfully Created.');
                 })
                 .catch((error)=>{
                     console.log(error);

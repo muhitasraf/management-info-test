@@ -20,6 +20,9 @@
                         <div class="form-control-feedback form-control-feedback-start">
                             <input type="text" v-model="fields.email" class="form-control" placeholder="example@email.com">
                             <span v-if="errors.email">{{ errors.email[0] }}</span>
+                            <div class="form-control-feedback-icon">
+                                <i class="ph-user-circle text-muted"></i>
+                            </div>
                         </div>
                     </div>
 
@@ -66,14 +69,14 @@
             submit(){
                 axios
                 .post("/api/login", this.fields)
-                .then(()=>{
-                    this.$router.push({name : 'Home'});
+                .then((response)=>{
+                    console.log(response)
+                    this.$router.push({name : 'Login'});
                     localStorage.setItem('authenticated','true');
-                    this.$emit('updateSidebar');
+                    location.reload();
                 })
                 .catch((error)=>{
                     this.errors = error.response.data.errors;
-                    console.log(this.errors);
                 });
             },
         },

@@ -58,7 +58,7 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end">
-                        <a href="#" @click="logout" class="dropdown-item">Logout</a>
+                        <a href="" @click="logout" class="dropdown-item">Logout</a>
                     </div>
                 </li>
             </ul>
@@ -78,18 +78,15 @@
 
         },
         methods :{
-            logout(){
+            logout() {
                 axios
-                .post("/api/logout", this.fields)
-                .then((response)=>{
-                    this.$router.push({name : 'Home'});
-                    // localStorage.setItem('authenticated','false');
-                    this.$emit('updateSidebar');
+                .post("/api/logout")
+                .then((response) => {
+                    localStorage.removeItem("authenticated");
+                    // this.$router.push({ name: "Login" });
+                    location.reload()
                 })
-                .catch((error)=>{
-                    this.errors = error.response.data.errors;
-                    console.log(this.errors);
-                });
+                .catch((error) => console.log(error));
             },
         },
     }

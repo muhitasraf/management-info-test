@@ -172,6 +172,7 @@
                     this.fields = {};
                     this.errors = {};
                     this.$router.push('/employee');
+                    toastr.success('Successfully Updated.');
                 })
                 .catch((error)=>{
                     console.log(error);

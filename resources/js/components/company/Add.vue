@@ -108,6 +108,7 @@
                         this.field = {};
                         this.errors = {};
                         this.getCompany();
+                        toastr.success('Successfully Created.');
                     })
                     .catch((error)=>{
                         console.log(error);
@@ -121,6 +122,7 @@
                         this.ButtonText = 'Insert'
                         this.submitStatus = 0;
                         this.getCompany();
+                        toastr.success('Successfully Updated.');
                     })
                     .catch((error)=>{
                         console.log(error);
@@ -157,6 +159,7 @@
                     axios
                     .post("/api/company/delete/"+id)
                     .then((response)=>{
+                        toastr.error('Successfully Deleted.');
                         this.getCompany();
                     })
                     .catch((error)=>{

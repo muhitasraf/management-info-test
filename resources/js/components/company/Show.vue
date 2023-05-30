@@ -7,7 +7,6 @@
                     <th>Company Name</th>
                     <th>Display Name</th>
                     <th>Status</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,10 +15,6 @@
                     <td>{{ company.name }}</td>
                     <td>{{ company.display_name }}</td>
                     <td>{{ company.status == 1 ? 'Active' : 'In-Active' }}</td>
-                    <td>
-                        <button class="btn btn-sm btn-info mx-1">Edit</button>
-                        <button class="btn btn-sm btn-danger">Delete</button>
-                    </td>
                 </tr>
             </tbody>
         </table>

@@ -107,6 +107,7 @@
                         this.errors = {};
                         // $('#thanaModal').modal('hide');
                         document.getElementById('close').click();
+                        toastr.success('Successfully Created.');
                         this.getThana();
                     })
                     .catch((error)=>{
@@ -123,6 +124,7 @@
                         this.errors = {};
                         this.ButtonText = 'Insert'
                         this.submitStatus = 0;
+                        toastr.success('Successfully Updated.');
                         this.getThana();
                     })
                     .catch((error)=>{
@@ -160,6 +162,7 @@
                     axios
                     .post("/api/thana/delete/"+id)
                     .then((response)=>{
+                        toastr.error('Successfully Deleted.');
                         this.getThana();
                     })
                     .catch((error)=>{

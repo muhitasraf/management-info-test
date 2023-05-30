@@ -3,7 +3,7 @@
         <h5 class="mb-0">Create Employee Salary</h5>
     </div>
     <div class="card-body">
-        <router-link to="/employee">
+        <router-link to="/employee_salary">
             <button class="btn btn-sm btn-info">Salary List</button>
         </router-link>
         <div class="row">
@@ -19,6 +19,7 @@
                                 <div class="col">
                                     <label>Employee Code</label>
                                     <input type="text" v-model="fields.emp_code" @keyup.enter="getEmployee($event.target.value)" class="form-control" placeholder="Employee Code">
+                                    <input type="hidden" v-model="fields.emp_id">
                                 </div>
                                 <div class="col">
                                     <label>Employee Name</label>
@@ -95,6 +96,7 @@
                 fields : {},
                 errors : {},
                 employee_name : '',
+                emp_id : '',
             };
         },
         mounted(){
@@ -102,11 +104,13 @@
         },
         methods :{
             submit(){
+                console.log(this.fields);
                 axios
-                .post("/api/employee_salary/store", this.fields)
+                .post("/api/employee_salary/create", this.fields)
                 .then((response)=>{
                     this.fields = {};
                     this.errors = {};
+                    toastr.success('Successfully Created.');
                     this.$router.push('/employee_salary');
                 })
                 .catch((error)=>{
@@ -118,9 +122,8 @@
                 axios
                 .get("/api/get_data/employee_info/code/"+code)
                 .then((response)=>{
-                    // this.employee_name = response.data[0]['name']
-                    // console.log(this.employee_name)
-                    this.fields.employee_name = response.data[0]['name']
+                    this.fields.employee_name = response.data[0]['name'];
+                    this.fields.emp_id = response.data[0]['id'];
                 })
                 .catch((error)=>{
                     console.log(error);
