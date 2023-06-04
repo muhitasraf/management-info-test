@@ -101,7 +101,8 @@
                         this.getDivision();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        toastr.error('Something went wrong.');
+                        // console.log(error);
                     });
                 }else{
                     axios
@@ -118,7 +119,8 @@
                         this.getDivision();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        toastr.error('Something went wrong.');
+                        // console.log(error);
                     });
                 }
             },
@@ -142,7 +144,7 @@
                     this.division_id = response.data.id
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    // console.log(error);
                 });
             },
             deleteDivision(id){
@@ -154,7 +156,8 @@
                         this.getDivision();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        toastr.error('Something went wrong.');
+                        // console.log(error);
                     });
                 }
             },

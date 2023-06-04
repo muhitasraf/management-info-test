@@ -146,7 +146,8 @@
                 this.field.is_alive = response.data.is_alive
             })
             .catch((error)=>{
-                console.log(error);
+                // console.log(error);
+                toastr.error('Something went wrong.');
             });
         },
         methods :{
@@ -160,7 +161,8 @@
                         toastr.success('Successfully Updated.');
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        // console.log(error);
+                        toastr.error('Something went wrong.');
                     });
             },
         },

@@ -22,6 +22,7 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
+                                                    <th scope="col">Bookimg No</th>
                                                     <th scope="col">Customer</th>
                                                     <th scope="col">Unit</th>
                                                     <th scope="col text-right">Quantity</th>
@@ -36,6 +37,9 @@
                                                 <tr v-for="(booking, k) in bookings" :key="k">
                                                     <td scope="row" class="trashIconContainer">
                                                         <i class="ph ph-trash" @click="deleteRow(k, booking)"></i>
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control text-right" type="text" v-bind:value="bookings.booking_no">
                                                     </td>
                                                     <td>
                                                         <select class="form-control" v-model="booking.customer" id="customer">
@@ -74,7 +78,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="col-md-12 mb-2 mt-2">
-                                    <button type='button' class="btn btn-info" @click="addNewRow">
+                                    <button type='button' class="btn btn-info" @click="addNewRow()">
                                         <i class="fas fa-plus-circle"></i> Add
                                     </button>
                                 </div>
@@ -105,6 +109,7 @@
                     booked_amt : '',
                     booked_date : '',
                     remaining_amt : '',
+                    booking_no : '',
                 }],
                 all_units : [],
                 customers : [],
@@ -115,17 +120,19 @@
         mounted(){
             this.getUnit();
             this.getCustomer();
+            this.getBookingNo();
         },
         methods :{
             submit(){
                 axios
-                .post("/api/booking/create",this.bookings)
+                .post("/api/booking/create",this.bookings.array)
                 .then((response)=>{
                     this.$router.push('/booking');
                     toastr.success('Successfully Created.');
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    // console.log(error);
+                    toastr.error('Something went wrong.');
                 });
             },
             getTotalPrice(booking){
@@ -160,6 +167,11 @@
                 });
             },
             addNewRow() {
+                // let book_first_str = this.bookings.booking_no.substring(0, 9);
+                // let book_second_str =  this.bookings.booking_no.substring(10, 17);
+                // let booking_num = book_first_str+book_second_str;
+                // this.bookings.booking_no = parseFloat(this.bookings.booking_no) +1;
+
                 this.bookings.push({
                     customer : '',
                     unit : '',
@@ -169,6 +181,7 @@
                     booked_amt : '',
                     booked_date : '',
                     remaining_amt : '',
+                    booking_no : '',
                 });
             },
             deleteRow(index, booking) {
@@ -176,6 +189,18 @@
                 if (idx > -1) {
                     this.bookings.splice(idx, 1);
                 }
+            },
+
+            getBookingNo(){
+                axios
+                .get("/api/booking_no")
+                .then((response)=>{
+                    this.bookings.booking_no = response.data;
+                    console.log(this.bookings.booking_no);
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
             },
 
         },

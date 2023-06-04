@@ -15,6 +15,19 @@ class BookingController extends Controller
         $data = DB::select($sql);
         return response()->json($data);
     }
+
+    public function booking_no(){
+        $prev_booking_no = DB::select("SELECT booking_no FROM bookings ORDER BY id DESC LIMIT 1");
+        if(!empty($prev_booking_no['booking_no'])){
+            $prev_booking_str = substr($prev_booking_no['booking_no'],0,9);
+            $prev_booking_num = substr($prev_booking_no['booking_no'],9,strlen($prev_booking_no['booking_no']));
+            $new_booking_no = $prev_booking_str.sprintf('%08d', $prev_booking_num + 1);
+        }else{
+            $new_booking_no = "BOK-".date("Y")."-00000000";
+        }
+        return response()->json($new_booking_no);
+    }
+
     public function store(Request $request){
 
         $req_data = $request->all();
@@ -30,7 +43,8 @@ class BookingController extends Controller
                 'total_price' => $req['total_price'],
                 'booked_amt' => $req['booked_amt'],
                 'booked_date' => $req['booked_date'],
-                'remaining_amt' => $req['remaining_amt']
+                'remaining_amt' => $req['remaining_amt'],
+                'booking_no' => $req['booking_no']
             ];
         }
         Booking::insert($data);

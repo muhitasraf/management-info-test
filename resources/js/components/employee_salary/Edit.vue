@@ -115,7 +115,8 @@
                     this.$router.push('/employee_salary');
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    // console.log(error);
+                    toastr.error('Something went wrong.');
                 });
             },
             getEmployee(id){

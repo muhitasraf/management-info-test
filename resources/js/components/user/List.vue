@@ -60,7 +60,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered">
+                            <table class="table table-striped table-bordered dataTable">
                                 <thead>
                                     <tr>
                                         <th>SN</th>
@@ -127,6 +127,7 @@
                     })
                     .catch((error)=>{
                         this.errors = error.response.data.errors;
+                        toastr.error('Something went wrong.');
                     });
                 }else{
                     axios
@@ -144,6 +145,7 @@
                     })
                     .catch((error)=>{
                         this.errors = error.response.data.errors;
+                        toastr.error('Something went wrong.');
                     });
                 }
             },
@@ -181,7 +183,8 @@
                         this.getUser();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        // console.log(error);
+                        toastr.error('Something went wrong.');
                     });
                 }
             },

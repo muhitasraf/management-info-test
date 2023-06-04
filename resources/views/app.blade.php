@@ -17,6 +17,9 @@
         <script src="{{asset('global_assets/js/jquery/jquery.min.js')}}"></script>
         <!-- /core JS files -->
 
+        <!-- Datatable JS -->
+        <script src="{{asset('global_assets/js/vendor/tables/datatables/datatables.min.js')}}"></script>
+
         <!-- Toaster files -->
         <script src="{{asset('global_assets/js/toastr/toastr.min.js')}}"></script>
         <link href="{{asset('global_assets/js/toastr/toastr.css')}}" rel="stylesheet">
@@ -32,26 +35,5 @@
     <body id="app">
 
     </body>
-    <script>
 
-        $(document).ready(function onDocumentReady() {
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": true,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            }
-        });
-    </script>
 </html>

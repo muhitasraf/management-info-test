@@ -155,6 +155,14 @@
                             <li class="nav-item"><router-link to="/booking" class="nav-item nav-link">List</router-link></li>
                         </ul>
                     </li>
+
+                    <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Registration</span></a>
+                        <ul class="nav-group-sub collapse">
+                            <li class="nav-item"><router-link to="/registration/create" class="nav-item nav-link">Cteate</router-link></li>
+                            <li class="nav-item"><router-link to="/registration" class="nav-item nav-link">List</router-link></li>
+                        </ul>
+                    </li>
                     <!-- /layout -->
 
                 </ul>

@@ -153,7 +153,8 @@
                 .catch((error)=>{
 
                     this.errors = error.response.data.errors;
-                    console.log(this.errors);
+                    toastr.error('Something went wrong.');
+                    // console.log(this.errors);
                 });
             }
         },

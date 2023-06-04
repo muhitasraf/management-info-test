@@ -111,7 +111,8 @@
                         this.getUnion();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        toastr.error('Something went wrong.');
+                        // console.log(error);
                     });
                 }else{
                     axios
@@ -128,7 +129,8 @@
                         this.getUnion();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        toastr.error('Something went wrong.');
+                        // console.log(error);
                     });
                 }
             },
@@ -165,7 +167,8 @@
                         this.getUnion();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        toastr.error('Something went wrong.');
+                        // console.log(error);
                     });
                 }
             },

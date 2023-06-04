@@ -144,7 +144,8 @@
                         this.getMowza();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        toastr.error('Something went wrong.');
+                        // console.log(error);
                     });
                 }else{
                     axios
@@ -161,7 +162,8 @@
                         this.getMowza();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        toastr.error('Something went wrong.');
+                        // console.log(error);
                     });
                 }
             },
@@ -172,7 +174,8 @@
                     this.mowzas = response.data
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    // console.log(error);
+                    toastr.error('Something went wrong.');
                 });
             },
             editMowza(id, division_id, district_id, thana_id){
@@ -193,7 +196,8 @@
                     this.mowza_id = response.data.id
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    toastr.error('Something went wrong.');
+                    // console.log(error);
                 });
             },
             deleteMowza(id){
@@ -205,7 +209,8 @@
                         this.getmowza();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        toastr.error('Something went wrong.');
+                        // console.log(error);
                     });
                 }
             },

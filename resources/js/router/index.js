@@ -57,6 +57,11 @@ import CreateBooking from '../components/booking/Add.vue';
 import ViewBooking from '../components/booking/Show.vue';
 import EditBooking from '../components/booking/Edit.vue';
 
+import Registration from '../components/registration/List.vue';
+import CreateRegistration from '../components/registration/Add.vue';
+import ViewRegistration from '../components/registration/Show.vue';
+import EditRegistration from '../components/registration/Edit.vue';
+
 export const routes = [
     { name: 'Home', path: '/', component: Home, meta : {requiresAuth:true} },
     { name: 'Login', path: '/login', component: Login, meta : {requiresGuest:true} },
@@ -116,6 +121,11 @@ export const routes = [
     { name: 'CreateBooking', path: '/booking/create', component: CreateBooking, meta : {requiresAuth:true} },
     { name: 'ViewBooking', path: '/booking/view/:id', component: ViewBooking, meta : {requiresAuth:true} },
     { name: 'EditBooking', path: '/booking/edit/:id', component: EditBooking, meta : {requiresAuth:true} },
+
+    { name: 'Registration', path: '/registration', component: Registration, meta : {requiresAuth:true} },
+    { name: 'CreateRegistration', path: '/registration/create', component: CreateRegistration, meta : {requiresAuth:true} },
+    { name: 'ViewRegistration', path: '/registration/view/:id', component: ViewRegistration, meta : {requiresAuth:true} },
+    { name: 'EditRegistration', path: '/registration/edit/:id', component: EditRegistration, meta : {requiresAuth:true} },
 ];
 
 const router = createRouter({

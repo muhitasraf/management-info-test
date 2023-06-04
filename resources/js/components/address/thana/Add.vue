@@ -111,7 +111,8 @@
                         this.getThana();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        toastr.error('Something went wrong.');
+                        // console.log(error);
                     });
                 }else{
                     axios
@@ -128,7 +129,8 @@
                         this.getThana();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        toastr.error('Something went wrong.');
+                        // console.log(error);
                     });
                 }
             },
@@ -166,7 +168,8 @@
                         this.getThana();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        toastr.error('Something went wrong.');
+                        // console.log(error);
                     });
                 }
             },

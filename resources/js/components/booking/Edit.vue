@@ -122,12 +122,12 @@
 
             })
             .catch((error)=>{
-                console.log(error);
+                // console.log(error);
+                toastr.error('Something went wrong.');
             });
         },
         methods :{
             submit(){
-                console.log(this.bookings);
                 this.booking_id = this.$route.params.id ?? ''
                 axios
                 .post("/api/booking/update/"+this.booking_id,this.bookings)
@@ -136,7 +136,8 @@
                     toastr.success('Successfully Updated.');
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    // console.log(error);
+                    toastr.error('Something went wrong.');
                 });
             },
             getTotalPrice(){

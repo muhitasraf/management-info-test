@@ -111,7 +111,8 @@
                         this.getDistrict();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        toastr.error('Something went wrong.');
+                        // console.log(error);
                     });
                 }else{
                     axios
@@ -128,7 +129,8 @@
                         this.getDistrict();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        toastr.error('Something went wrong.');
+                        // console.log(error);
                     });
                 }
             },
@@ -139,7 +141,7 @@
                     this.districts = response.data
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    // console.log(error);
                 });
             },
             editDistrict(id){
@@ -165,7 +167,8 @@
                         this.getDistrict();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        toastr.error('Something went wrong.');
+                        // console.log(error);
                     });
                 }
             },

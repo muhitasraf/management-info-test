@@ -91,7 +91,8 @@
                         this.getCustomer();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        // console.log(error);
+                        toastr.error('Something went wrong.');
                     });
                 }
             },

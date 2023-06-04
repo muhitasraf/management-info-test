@@ -1,10 +1,10 @@
 <template>
     <div class="card-header">
-        <h5 class="mb-0">Booking List</h5>
+        <h5 class="mb-0">Registration List</h5>
     </div>
     <div class="card-body">
-        <router-link to="/booking/create">
-            <button class="btn btn-sm btn-info">Create Booking</button>
+        <router-link to="/registration/create">
+            <button class="btn btn-sm btn-info">Create registration</button>
         </router-link>
         <div class="row">
 
@@ -26,58 +26,74 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Customer</th>
+                                            <th scope="col">Booking ID</th>
                                             <th scope="col">Unit</th>
-                                            <th scope="col text-right">Quantity</th>
-                                            <th scope="col text-right">Unit Price</th>
-                                            <th scope="col text-right">Total Price</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Unit Price</th>
+                                            <th scope="col">Total Price</th>
                                             <th scope="col text-right">Booked Amount</th>
-                                            <th scope="col text-right">Booked Date</th>
+                                            <th scope="col text-right">Down Payment</th>
                                             <th scope="col text-right">Remaining Amount</th>
+                                            <th scope="col text-right">Installment</th>
+                                            <th scope="col text-right">No of install</th>
+                                            <th scope="col text-right">Per month install</th>
                                             <th scope="col text-right">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(booking, k) in all_booking" :key="k">
+                                        <tr v-for="(registration, k) in registrations" :key="k">
                                             <td scope="row" class="trashIconContainer">
                                                 {{ ++k }}
                                             </td>
                                             <td>
-                                                {{ booking.customer_name }}
+                                                {{ registration.customer }}
+                                            </td>
+                                            <td>
+                                                {{ registration.booking_id }}
                                             </td>
                                             <td style="width: 10%;">
-                                                {{ booking.unit_name }}
+                                                {{ registration.unit }}
                                             </td>
                                             <td>
-                                                {{ booking.qty }}
+                                                {{ registration.qty }}
                                             </td>
                                             <td>
-                                                {{ booking.unit_price }}
+                                                {{ registration.unit_price }}
                                             </td>
                                             <td>
-                                                {{ booking.total_price }}
+                                                {{ registration.total_price }}
                                             </td>
                                             <td>
-                                                {{ booking.booked_amt }}
+                                                {{ registration.booked_amt }}
                                             </td>
                                             <td>
-                                                {{ booking.booked_date }}
+                                                {{ registration.down_payment }}
                                             </td>
                                             <td>
-                                                {{ booking.remaining_amt }}
+                                                {{ registration.remaining_amt }}
+                                            </td>
+                                            <td>
+                                                {{ registration.installment }}
+                                            </td>
+                                            <td>
+                                                {{ registration.no_of_install }}
+                                            </td>
+                                            <td>
+                                                {{ registration.per_month_install }}
                                             </td>
                                             <td>
                                                 <td class="text-center">
-                                                    <router-link :to="'/booking/view/'+booking.id">
+                                                    <router-link :to="'/registration/view/'+registration.id">
                                                         <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-eye"></i></button>
                                                     </router-link>
-                                                    <router-link :to="'/booking/edit/'+booking.id">
+                                                    <router-link :to="'/registration/edit/'+registration.id">
                                                         <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-pencil"></i></button>
                                                     </router-link>
-                                                    <button @click="deleteBooking(booking.id)" class="btn btn-sm btn-danger"><i class="ph ph-trash"></i></button>
+                                                    <button @click="deleteRegistration(registration.id)" class="btn btn-sm btn-danger"><i class="ph ph-trash"></i></button>
                                                 </td>
                                             </td>
                                         </tr>
-                                        <tr v-show="all_booking.length === 0">
+                                        <tr v-show="registrations.length === 0">
                                             <td colspan="9">
                                                 <p class="text-center alert alert-danger">
                                                     <span style="font-size: 20px;"><b> No data available.</b></span>
@@ -99,34 +115,34 @@
     export default{
         data() {
             return {
-                all_booking : [],
+                registrations : [],
                 customers : [],
                 errors : {},
                 loading: false
             };
         },
         mounted(){
-            this.getBooking();
+            this.getRegistration();
         },
         methods :{
-            getBooking(){
+            getRegistration(){
                 this.loading = true
                 axios
-                .get("/api/booking")
+                .get("/api/registration")
                 .then((response)=>{
-                    this.all_booking = response.data
+                    this.registrations = response.data
                 })
                 .catch((error)=>{
                     console.log(error);
                 }).finally(() => (this.loading = false));
             },
-            deleteBooking(booking_id){
+            deleteRegistration(registration_id){
                 if(confirm("Do you really want to delete?")){
                     axios
-                    .post("/api/booking/delete/"+booking_id)
+                    .post("/api/registration/delete/"+registration_id)
                     .then((response)=>{
                         toastr.error('Successfully Deleted.');
-                        this.getBooking();
+                        this.getRegistration();
                     })
                     .catch((error)=>{
                         // console.log(error);

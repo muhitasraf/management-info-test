@@ -50,7 +50,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered">
+                            <table class="table datatable-highlight">
                                 <thead>
                                     <tr>
                                         <th>SN</th>
@@ -82,7 +82,7 @@
 </template>
 
 <script>
-    import CompanyList from '../company/Show.vue'
+
     export default{
         data() {
             return {
@@ -111,7 +111,8 @@
                         toastr.success('Successfully Created.');
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        // console.log(error);
+                        toastr.error('Something went wrong.');
                     });
                 }else{
                     axios
@@ -125,7 +126,8 @@
                         toastr.success('Successfully Updated.');
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        // console.log(error);
+                        toastr.error('Something went wrong.');
                     });
                 }
             },
@@ -151,7 +153,8 @@
                     this.company_id = response.data.id
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    // console.log(error);
+                    toastr.error('Something went wrong.');
                 });
             },
             deleteCompany(id){
@@ -163,13 +166,12 @@
                         this.getCompany();
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        // console.log(error);
+                        toastr.error('Something went wrong.');
                     });
                 }
             },
         },
-        components : {
-            CompanyList,
-        }
+
     }
 </script>

@@ -11,6 +11,7 @@ use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeSalaryController;
 use App\Http\Controllers\MowzaController;
+use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ThanaController;
 use App\Http\Controllers\UnionController;
@@ -126,6 +127,7 @@ Route::get('booking/view/{id}',[BookingController::class,'show']);
 Route::get('booking/edit/{id}',[BookingController::class,'edit']);
 Route::post('booking/update/{id}',[BookingController::class,'update']);
 Route::post('booking/delete/{id}',[BookingController::class,'destroy']);
+Route::get('booking_no',[BookingController::class,'booking_no']);
 
 Route::get('employee_salary',[EmployeeSalaryController::class,'index']);
 Route::post('employee_salary/create',[EmployeeSalaryController::class,'store']);
@@ -133,6 +135,13 @@ Route::post('employee_salary/view/{id}',[EmployeeSalaryController::class,'show']
 Route::get('employee_salary/edit/{id}',[EmployeeSalaryController::class,'edit']);
 Route::post('employee_salary/update/{id}',[EmployeeSalaryController::class,'update']);
 Route::post('employee_salary/delete/{id}',[EmployeeSalaryController::class,'destroy']);
+
+Route::get('registration',[RegistrationController::class,'index']);
+Route::post('registration/create',[RegistrationController::class,'store']);
+Route::get('registration/view/{id}',[RegistrationController::class,'show']);
+Route::get('registration/edit/{id}',[RegistrationController::class,'edit']);
+Route::post('registration/update/{id}',[RegistrationController::class,'update']);
+Route::post('registration/delete/{id}',[RegistrationController::class,'destroy']);
 
 Route::get('get_data/{table}/{column}/{id}',[CommonController::class,'getData']);
 Route::get('get_data/{table}/{column}',[CommonController::class,'getData']);
