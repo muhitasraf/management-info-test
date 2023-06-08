@@ -81,16 +81,14 @@
                                             <td>
                                                 {{ registration.per_month_install }}
                                             </td>
-                                            <td>
-                                                <td class="text-center">
-                                                    <router-link :to="'/registration/view/'+registration.id">
-                                                        <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-eye"></i></button>
-                                                    </router-link>
-                                                    <router-link :to="'/registration/edit/'+registration.id">
-                                                        <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-pencil"></i></button>
-                                                    </router-link>
-                                                    <button @click="deleteRegistration(registration.id)" class="btn btn-sm btn-danger"><i class="ph ph-trash"></i></button>
-                                                </td>
+                                            <td class="text-center">
+                                                <router-link :to="'/registration/view/'+registration.id">
+                                                    <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-eye"></i></button>
+                                                </router-link>
+                                                <router-link :to="'/registration/edit/'+registration.id">
+                                                    <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-pencil"></i></button>
+                                                </router-link>
+                                                <button @click="deleteRegistration(registration.id)" class="btn btn-sm btn-danger"><i class="ph ph-trash"></i></button>
                                             </td>
                                         </tr>
                                         <tr v-show="registrations.length === 0">

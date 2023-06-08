@@ -17,6 +17,20 @@
     </div>
 </template>
 <script>
+
+    export default{
+        data() {
+        },
+        created() {
+        },
+        mounted(){
+
+        },
+        methods :{
+        },
+    }
+
+
     $(document).ready(function onDocumentReady() {
         toastr.options = {
             "closeButton": true,
@@ -37,5 +51,5 @@
         }
     });
 
-    $('#dataTable').DataTable();
+    // $('#dataTable').DataTable();
 </script>

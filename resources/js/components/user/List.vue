@@ -59,8 +59,18 @@
             <div class="col-md-12 pt-2">
                 <div class="card">
                     <div class="card-body">
+                        <button type="button" class="btn btn-secondary mb-1 mx-1" @click="$export_pdf(this.$refs.dataTable.outerHTML)">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary mb-1 mx-1" @click="$export_excel(this.$refs.dataTable.outerHTML)">
+                            <i class="fa-solid fa-file-excel"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary mb-1" @click="$print_html('landscape')">
+                            <i class="fa-solid fa-print"></i>
+                        </button>
+                        <h3 class="title text-center">User List</h3>
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered dataTable">
+                            <table class="table table-striped table-bordered table_content" ref="dataTable" id="dataTable">
                                 <thead>
                                     <tr>
                                         <th>SN</th>
@@ -76,9 +86,13 @@
                                         <td>{{ user.name }}</td>
                                         <td>{{ user.user_name }}</td>
                                         <td>{{ user.email }}</td>
-                                        <td>
-                                            <button @click="editUser(user.id)" class="btn btn-sm btn-info mx-1" data-bs-toggle="modal" data-bs-target="#userModal">Edit</button>
-                                            <button @click="deleteUser(user.id)" class="btn btn-sm btn-danger">Delete</button>
+                                        <td class="text-center">
+                                            <button @click="editUser(user.id)" class="btn btn-sm btn-info mx-1 hide-btn" data-bs-toggle="modal" data-bs-target="#userModal">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </button>
+                                            <button @click="deleteUser(user.id)" class="btn btn-sm btn-danger hide-btn">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -91,6 +105,22 @@
     </div>
 </template>
 
+<style>
+    @media print {
+        body {
+            visibility: hidden;
+        }
+        #dataTable {
+            visibility: visible;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .hide-btn{
+            visibility: hidden;
+        }
+    }
+</style>
 <script>
 
     export default{
@@ -103,6 +133,7 @@
                 'ButtonText' : 'Insert',
                 'submitStatus' : '0',
                 'user_id' : '',
+                'table_contant' : '',
             };
         },
         created() {
@@ -154,6 +185,15 @@
                 .get("/api/user/list")
                 .then((response)=>{
                     this.users = response.data
+                    this.$nextTick(() => {
+                        $("#dataTable").DataTable({
+                            "destroy": true,
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'excel', 'pdf', 'print'
+                            ],
+                        });
+                    });
                 })
                 .catch((error)=>{
                     console.log(error);

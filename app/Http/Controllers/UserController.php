@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
 {
     public function index(){
-        return response()->json(User::get());
+        $query = User::get();
+        return response()->json($query);
+        // dd(Datatables::of($query)->toJson());
+        // return Datatables::of($query)->toJson();
     }
 
     public function store(Request $request){
@@ -17,7 +21,7 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->user_name = $request->input('user_name');
         $user->email = $request->input('email');
-        
+
         $user->save();
         return response()->json($user);
     }

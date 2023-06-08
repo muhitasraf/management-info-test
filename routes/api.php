@@ -146,3 +146,6 @@ Route::post('registration/delete/{id}',[RegistrationController::class,'destroy']
 Route::get('get_data/{table}/{column}/{id}',[CommonController::class,'getData']);
 Route::get('get_data/{table}/{column}',[CommonController::class,'getData']);
 Route::get('get_data/{table}',[CommonController::class,'getData']);
+
+Route::post('download_pdf',[CommonController::class,'download_pdf']);
+Route::post('download_xl',[CommonController::class,'download_xl']);
