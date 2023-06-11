@@ -163,6 +163,14 @@
                             <li class="nav-item"><router-link to="/registration" class="nav-item nav-link">List</router-link></li>
                         </ul>
                     </li>
+
+                    <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Collection</span></a>
+                        <ul class="nav-group-sub collapse">
+                            <li class="nav-item"><router-link to="/collection/create" class="nav-item nav-link">Cteate</router-link></li>
+                            <li class="nav-item"><router-link to="/collection" class="nav-item nav-link">List</router-link></li>
+                        </ul>
+                    </li>
                     <!-- /layout -->
 
                 </ul>

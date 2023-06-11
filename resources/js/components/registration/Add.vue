@@ -17,11 +17,15 @@
                         <form @submit.prevent="submit">
                             <div class="row mb-3">
                                 <div class="col">
-                                    <label>Booking ID</label>
+                                    <label>Booking No</label>
                                     <select v-model="fields.booking_id" name="booking_id" class="form-select">
                                         <option value="" disabled>Please select one</option>
-                                        <option v-for="booking in bookings" v-bind:value="booking.id">booking-{{ booking.id }}</option>
+                                        <option v-for="booking in bookings" v-bind:value="booking.id">{{ booking.booking_no }}</option>
                                     </select>
+                                </div>
+                                <div class="col">
+                                    <label>Registration No</label>
+                                    <input type="text" v-model="fields.registration_no" class="form-control" readonly>
                                 </div>
                                 <div class="col">
                                     <label>Customer</label>
@@ -138,6 +142,7 @@
                     no_of_install : '',
                     registration_date : '',
                     pay_install_date : '',
+                    registration_no : '',
                 },
                 errors : {},
                 bookings : [],
@@ -150,6 +155,7 @@
             this.getBooking();
             this.getCustomer();
             this.getUnit();
+            this.getRegistrationNo();
         },
         methods :{
             submit(){
@@ -211,6 +217,16 @@
                     this.fields.remaining_amt  = '';
                     this.readonly = 'yes';
                 }
+            },
+            getRegistrationNo(){
+                axios
+                .get("/api/registration_no")
+                .then((response)=>{
+                    this.fields.registration_no = response.data;
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
             },
         },
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -65,25 +66,22 @@ class CommonController extends Controller
         // To support Bootstrap add this line
         //$bootstrap = file_get_contents('https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css');
 
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: inline; filename="'.$documentFileName.'"');
+
         $mpdf->WriteHTML($table_contant);
-
-        // Save PDF on your public storage
-        Storage::disk('public')->put($documentFileName, $mpdf->Output($documentFileName, "S"));
-
-        // Get file back from storage with the give header informations
-        return Storage::disk('public')->download($documentFileName, 'Request', $header); //
+        $mpdf->OutputHttpDownload($documentFileName,'I');
 
     }
 
     public function download_xl(Request $request){
+        // dd($request->all());
+        // $file = new Filesystem;
+        // // $file->cleanDirectory(public_path()."/tmp_export_xl");
+        // // $file->makeDirectory(public_path()."/tmp_export_xl");
 
-        // $files = glob('./tmp_export_xl/*'); // get all file names
-        // foreach ($files as $file) { // iterate files
-        //     if (is_file($file)) {
-        //         unlink($file); // delete file
-        //     }
-        // }
         if ($request->input('table_contant')) {
+            // dd($request->input('table_contant'));
             $html_table = $request->input('table_contant');
 
             if(strpos($request->input('table_contant'),'<img src="')){
@@ -99,12 +97,6 @@ class CommonController extends Controller
                 }
             }
 
-            // $temporary_html_file = './tmp_export_xl/' . time() . '.html';
-
-            // file_put_contents($temporary_html_file, $html_table);
-            // $reader = IOFactory::createReader('Html');
-            // $spreadsheet = $reader->load($temporary_html_file);
-
             $reader = new \PhpOffice\PhpSpreadsheet\Reader\Html();
             $spreadsheet = $reader->loadFromString($html_table);
 
@@ -114,7 +106,8 @@ class CommonController extends Controller
             foreach (range('A', 'I') as $letra) {
                 $spreadsheet->getActiveSheet()->getColumnDimension($letra)->setAutoSize(true);
             }
-            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+
+            // $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 
             if ($request->input('title')) {
                 $filename = $request->input('title')."-".Date("d-m-Y")."-(Time-".date('h_i_s', time()).")".'.xlsx';
@@ -122,53 +115,50 @@ class CommonController extends Controller
                 $filename = time().'.xlsx';
             }
 
+            // dd($filename);
 
-            $writer->save($filename);
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="'.$filename.'"');
+            header('Cache-Control: max-age=0');
 
-            // header('Content-Type: application/x-www-form-urlencoded');
-            // header('Content-Transfer-Encoding: Binary');
-            // header("Content-disposition: attachment; filename=$filename");
+            // $header = [
+            //     'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            //     'Content-Disposition: attachment; filename="hello world.xlsx"',
+            //     'Cache-Control: max-age=0'
+            // ];
 
-            // header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            // header('Content-Disposition: attachment;filename="'.$filename.'"');
-            // header('Cache-Control: max-age=0');
-            // return readfile($filename);
-            
-            $header = [
-                'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                'Content-Disposition: attachment;filename="'.$filename.'"',
-                'Cache-Control: max-age=0',
-            ];
+            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 
-            Storage::disk('public')->put($filename, $writer->save($filename));
+            $writer->save('php://output');
+
+            exit;
+
+            // ob_end_clean();
+            // $writer->save('php://output');exit;
+            // $writer->save($filename);
+
+            // readfile("tmp_export_xl/".$filename);
+
+            // Storage::disk('public')->put($filename, $writer->save($filename));
             // Get file back from storage with the give header informations
-            return Storage::disk('public')->download($filename, 'Request', $header); //
+            // return Storage::disk('public')->download($filename, 'Request', $header);
         }
 
-        // $htmlString = '<table>
-        //           <tr>
-        //               <td>Hello World</td>
-        //           </tr>
-        //           <tr>
-        //               <td>Hello<br />World</td>
-        //           </tr>
-        //           <tr>
-        //               <td>Hello<br>World</td>
-        //           </tr>
-        //       </table>';
 
-        // $reader = new \PhpOffice\PhpSpreadsheet\Reader\Html();
-        // $spreadsheet = $reader->loadFromString($htmlString);
+        // $spreadsheet = new Spreadsheet();
+        // $activeWorksheet = $spreadsheet->getActiveSheet();
+        // $activeWorksheet->setCellValue('A1', 'Hello World !');
 
-        // // $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
-        // // $writer->save('write.xls');
+        // $writer = new Xlsx($spreadsheet);
 
         // header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        // header('Content-Disposition: attachment;filename="myfile.xlsx"');
+        // header('Content-Disposition: attachment;filename="hello world.xlsx"');
         // header('Cache-Control: max-age=0');
 
-        // $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
-        // $writer->save('write.xlsx');
+        // $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+
+        // $writer->save('php://output');
+        // exit;
 
     }
 }

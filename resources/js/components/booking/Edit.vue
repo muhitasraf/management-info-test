@@ -22,6 +22,7 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Customer</th>
+                                                    <th scope="col">Booking No</th>
                                                     <th scope="col">Unit</th>
                                                     <th scope="col text-right">Quantity</th>
                                                     <th scope="col text-right">Unit Price</th>
@@ -38,6 +39,9 @@
                                                             <option value="">Select Unit</option>
                                                             <option v-for="customers in all_customers" v-bind:value="customers.id">{{ customers.name }}</option>
                                                         </select>
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control text-right" type="text" v-model="bookings.booking_no" readonly>
                                                     </td>
                                                     <td style="width: 10%;">
                                                         <select class="form-control" v-model="bookings.unit" id="unit">
@@ -91,12 +95,6 @@
                 bookings : {
                     customer : '',
                     unit : '',
-                    // qty : '',
-                    // unit_price : '',
-                    // total_price : '',
-                    // booked_amt : '',
-                    // booked_date : '',
-                    // remaining_amt : '',
                 },
                 all_units : [],
                 all_customers : [],
@@ -112,6 +110,7 @@
             .then((response)=>{
 
                 this.bookings.customer = response.data.customer
+                this.bookings.booking_no = response.data.booking_no
                 this.bookings.unit = response.data.unit
                 this.bookings.qty = response.data.qty
                 this.bookings.unit_price = response.data.unit_price

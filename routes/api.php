@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
@@ -142,10 +143,19 @@ Route::get('registration/view/{id}',[RegistrationController::class,'show']);
 Route::get('registration/edit/{id}',[RegistrationController::class,'edit']);
 Route::post('registration/update/{id}',[RegistrationController::class,'update']);
 Route::post('registration/delete/{id}',[RegistrationController::class,'destroy']);
+Route::get('registration_no',[RegistrationController::class,'registration_no']);
+
+Route::get('collection',[CollectionController::class,'index']);
+Route::post('collection/create',[CollectionController::class,'store']);
+Route::get('collection/view/{id}',[CollectionController::class,'show']);
+Route::get('collection/edit/{id}',[CollectionController::class,'edit']);
+Route::post('collection/update/{id}',[CollectionController::class,'update']);
+Route::post('collection/delete/{id}',[CollectionController::class,'destroy']);
+Route::get('collection_no',[CollectionController::class,'registration_no']);
 
 Route::get('get_data/{table}/{column}/{id}',[CommonController::class,'getData']);
 Route::get('get_data/{table}/{column}',[CommonController::class,'getData']);
 Route::get('get_data/{table}',[CommonController::class,'getData']);
 
 Route::post('download_pdf',[CommonController::class,'download_pdf']);
-Route::post('download_xl',[CommonController::class,'download_xl']);
+Route::get('download_xl',[CommonController::class,'download_xl']);

@@ -70,7 +70,7 @@
                         </button>
                         <h3 class="title text-center">User List</h3>
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table_content" ref="dataTable" id="dataTable">
+                            <table class="table table-striped table-bordered table_content" ref="dataTable">
                                 <thead>
                                     <tr>
                                         <th>SN</th>
@@ -107,15 +107,6 @@
 
 <style>
     @media print {
-        body {
-            visibility: hidden;
-        }
-        #dataTable {
-            visibility: visible;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
         .hide-btn{
             visibility: hidden;
         }

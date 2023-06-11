@@ -78,7 +78,7 @@
                                             </td>
                                         </tr>
                                         <tr v-show="all_booking.length === 0">
-                                            <td colspan="9">
+                                            <td colspan="10">
                                                 <p class="text-center alert alert-danger">
                                                     <span style="font-size: 20px;"><b> No data available.</b></span>
                                                 </p>

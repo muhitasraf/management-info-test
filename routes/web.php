@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommonController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::post('download_xl',[CommonController::class,'download_xl']);
 
 Route::get('{any}', function () {
     return view('app');

@@ -29,11 +29,23 @@ const myPlugin = {
         },
 
         app.config.globalProperties.$export_excel = (table_contant, title='Management Report') => {
-
+            console.log(table_contant);
             axios
-            .post("/api/download_xl",{table_contant:table_contant, title:title})
+            .get("/api/download_xl",{
+                params: {
+                    table_contant: table_contant,
+                    title:title
+                }
+            })
             .then(()=>{
                 toastr.success('Successfull Download.');
+                // window.open('/api/download_xl','_blank' );
+                var $a = $("<a>");
+                $a.attr("href",data.file);
+                $("body").append($a);
+                $a.attr("download","file.xls");
+                $a[0].click();
+                $a.remove();
             })
             .catch((error)=>{
                 toastr.error('Something went wrong.');

@@ -36,10 +36,11 @@
                                             <tbody>
                                                 <tr v-for="(booking, k) in bookings" :key="k">
                                                     <td scope="row" class="trashIconContainer">
-                                                        <i class="ph ph-trash" @click="deleteRow(k, booking)"></i>
+                                                        <i class="ph ph-trash" v-if="k==bookings.length-1" @click="deleteRow(k, booking)"></i>
+                                                        <i class="ph ph-arrow-fat-down" v-else @click="deleteRowNotAllow()"></i>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control text-right" type="text" v-bind:value="bookings.booking_no">
+                                                        <input class="form-control text-right booking_no" id="booking_no" type="text" v-bind:value="booking.booking_no">
                                                     </td>
                                                     <td>
                                                         <select class="form-control" v-model="booking.customer" id="customer">
@@ -115,6 +116,7 @@
                 customers : [],
                 errors : {},
                 readonly : 'yes',
+                local_booking : '',
             };
         },
         mounted(){
@@ -125,7 +127,7 @@
         methods :{
             submit(){
                 axios
-                .post("/api/booking/create",this.bookings.array)
+                .post("/api/booking/create",this.bookings)
                 .then((response)=>{
                     this.$router.push('/booking');
                     toastr.success('Successfully Created.');
@@ -167,10 +169,18 @@
                 });
             },
             addNewRow() {
-                // let book_first_str = this.bookings.booking_no.substring(0, 9);
-                // let book_second_str =  this.bookings.booking_no.substring(10, 17);
-                // let booking_num = book_first_str+book_second_str;
-                // this.bookings.booking_no = parseFloat(this.bookings.booking_no) +1;
+                let booking_num = '';
+                let bookingsLength = this.bookings.length;
+                if(bookingsLength){
+                    let book_first_str = (this.bookings[bookingsLength-1].booking_no).substring(0, 9);
+                    let book_second_str =  Number(this.bookings[bookingsLength-1].booking_no.substring(10, 17)) + 1;
+                    book_second_str = `${book_second_str}`.padStart(8, '0')
+                    console.log(book_second_str);
+                    booking_num = book_first_str + book_second_str;
+                }else{
+                    this.getBookingNo();
+                    booking_num = this.local_booking;
+                }
 
                 this.bookings.push({
                     customer : '',
@@ -181,22 +191,27 @@
                     booked_amt : '',
                     booked_date : '',
                     remaining_amt : '',
-                    booking_no : '',
+                    booking_no : booking_num,
                 });
             },
             deleteRow(index, booking) {
+                console.log(this.bookings);
                 var idx = this.bookings.indexOf(booking);
                 if (idx > -1) {
                     this.bookings.splice(idx, 1);
                 }
             },
 
+            deleteRowNotAllow(){
+                toastr.error("You can't delete this Row. Delete only last row allow.");
+            },
+
             getBookingNo(){
                 axios
                 .get("/api/booking_no")
                 .then((response)=>{
-                    this.bookings.booking_no = response.data;
-                    console.log(this.bookings.booking_no);
+                    this.bookings[0].booking_no = response.data;
+                    this.local_booking = response.data;
                 })
                 .catch((error)=>{
                     console.log(error);

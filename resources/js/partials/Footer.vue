@@ -19,15 +19,7 @@
 <script>
 
     export default{
-        data() {
-        },
-        created() {
-        },
-        mounted(){
 
-        },
-        methods :{
-        },
     }
 
 

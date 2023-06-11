@@ -62,6 +62,11 @@ import CreateRegistration from '../components/registration/Add.vue';
 import ViewRegistration from '../components/registration/Show.vue';
 import EditRegistration from '../components/registration/Edit.vue';
 
+import Collection from '../components/collection/List.vue';
+import CreateCollection from '../components/collection/Add.vue';
+import ViewCollection from '../components/collection/Show.vue';
+import EditCollection from '../components/collection/Edit.vue';
+
 export const routes = [
     { name: 'Home', path: '/', component: Home, meta : {requiresAuth:true} },
     { name: 'Login', path: '/login', component: Login, meta : {requiresGuest:true} },
@@ -126,6 +131,11 @@ export const routes = [
     { name: 'CreateRegistration', path: '/registration/create', component: CreateRegistration, meta : {requiresAuth:true} },
     { name: 'ViewRegistration', path: '/registration/view/:id', component: ViewRegistration, meta : {requiresAuth:true} },
     { name: 'EditRegistration', path: '/registration/edit/:id', component: EditRegistration, meta : {requiresAuth:true} },
+
+    { name: 'Collection', path: '/collection', component: Collection, meta : {requiresAuth:true} },
+    { name: 'CreateCollection', path: '/collection/create', component: CreateCollection, meta : {requiresAuth:true} },
+    { name: 'ViewCollection', path: '/collection/view/:id', component: ViewCollection, meta : {requiresAuth:true} },
+    { name: 'EditCollection', path: '/collection/edit/:id', component: EditCollection, meta : {requiresAuth:true} },
 ];
 
 const router = createRouter({

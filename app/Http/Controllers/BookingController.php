@@ -17,10 +17,10 @@ class BookingController extends Controller
     }
 
     public function booking_no(){
-        $prev_booking_no = DB::select("SELECT booking_no FROM bookings ORDER BY id DESC LIMIT 1");
-        if(!empty($prev_booking_no['booking_no'])){
-            $prev_booking_str = substr($prev_booking_no['booking_no'],0,9);
-            $prev_booking_num = substr($prev_booking_no['booking_no'],9,strlen($prev_booking_no['booking_no']));
+        $prev_booking_no = collect(DB::select("SELECT booking_no FROM bookings ORDER BY id DESC LIMIT 1"))->first();
+        if(!empty($prev_booking_no->booking_no)){
+            $prev_booking_str = substr($prev_booking_no->booking_no,0,9);
+            $prev_booking_num = substr($prev_booking_no->booking_no,9,strlen($prev_booking_no->booking_no));
             $new_booking_no = $prev_booking_str.sprintf('%08d', $prev_booking_num + 1);
         }else{
             $new_booking_no = "BOK-".date("Y")."-00000000";
@@ -31,7 +31,6 @@ class BookingController extends Controller
     public function store(Request $request){
 
         $req_data = $request->all();
-
         $data = [];
 
         foreach($req_data as $req){
@@ -47,6 +46,7 @@ class BookingController extends Controller
                 'booking_no' => $req['booking_no']
             ];
         }
+        // dd($data);
         Booking::insert($data);
         return response()->json($data);
     }

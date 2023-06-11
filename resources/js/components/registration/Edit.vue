@@ -20,7 +20,7 @@
                                     <label>Booking ID</label>
                                     <select v-model="fields.booking_id" name="booking_id" class="form-select">
                                         <option value="" disabled>Please select one</option>
-                                        <option v-for="booking in bookings" v-bind:value="booking.id">booking-{{ booking.id }}</option>
+                                        <option v-for="booking in bookings" v-bind:value="booking.id">{{ booking.booking_no }}</option>
                                     </select>
                                 </div>
                                 <div class="col">
@@ -150,9 +150,8 @@
             this.getBooking();
             this.getCustomer();
             this.getUnit();
-            this.registration_id = this.$route.params.id ?? ''
             axios
-            .get("/api/registration/edit/"+this.registration_id)
+            .get("/api/registration/edit/"+this.$route.params.id)
             .then((response)=>{
 
                 this.fields.customer_id = response.data.customer
@@ -177,7 +176,7 @@
         methods :{
             submit(){
                 axios
-                    .post("/api/registration/update", this.fields)
+                    .post("/api/registration/update/"+this.$route.params.id, this.fields)
                     .then((response)=>{
                         this.fields = {};
                         this.errors = {};
