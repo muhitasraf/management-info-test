@@ -16,7 +16,7 @@ class RegistrationController extends Controller
     }
 
     public function store(Request $request){
-
+        // dd($request->all());
         $registration = new Registration();
 
         $registration->booking_id = $request->input('booking_id');
@@ -31,11 +31,9 @@ class RegistrationController extends Controller
         $registration->remaining_amt = $request->input('remaining_amt');
         $registration->registration_date = $request->input('registration_date');
         $registration->installment = $request->input('installment');
-        $registration->duration = $request->input('duration');
         $registration->no_of_install = $request->input('no_of_install');
         $registration->per_month_install = $request->input('per_month_install');
         $registration->pay_install_date = $request->input('pay_install_date');
-        $registration->mutation_type = $request->input('mutation_type');
 
         $registration->save();
         return response()->json($registration);
@@ -49,7 +47,7 @@ class RegistrationController extends Controller
     public function update($id, Request $request){
 
         $registration = Registration::find($id);
-        
+
         $registration->booking_id = $request->input('booking_id');
         $registration->customer = $request->input('customer_id');
         $registration->unit = $request->input('unit_id');

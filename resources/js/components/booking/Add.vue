@@ -40,37 +40,37 @@
                                                         <i class="ph ph-arrow-fat-down" v-else @click="deleteRowNotAllow()"></i>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control text-right booking_no" id="booking_no" type="text" v-bind:value="booking.booking_no">
+                                                        <input class="form-control text-right booking_no" style="width: 175px !important;" id="booking_no" type="text" v-bind:value="booking.booking_no">
                                                     </td>
                                                     <td>
-                                                        <select class="form-control" v-model="booking.customer" id="customer">
+                                                        <select class="form-control" v-model="booking.customer" id="customer" style="width: 105px !important;">
                                                             <option value="">Select Unit</option>
                                                             <option v-for="customer in customers" v-bind:value="customer.id">{{ customer.name }}</option>
                                                         </select>
                                                     </td>
-                                                    <td style="width: 10%;">
-                                                        <select class="form-control" v-model="booking.unit" id="unit">
+                                                    <td>
+                                                        <select class="form-control" v-model="booking.unit" id="unit" style="width: 105px !important;">
                                                             <option value="">Select Unit</option>
                                                             <option v-for="units in all_units" v-bind:value="units.id">{{ units.name }}</option>
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control text-right" type="number" v-model="booking.qty" @keyup="getTotalPrice(booking)">
+                                                        <input class="form-control text-right" style="width: 105px !important;" type="number" v-model="booking.qty" @keyup="getTotalPrice(booking)">
                                                     </td>
                                                     <td>
-                                                        <input class="form-control text-right" type="number" v-model="booking.unit_price" @keyup="getTotalPrice(booking)">
+                                                        <input class="form-control text-right" style="width: 105px !important;" type="number" v-model="booking.unit_price" @keyup="getTotalPrice(booking)">
                                                     </td>
                                                     <td>
-                                                        <input readonly class="form-control text-right" type="number" v-model="booking.total_price" >
+                                                        <input class="form-control text-right" style="width: 105px !important;" type="number" v-model="booking.total_price" readonly>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control text-right" type="number" v-model="booking.booked_amt" @keyup="getTotalPrice(booking)" :readonly="readonly === 'yes'">
+                                                        <input class="form-control text-right" style="width: 105px !important;" type="number" v-model="booking.booked_amt" @keyup="getTotalPrice(booking)" :readonly="readonly === 'yes'">
                                                     </td>
                                                     <td>
                                                         <input class="form-control text-right" type="date" v-model="booking.booked_date">
                                                     </td>
                                                     <td>
-                                                        <input readonly class="form-control text-right" type="number" v-model="booking.remaining_amt" >
+                                                        <input class="form-control text-right" style="width: 105px !important;" type="number" v-model="booking.remaining_amt" readonly>
                                                     </td>
                                                 </tr>
                                             </tbody>

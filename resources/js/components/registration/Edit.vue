@@ -42,62 +42,62 @@
                             </div>
 
                             <div class="row gy-3">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Unit</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Unit Price</th>
+                                                <th scope="col">Total Price</th>
+                                                <th scope="col text-right">Booked Amount</th>
+                                                <th scope="col text-right">Down Payment</th>
+                                                <th scope="col text-right">Remaining Amount</th>
+                                                <th scope="col text-right">Installment</th>
+                                                <th scope="col text-right">No of install</th>
+                                                <th scope="col text-right">Per month install</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <select v-model="fields.unit_id" name="unit_id" class="form-select" style="width: 105px !important;">
+                                                        <option value="" disabled>Please select one</option>
+                                                        <option v-for="unit in units" v-bind:value="unit.id">{{ unit.name }}</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control text-right" style="width: 105px !important;" v-model="fields.qty" @keyup="getTotalPrice()">
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control text-right" style="width: 105px !important;" v-model="fields.unit_price" @keyup="getTotalPrice()">
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control text-right" style="width: 105px !important;" v-model="fields.total_price" readonly>
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control text-right" style="width: 105px !important;" v-model="fields.booked_amt" @keyup="getTotalPrice()" :readonly="readonly === 'yes'">
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" style="width: 105px !important;" v-model="fields.down_payment" @keyup="getTotalPrice()">
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="width: 105px !important;" v-model="fields.remaining_amt" placeholder="remaining amt" readonly>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="width: 105px !important;" v-model="fields.installment" placeholder="Installment">
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="width: 105px !important;" v-model="fields.no_of_install" placeholder="No Of install" @keyup="getTotalPrice()">
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="width: 105px !important;" v-model="fields.per_month_install" placeholder="Per month install">
+                                                </td>
+                                            </tr>
 
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Unit</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Unit Price</th>
-                                            <th scope="col">Total Price</th>
-                                            <th scope="col text-right">Booked Amount</th>
-                                            <th scope="col text-right">Down Payment</th>
-                                            <th scope="col text-right">Remaining Amount</th>
-                                            <th scope="col text-right">Installment</th>
-                                            <th scope="col text-right">No of install</th>
-                                            <th scope="col text-right">Per month install</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <select v-model="fields.unit_id" name="unit_id" class="form-select">
-                                                    <option value="" disabled>Please select one</option>
-                                                    <option v-for="unit in units" v-bind:value="unit.id">{{ unit.name }}</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input class="form-control text-right" type="number" v-model="fields.qty" @keyup="getTotalPrice()">
-                                            </td>
-                                            <td>
-                                                <input class="form-control text-right" type="number" v-model="fields.unit_price" @keyup="getTotalPrice()">
-                                            </td>
-                                            <td>
-                                                <input readonly class="form-control text-right" type="number" v-model="fields.total_price" >
-                                            </td>
-                                            <td>
-                                                <input class="form-control text-right" type="number" v-model="fields.booked_amt" @keyup="getTotalPrice()" :readonly="readonly === 'yes'">
-                                            </td>
-                                            <td>
-                                                <input type="number" v-model="fields.down_payment" class="form-control" @keyup="getTotalPrice()">
-                                            </td>
-                                            <td>
-                                                <input type="text" v-model="fields.remaining_amt" class="form-control" placeholder="remaining amt" readonly>
-                                            </td>
-                                            <td>
-                                                <input type="text" v-model="fields.installment" class="form-control" placeholder="Installment">
-                                            </td>
-                                            <td>
-                                                <input type="text" v-model="fields.no_of_install" class="form-control" placeholder="No Of install" @keyup="getTotalPrice()">
-                                            </td>
-                                            <td>
-                                                <input type="text" v-model="fields.per_month_install" class="form-control" placeholder="Per month install">
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
 
                             <span v-if="errors.supplier_name">{{ errors.supplier_name }}</span>

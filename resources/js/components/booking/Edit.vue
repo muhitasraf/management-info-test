@@ -35,37 +35,37 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <select class="form-control" v-model="bookings.customer" id="customer">
+                                                        <select class="form-control" v-model="bookings.customer" id="customer" style="width: 115px !important;">
                                                             <option value="">Select Unit</option>
                                                             <option v-for="customers in all_customers" v-bind:value="customers.id">{{ customers.name }}</option>
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control text-right" type="text" v-model="bookings.booking_no" readonly>
+                                                        <input class="form-control text-right" style="width: 165px !important;" type="text" v-model="bookings.booking_no" readonly>
                                                     </td>
-                                                    <td style="width: 10%;">
-                                                        <select class="form-control" v-model="bookings.unit" id="unit">
+                                                    <td>
+                                                        <select class="form-control" v-model="bookings.unit" id="unit"  style="width: 105px !important;">
                                                             <option value="">Select Unit</option>
                                                             <option v-for="units in all_units" v-bind:value="units.id">{{ units.name }}</option>
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control text-right" type="number" v-model="bookings.qty" @keyup="getTotalPrice($event.target.value)">
+                                                        <input class="form-control text-right" style="width: 105px !important;" type="number" v-model="bookings.qty" @keyup="getTotalPrice($event.target.value)">
                                                     </td>
                                                     <td>
-                                                        <input class="form-control text-right" type="number" v-model="bookings.unit_price" @keyup="getTotalPrice($event.target.value)">
+                                                        <input class="form-control text-right" style="width: 105px !important;" type="number" v-model="bookings.unit_price" @keyup="getTotalPrice($event.target.value)">
                                                     </td>
                                                     <td>
-                                                        <input readonly class="form-control text-right" type="number" v-model="bookings.total_price" >
+                                                        <input readonly class="form-control text-right" style="width: 105px !important;" type="number" v-model="bookings.total_price" >
                                                     </td>
                                                     <td>
-                                                        <input class="form-control text-right" type="number" v-model="bookings.booked_amt" @keyup="getRemaningAmt($event.target.value)">
+                                                        <input class="form-control text-right" style="width: 105px !important;" type="number" v-model="bookings.booked_amt" @keyup="getRemaningAmt($event.target.value)">
                                                     </td>
                                                     <td>
                                                         <input class="form-control text-right" type="date" v-model="bookings.booked_date">
                                                     </td>
                                                     <td>
-                                                        <input readonly class="form-control text-right" type="number" v-model="bookings.remaining_amt" >
+                                                        <input readonly class="form-control text-right" style="width: 105px !important;" type="number" v-model="bookings.remaining_amt" >
                                                     </td>
                                                 </tr>
                                             </tbody>
