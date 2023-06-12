@@ -1,58 +1,46 @@
 <template>
     <div class="card-header">
-        <h5 class="mb-0">Create Supplier</h5>
+        <h5 class="mb-0">Create collection</h5>
     </div>
     <div class="card-body">
-        <router-link to="/supplier/create">
-            <button class="btn btn-sm btn-info">Create Supplier</button>
+        <router-link to="/collection/create">
+            <button class="btn btn-sm btn-info">Create collection</button>
         </router-link>
         <div class="table-responsive mt-2">
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>SN</th>
-                        <th>Supplier Name</th>
-                        <th>NID</th>
-                        <th>BIN</th>
-                        <th>Present Address</th>
-                        <th>Permanent Address</th>
-                        <th>Mobile Office</th>
-                        <th>Mobile Home</th>
-                        <th>DOB</th>
-                        <th>Father</th>
-                        <th>Mother</th>
-                        <th>Spouse</th>
-                        <th>No of child</th>
-                        <th>Occupation</th>
-                        <th>Is alive</th>
+                        <th>Booking No</th>
+                        <th>Registration No</th>
+                        <th>Month</th>
+                        <th>Year</th>
+                        <th>Financial Year</th>
+                        <th>Sales Man</th>
+                        <th>Collection By</th>
+                        <th>Collection Date</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(supplier, index) in suppliers" :key="supplier.id">
+                    <tr v-for="(collection, index) in collections" :key="collection.id">
                         <td>{{ index + 1 }}</td>
-                        <td>{{ supplier.name }}</td>
-                        <td>{{ supplier.nid }}</td>
-                        <td>{{ supplier.bin }}</td>
-                        <td>{{ supplier.present_address }}</td>
-                        <td>{{ supplier.permanent_address }}</td>
-                        <td>{{ supplier.mobile }}</td>
-                        <td>{{ supplier.mobile_1 }}</td>
-                        <td>{{ supplier.DOB }}</td>
-                        <td>{{ supplier.father }}</td>
-                        <td>{{ supplier.mother }}</td>
-                        <td>{{ supplier.spouse }}</td>
-                        <td>{{ supplier.no_of_child }}</td>
-                        <td>{{ supplier.occupation }}</td>
-                        <td>{{ supplier.is_alive == 1 ? "Yes" : "No" }}</td>
+                        <td>{{ collection.booking_no }}</td>
+                        <td>{{ collection.registration_no }}</td>
+                        <td>{{ $getMonthName(collection.month) }}</td>
+                        <td>{{ collection.year }}</td>
+                        <td>{{ collection.financial_year }}</td>
+                        <td>{{ collection.sales_man }}</td>
+                        <td>{{ collection.collection_by }}</td>
+                        <td>{{ collection.collection_date }}</td>
                         <td class="text-center">
-                            <router-link :to="'/supplier/view/'+supplier.id">
+                            <router-link :to="'/collection/view/'+collection.id">
                                 <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-eye"></i></button>
                             </router-link>
-                            <router-link :to="'/supplier/edit/'+supplier.id">
+                            <router-link :to="'/collection/edit/'+collection.id">
                                 <button class="btn btn-sm btn-info mx-1 my-1"><i class="ph ph-pencil"></i></button>
                             </router-link>
-                            <button @click="deleteSupplier(supplier.id)" class="btn btn-sm btn-danger"><i class="ph ph-trash"></i></button>
+                            <button @click="deleteCollection(collection.id)" class="btn btn-sm btn-danger"><i class="ph ph-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -65,29 +53,29 @@
     export default {
         data() {
             return {
-                'suppliers' : [],
+                'collections' : [],
             };
         },
         mounted(){
-            this.getSupplier();
+            this.getCollection();
         },
         methods : {
-            getSupplier(){
+            getCollection(){
                 axios
-                .get("/api/supplier")
+                .get("/api/collection")
                 .then((response)=>{
-                    this.suppliers = response.data
+                    this.collections = response.data
                 })
                 .catch((error)=>{
                     console.log(error);
                 });
             },
-            deleteSupplier(supplier_id){
+            deleteCollection(collection_id){
                 if(confirm("Do you really want to delete?")){
                     axios
-                    .post("/api/supplier/delete/"+supplier_id)
+                    .post("/api/collection/delete/"+collection_id)
                     .then((response)=>{
-                        this.getSupplier();
+                        this.getCollection();
                     })
                     .catch((error)=>{
                         console.log(error);

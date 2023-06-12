@@ -1,13 +1,13 @@
 <template>
     <div class="card-header">
-        <h5 class="mb-0">Edit Supplier</h5>
+        <h5 class="mb-0">Edit collection</h5>
     </div>
     <div class="card-body">
-        <router-link to="/supplier">
-            <button class="btn btn-sm btn-info mx-1">Supplier List</button>
+        <router-link to="/collection">
+            <button class="btn btn-sm btn-info mx-1">collection List</button>
         </router-link>
-        <router-link to="/supplier/create">
-            <button class="btn btn-sm btn-info">Create Supplier</button>
+        <router-link to="/collection/create">
+            <button class="btn btn-sm btn-info">Create collection</button>
         </router-link>
         <div class="row">
 
@@ -20,81 +20,76 @@
                         <form @submit.prevent="submit">
                             <div class="row g-3">
                                 <div class="col">
-                                    <label>supplier Name</label>
-                                    <input type="text" v-model="fields.supplier_name" class="form-control" placeholder="supplier Name" aria-label="supplier Name">
-                                </div>
-                                <div class="col">
-                                    <label>NID</label>
-                                    <input type="text" v-model="fields.nid" class="form-control" placeholder="NID" aria-label="NID">
-                                </div>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col">
-                                    <label>BIN</label>
-                                    <input type="text" v-model="fields.bin" class="form-control" placeholder="BIN" aria-label="NID">
-                                </div>
-                                <div class="col">
-                                    <label>Present Address</label>
-                                    <input type="text" v-model="fields.present_address" class="form-control" placeholder="Present Address" aria-label="Present Address">
-                                </div>
-                            </div>
-
-                            <div class="row g-3">
-                                <div class="col">
-                                    <label>Permanent Address</label>
-                                    <input type="text" v-model="fields.permanent_address" class="form-control" placeholder="Permanent Address" aria-label="Permanent Address">
-                                </div>
-                                <div class="col">
-                                    <label>Mobile Home</label>
-                                    <input type="text" v-model="fields.mobile" class="form-control" placeholder="Mobile Home" aria-label="Mobile Home">
-                                </div>
-                            </div>
-
-                            <div class="row g-3">
-                                <div class="col">
-                                    <label>Mobile Office</label>
-                                    <input type="text" v-model="fields.mobile_1" class="form-control" placeholder="Mobile Office" aria-label="Mobile Office">
-                                </div>
-                                <div class="col">
-                                    <label>Date of Birth</label>
-                                    <input type="date" v-model="fields.DOB" class="form-control" >
-                                </div>
-                            </div>
-
-                            <div class="row g-3">
-                                <div class="col">
-                                    <label>Father</label>
-                                    <input type="text" v-model="fields.father" class="form-control" placeholder="Mobile Office" aria-label="Mobile Office">
-                                </div>
-                                <div class="col">
-                                    <label>Mother</label>
-                                    <input type="text" v-model="fields.mother" class="form-control" placeholder="Mother" aria-label="Mother">
-                                </div>
-                            </div>
-
-                            <div class="row g-3">
-                                <div class="col">
-                                    <label>Spous</label>
-                                    <input type="text" v-model="fields.spouse" class="form-control" placeholder="Spous" aria-label="Spous">
-                                </div>
-                                <div class="col">
-                                    <label>No of child</label>
-                                    <input type="text" v-model="fields.no_of_child" class="form-control" placeholder="No Of Child">
-                                </div>
-                            </div>
-
-                            <div class="row g-3">
-                                <div class="col">
-                                    <label>Occupation</label>
-                                    <input type="text" v-model="fields.occupation" class="form-control" placeholder="Spous" aria-label="Spous">
-                                </div>
-                                <div class="col">
-                                    <label>Is Alive</label>
-                                    <select v-model="fields.is_alive" name="is_alive" class="form-select">
+                                    <label>Booking No</label>
+                                    <select v-model="fields.booking_id" name="booking_id" class="form-select">
                                         <option value="" disabled>Please select one</option>
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
+                                        <option v-for="booking in bookings" v-bind:value="booking.id">{{ booking.booking_no }}</option>
                                     </select>
+                                </div>
+                                <div class="col">
+                                    <label>Registration No</label>
+                                    <select v-model="fields.registration_id" name="booking_id" class="form-select">
+                                        <option value="" disabled>Please select one</option>
+                                        <option v-for="registration in registrations" v-bind:value="registration.id">{{ registration.registration_no }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col">
+                                    <label>Month</label>
+                                    <select class="form-select" v-model="fields.month">
+                                        <option value='' disabled>--Select Month--</option>
+                                        <option selected value='1'>Janaury</option>
+                                        <option value='2'>February</option>
+                                        <option value='3'>March</option>
+                                        <option value='4'>April</option>
+                                        <option value='5'>May</option>
+                                        <option value='6'>June</option>
+                                        <option value='7'>July</option>
+                                        <option value='8'>August</option>
+                                        <option value='9'>September</option>
+                                        <option value='10'>October</option>
+                                        <option value='11'>November</option>
+                                        <option value='12'>December</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label>Year</label>
+                                    <select class="form-select" id="year" v-model="fields.year">
+                                        <option value="" disabled>Select Year</option>
+                                        <option v-for="year in years" v-bind:value="year">{{ year }}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col">
+                                    <label>Financial Year</label>
+                                    <select class="form-select" id="financial_year" v-model="fields.financial_year">
+                                        <option value="" disabled>Select Year</option>
+                                        <option v-for="year in years" v-bind:value="year">{{ year }}</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label>Sales Man</label>
+                                    <select v-model="fields.sales_man_id" name="sales_man_id" class="form-select">
+                                        <option value="" disabled>Please select one</option>
+                                        <option v-for="sales_man in all_sales_man" v-bind:value="sales_man.id">{{ sales_man.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col">
+                                    <label>Collection By</label>
+                                    <select v-model="fields.collection_by" name="sales_man_id" class="form-select">
+                                        <option value="" disabled>Please select one</option>
+                                        <option v-for="(sales_man, index) in all_sales_man" v-bind:value="sales_man.id">{{ sales_man.name }}</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label>Collection Date</label>
+                                    <input type="date" v-model="fields.collection_date" class="form-control" >
                                 </div>
                             </div>
                             <span v-if="errors.supplier_name">{{ errors.supplier_name }}</span>
@@ -120,31 +115,50 @@
     export default{
         data() {
             return {
-                fields : {},
+                fields : {
+                    booking_id : '',
+                    sales_man_id : '',
+                    registration_id : '',
+                    year : '',
+                    financial_year : '',
+                    month : '',
+                },
                 errors : {},
-                supplier_id : '',
+                bookings : [],
+                all_sales_man : [],
+                registrations : [],
+                units : [],
+                readonly : 'yes',
+                years : [],
             };
         },
         mounted(){
-            this.supplier_id = this.$route.params.id ?? ''
+
+            this.getBooking();
+            this.getRegistration();
+            this.getSalesMan();
+            let currentYear = new Date().getFullYear();
+            let earliestYear = 2002;
+            let i = 0;
+            while (currentYear >= earliestYear) {
+                this.years[i] = currentYear;
+                currentYear -= 1;
+                i++;
+            }
+
+            this.collection_id = this.$route.params.id ?? ''
             axios
-            .post("/api/supplier/edit/"+this.supplier_id)
+            .get("/api/collection/edit/"+this.collection_id)
             .then((response)=>{
                 console.log(response.data)
-                this.fields.supplier_name = response.data.name
-                this.fields.nid = response.data.nid
-                this.fields.bin = response.data.bin
-                this.fields.present_address = response.data.present_address
-                this.fields.permanent_address = response.data.permanent_address
-                this.fields.mobile = response.data.mobile
-                this.fields.mobile_1 = response.data.mobile_1
-                this.fields.DOB = response.data.DOB
-                this.fields.father = response.data.father
-                this.fields.mother = response.data.mother
-                this.fields.spouse = response.data.spouse
-                this.fields.no_of_child = response.data.no_of_child
-                this.fields.occupation = response.data.occupation
-                this.fields.is_alive = response.data.is_alive
+                this.fields.booking_id = response.data.booking
+                this.fields.registration_id = response.data.registration
+                this.fields.month = response.data.month
+                this.fields.year = response.data.year
+                this.fields.financial_year = response.data.financial_year
+                this.fields.sales_man_id = response.data.sales_man
+                this.fields.collection_by = response.data.collection_by
+                this.fields.collection_date = response.data.collection_date
             })
             .catch((error)=>{
                 console.log(error);
@@ -153,12 +167,43 @@
         methods :{
             submit(){
                 axios
-                    .post("/api/supplier/update/"+this.supplier_id, this.fields)
+                    .post("/api/collection/update/"+this.$route.params.id, this.fields)
                     .then((response)=>{
                         this.fields = {};
                         this.errors = {};
-                        this.$router.push('/supplier');
+                        this.$router.push('/collection');
                         toastr.success('Successfully Updated.');
+                    })
+                    .catch((error)=>{
+                        console.log(error);
+                    });
+            },
+            getBooking(){
+                axios
+                    .get("/api/booking")
+                    .then((response)=>{
+                        this.bookings = response.data;
+                    })
+                    .catch((error)=>{
+                        console.log(error);
+                    });
+            },
+            getRegistration(){
+                axios
+                .get("/api/registration")
+                .then((response)=>{
+                    this.registrations = response.data;
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
+            },
+
+            getSalesMan(){
+                axios
+                    .get("/api/get_data/employee_info")
+                    .then((response)=>{
+                        this.all_sales_man = response.data;
                     })
                     .catch((error)=>{
                         console.log(error);

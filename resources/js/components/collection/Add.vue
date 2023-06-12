@@ -3,7 +3,7 @@
         <h5 class="mb-0">Create Collection</h5>
     </div>
     <div class="card-body">
-        <router-link to="/supplier">
+        <router-link to="/collection">
             <button class="btn btn-sm btn-info">Collection List</button>
         </router-link>
         <div class="row">
@@ -69,9 +69,9 @@
                                 </div>
                                 <div class="col">
                                     <label>Sales Man</label>
-                                    <select v-model="fields.customer_id" name="customer_id" class="form-select">
+                                    <select v-model="fields.sales_man_id" name="sales_man_id" class="form-select">
                                         <option value="" disabled>Please select one</option>
-                                        <option v-for="customer in customers" v-bind:value="customer.id">{{ customer.name }}</option>
+                                        <option v-for="(sales_man, index) in all_sales_man" v-bind:value="sales_man.id">{{ sales_man.name }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -79,7 +79,10 @@
                             <div class="row g-3">
                                 <div class="col">
                                     <label>Collection By</label>
-                                    <input type="text" v-model="fields.collection_by" class="form-control" placeholder="Collection By">
+                                    <select v-model="fields.collection_by" name="sales_man_id" class="form-select">
+                                        <option value="" disabled>Please select one</option>
+                                        <option v-for="(sales_man, index) in all_sales_man" v-bind:value="sales_man.id">{{ sales_man.name }}</option>
+                                    </select>
                                 </div>
                                 <div class="col">
                                     <label>Collection Date</label>
@@ -113,15 +116,16 @@
             return {
                 fields : {
                     booking_id : '',
-                    customer_id : '',
+                    sales_man_id : '',
                     registration_id : '',
                     year : '',
                     financial_year : '',
                     month : '',
+                    collection_by : '',
                 },
                 errors : {},
                 bookings : [],
-                customers : [],
+                all_sales_man : [],
                 registrations : [],
                 units : [],
                 readonly : 'yes',
@@ -131,7 +135,7 @@
         mounted(){
             this.getBooking();
             this.getRegistration();
-            this.getCustomer();
+            this.getSalesMan();
             let currentYear = new Date().getFullYear();
             let earliestYear = 2002;
             let i = 0;
@@ -148,7 +152,7 @@
                     .then((response)=>{
                         this.fields = {};
                         this.errors = {};
-                        this.$router.push('/supplier');
+                        this.$router.push('/collection');
                         toastr.success('Successfully Deleted.');
                     })
                     .catch((error)=>{
@@ -176,16 +180,17 @@
                 });
             },
 
-            getCustomer(){
+            getSalesMan(){
                 axios
-                    .get("/api/customer")
+                    .get("/api/get_data/employee_info")
                     .then((response)=>{
-                        this.customers = response.data;
+                        this.all_sales_man = response.data;
                     })
                     .catch((error)=>{
                         console.log(error);
                     });
             },
+
         },
     }
 

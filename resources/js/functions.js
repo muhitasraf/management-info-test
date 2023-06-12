@@ -34,33 +34,33 @@ const myPlugin = {
             .get("/api/download_xl",{
                 params: {
                     table_contant: table_contant,
-                    title:title
+                    title: title
                 }
             })
             .then(()=>{
                 toastr.success('Successfull Download.');
                 // window.open('/api/download_xl','_blank' );
-                var $a = $("<a>");
-                $a.attr("href",data.file);
-                $("body").append($a);
-                $a.attr("download","file.xls");
-                $a[0].click();
-                $a.remove();
             })
             .catch((error)=>{
                 toastr.error('Something went wrong.');
             });
         },
 
-        app.config.globalProperties.$export_pdf = (table_contant, title='Management Report') => {
+        app.config.globalProperties.$export_pdf = (table_contant, orientation="P",title='Management Report') => {
             axios
-            .post("/api/download_pdf",{table_contant:table_contant, title: title})
+            .post("/api/download_pdf",{table_contant:table_contant, title: title, orientation: orientation})
             .then(()=>{
                 toastr.success('Successfull Download.');
             })
             .catch((error)=>{
                 toastr.error('Something went wrong.');
             });
+        }
+
+        app.config.globalProperties.$getMonthName = (monthNumber) => {
+            const date = new Date();
+            date.setMonth(monthNumber - 1);
+            return date.toLocaleString('en-US', { month: 'long' });
         }
     }
 }

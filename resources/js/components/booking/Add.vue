@@ -119,10 +119,18 @@
                 local_booking : '',
             };
         },
+        beforeCreate(){
+            //this.getBookingNo();
+        },
+        created(){
+            //this.getBookingNo();
+        },
+        beforeMount(){
+            this.getBookingNo();
+        },
         mounted(){
             this.getUnit();
             this.getCustomer();
-            this.getBookingNo();
         },
         methods :{
             submit(){

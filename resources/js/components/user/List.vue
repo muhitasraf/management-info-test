@@ -59,7 +59,7 @@
             <div class="col-md-12 pt-2">
                 <div class="card">
                     <div class="card-body">
-                        <button type="button" class="btn btn-secondary mb-1 mx-1" @click="$export_pdf(this.$refs.dataTable.outerHTML)">
+                        <button type="button" class="btn btn-secondary mb-1 mx-1" @click="$export_pdf(this.$refs.dataTable.outerHTML, 'P', 'User List')">
                             <i class="fa-solid fa-file-pdf"></i>
                         </button>
                         <button type="button" class="btn btn-secondary mb-1 mx-1" @click="$export_excel(this.$refs.dataTable.outerHTML)">

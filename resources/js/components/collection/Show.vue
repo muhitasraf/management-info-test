@@ -1,27 +1,23 @@
 <template>
     <div class="card-header">
-        <h5 class="mb-0">Single Supplier</h5>
+        <h5 class="mb-0">Single Collection</h5>
     </div>
     <div class="card-body">
-        <router-link to="/supplier">
-            <button class="btn btn-sm btn-info mx-1">Supplier List</button>
+        <router-link to="/collection">
+            <button class="btn btn-sm btn-info mx-1">Collection List</button>
         </router-link>
-        <router-link to="/supplier/create">
-            <button class="btn btn-sm btn-info">Create Supplier</button>
+        <router-link to="/collection/create">
+            <button class="btn btn-sm btn-info">Create Collection</button>
         </router-link>
         <div class="table-responsive mt-2">
-            <p>Name: {{ supplier.name }}</p>
-            <p>NID: {{ supplier.nid }}</p>
-            <p>BIN: {{ supplier.bin }}</p>
-            <p>Present Address: {{ supplier.present_address }}</p>
-            <p>Permanent Add: {{ supplier.permanent_address }}</p>
-            <p>Mobile: {{ supplier.mobile }}</p>
-            <p>Father: {{ supplier.father }}</p>
-            <p>Mother: {{ supplier.mother }}</p>
-            <p>DOB: {{ supplier.DBO }}</p>
-            <p>Spouse: {{ supplier.spouse }}</p>
-            <p>No Of Child: {{ supplier.no_of_child }}</p>
-            <p>Occupation: {{ supplier.occupation }}</p>
+            <p>Booking No : {{ collection.booking_no }}</p>
+            <p>Registration : {{ collection.registration_no }}</p>
+            <p>Month : {{ collection.month }}</p>
+            <p>Year : {{ collection.year }}</p>
+            <p>Financial Year : {{ collection.financial_year }}</p>
+            <p>Sales Man : {{ collection.sales_man }}</p>
+            <p>Collection By : {{ collection.collection_by }}</p>
+            <p>Collection Date : {{ collection.collection_date }}</p>
         </div>
     </div>
 </template>
@@ -30,14 +26,14 @@
     export default {
         data() {
             return {
-                'supplier' : [],
+                'collection' : [],
             };
         },
         mounted(){
             axios
-            .post("/api/supplier/view/"+this.$route.params.id)
+            .get("/api/collection/view/"+this.$route.params.id)
             .then((response)=>{
-                this.supplier = response.data
+                this.collection = response.data
             })
             .catch((error)=>{
                 console.log(error);

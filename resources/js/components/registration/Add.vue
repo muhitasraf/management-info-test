@@ -151,11 +151,14 @@
                 readonly : 'yes',
             };
         },
+        created(){
+            this.getRegistrationNo();
+        },
         mounted(){
             this.getBooking();
             this.getCustomer();
             this.getUnit();
-            this.getRegistrationNo();
+
         },
         methods :{
             submit(){

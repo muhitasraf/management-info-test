@@ -14,18 +14,18 @@
                         <form @submit.prevent="submit">
                             <div class="form-group">
                                 <label>Comapany Name</label>
-                                <input v-model="field.company_name" type="text" class="form-control company_name">
+                                <input v-model="fields.company_name" type="text" class="form-control company_name">
                                 <input v-model="company_id" type="hidden">
                             </div>
 
                             <div class="form-group">
                                 <label>Display Name</label>
-                                <input v-model="field.display_name" type="text" class="form-control display_name">
+                                <input v-model="fields.display_name" type="text" class="form-control display_name">
                             </div>
 
                             <div class="form-group">
                                 <label>Company Status</label>
-                                <select v-model="field.status" class="form-control status">
+                                <select v-model="fields.status" class="form-control status">
                                     <option disabled value="">Select Status</option>
                                     <option value="1">Active</option>
                                     <option value="0">InActive</option>
@@ -86,7 +86,7 @@
     export default{
         data() {
             return {
-                field : {
+                fields : {
                     status : '',
                 },
                 errors : {},
@@ -103,22 +103,21 @@
             submit(){
                 if(this.submitStatus==0){
                     axios
-                    .post("/api/company/create", this.field)
+                    .post("/api/company/create", this.fields)
                     .then((response)=>{
-                        this.field = {};
+                        this.fields = {};
                         this.errors = {};
                         this.getCompany();
                         toastr.success('Successfully Created.');
                     })
                     .catch((error)=>{
-                        // console.log(error);
                         toastr.error('Something went wrong.');
                     });
                 }else{
                     axios
-                    .post("/api/company/update/"+this.company_id, this.field)
+                    .post("/api/company/update/"+this.company_id, this.fields)
                     .then((response)=>{
-                        this.field = {};
+                        this.fields = {};
                         this.errors = {};
                         this.ButtonText = 'Insert'
                         this.submitStatus = 0;
@@ -126,7 +125,6 @@
                         toastr.success('Successfully Updated.');
                     })
                     .catch((error)=>{
-                        // console.log(error);
                         toastr.error('Something went wrong.');
                     });
                 }
@@ -145,9 +143,9 @@
                 axios
                 .post("/api/company/edit/"+id)
                 .then((response)=>{
-                    this.field.company_name = response.data.name
-                    this.field.display_name = response.data.display_name
-                    this.field.status = response.data.status
+                    this.fields.company_name = response.data.name
+                    this.fields.display_name = response.data.display_name
+                    this.fields.status = response.data.status
                     this.ButtonText = 'Update'
                     this.submitStatus = 1;
                     this.company_id = response.data.id
