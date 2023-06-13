@@ -133,21 +133,21 @@ class CommonController extends Controller
 
             // $reader = new \PhpOffice\PhpSpreadsheet\Reader\Html();
             // $spreadsheet = $reader->loadFromString($html_table);
+            $spreadsheet = new Spreadsheet();
+            $spreadsheet->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal('center');
+            $spreadsheet->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical('center');
 
-            // $spreadsheet->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal('center');
-            // $spreadsheet->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical('center');
-
-            // foreach (range('A', 'I') as $letra) {
-            //     $spreadsheet->getActiveSheet()->getColumnDimension($letra)->setAutoSize(true);
-            // }
+            foreach (range('A', 'I') as $letra) {
+                $spreadsheet->getActiveSheet()->getColumnDimension($letra)->setAutoSize(true);
+            }
 
             // $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 
-            // if ($request->input('title')) {
-            //     $filename = $request->input('title')."-".Date("d-m-Y")."-(Time-".date('h_i_s', time()).")".'.xlsx';
-            // } else {
-            //     $filename = time().'.xlsx';
-            // }
+            if ($request->input('title')) {
+                $filename = $request->input('title')."-".Date("d-m-Y")."-(Time-".date('h_i_s', time()).")".'.xlsx';
+            } else {
+                $filename = time().'.xlsx';
+            }
 
             // header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             // header('Content-Disposition: attachment;filename="'.$filename.'"');
@@ -177,24 +177,33 @@ class CommonController extends Controller
         }
         // dd($html_table);
 
-        $spreadsheet = new Spreadsheet();
+
         // $activeWorksheet = $spreadsheet->getActiveSheet();
         // $activeWorksheet->setCellValue('A1', 'Hello World !');
-        $htmlString = '<table class="table table-striped table-bordered table_content"><thead><tr><th>SN</th><th>Name</th><th>User Name</th><th>Email</th><th>Action</th></tr></thead><tbody><tr><td>1</td><td>Muhit Asraf</td><td>muhit</td><td>muhit@gmail.com</td><td class="text-center"><button class="btn btn-sm btn-info mx-1 hide-btn" data-bs-toggle="modal" data-bs-target="#userModal"><i class="fa-solid fa-pen-to-square"></i></button><button class="btn btn-sm btn-danger hide-btn"><i class="fa-solid fa-trash"></i></button></td></tr><tr><td>2</td><td>Saad Ali</td><td>saad_ali</td><td>mocarepes@mailinator.com</td><td class="text-center"><button class="btn btn-sm btn-info mx-1 hide-btn" data-bs-toggle="modal" data-bs-target="#userModal"><i class="fa-solid fa-pen-to-square"></i></button><button class="btn btn-sm btn-danger hide-btn"><i class="fa-solid fa-trash"></i></button></td></tr></tbody></table>';
+        //$htmlString = '<table class="table table-striped table-bordered table_content"><thead><tr><th>SN</th><th>Name</th><th>User Name</th><th>Email</th><th>Action</th></tr></thead><tbody><tr><td>1</td><td>Muhit Asraf</td><td>muhit</td><td>muhit@gmail.com</td><td class="text-center"><button class="btn btn-sm btn-info mx-1 hide-btn" data-bs-toggle="modal" data-bs-target="#userModal"><i class="fa-solid fa-pen-to-square"></i></button><button class="btn btn-sm btn-danger hide-btn"><i class="fa-solid fa-trash"></i></button></td></tr><tr><td>2</td><td>Saad Ali</td><td>saad_ali</td><td>mocarepes@mailinator.com</td><td class="text-center"><button class="btn btn-sm btn-info mx-1 hide-btn" data-bs-toggle="modal" data-bs-target="#userModal"><i class="fa-solid fa-pen-to-square"></i></button><button class="btn btn-sm btn-danger hide-btn"><i class="fa-solid fa-trash"></i></button></td></tr></tbody></table>';
 
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Html();
         $spreadsheet = $reader->loadFromString($html_table);
 
-        $writer = new Xlsx($spreadsheet);
+        //$writer = new Xlsx($spreadsheet);
 
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="hello world.xlsx"');
-        header('Cache-Control: max-age=0');
+        // header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        // header('Content-Disposition: attachment;filename="hello world.xlsx"');
+        // header('Cache-Control: max-age=0');
 
-        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        // $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 
-        $writer->save('php://output');
-        exit;
+        $response = response()->streamDownload(function () use ($spreadsheet) {
+            $writer = new xlsx($spreadsheet);
+            $writer->save('php://output');
+        }, $filename);
+
+        $response->setStatusCode(200);
+        $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+        return $response;
+        // $writer->save('php://output');
+        // return response()->json($writer);
 
     }
 }
