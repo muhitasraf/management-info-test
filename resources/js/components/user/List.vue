@@ -62,7 +62,7 @@
                         <button type="button" class="btn btn-secondary mb-1 mx-1" @click="$export_pdf(this.$refs.dataTable.outerHTML, 'P', 'User List')">
                             <i class="fa-solid fa-file-pdf"></i>
                         </button>
-                        <button type="button" class="btn btn-secondary mb-1 mx-1" @click="$export_excel(this.$refs.dataTable.outerHTML)">
+                        <button type="button" class="btn btn-secondary mb-1 mx-1" @click="$export_excel(this.$refs.dataTable.outerHTML,'User List')">
                             <i class="fa-solid fa-file-excel"></i>
                         </button>
                         <button type="button" class="btn btn-secondary mb-1" @click="$print_html('landscape')">
@@ -132,6 +132,7 @@
         },
         mounted(){
             this.getUser();
+            console.log(this.$dateConversion("Y-m-d"));
         },
         methods :{
 
@@ -155,7 +156,6 @@
                     axios
                     .post("/api/user/update/"+this.user_id, this.fields)
                     .then((response)=>{
-                        // $('#userModal').modal('hide');
                         document.getElementById('close').click();
                         toastr.success('Successfully Updated.');
                         this.fields = {};

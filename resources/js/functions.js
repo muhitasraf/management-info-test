@@ -29,7 +29,6 @@ const myPlugin = {
         },
 
         app.config.globalProperties.$export_excel = (table_contant, title='Management Report') => {
-            console.log(table_contant);
             axios
             .get("/api/download_xl",{
                 params: {
@@ -37,69 +36,63 @@ const myPlugin = {
                     title: title
                 },
                 responseType: 'blob'
-                // 'headers': {
-                //     'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                //     'Content-Disposition' : 'attachment;filename="hello world.xlsx"',
-                //     'Cache-Control': 'max-age=0'
-                // }
             })
-            // .then((response)=>{
-            //     toastr.success('Successfull Download.');
-            //     // window.open('/api/download_xl','_blank' );
-            //     console.log(response.data);
-            //     // const url = window.URL.createObjectURL(new Blob([response.data]));
-            //     // const link = document.createElement('a');
-            //     // link.href = url;
-            //     // link.setAttribute('download', 'template.xlsx');
-            //     // document.body.appendChild(link);
-            //     // link.click();
-
-            // })
             .then(resp => {
-                //success callback
-                console.log(resp);
                 if (resp.status == 200) {
+                    console.log(resp);
                     const blob = new Blob([resp.data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
                     let link = URL.createObjectURL(blob);
                     let a = document.createElement("a");
-                    a.download = title;
+                    a.download = title +' -'+new Date().toISOString().split('T')[0];
                     a.href = link;
                     document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a);
+                    toastr.success('Download Success.');
                 }
             })
             .catch(error => {
-                _.forEach(error.response.data.errors, function (
-                    value,
-                    el
-                ) {
-                    toastr.error("Error", value, {
-                        onHidden: function onHidden() { }
-                    });
-                });
+                console.log(error);
+                toastr.error('Something went wrong.');
             })
             .finally(() => { });
-            // .catch((error)=>{
-            //     toastr.error('Something went wrong.');
-            // });
         },
 
         app.config.globalProperties.$export_pdf = (table_contant, orientation="P",title='Management Report') => {
             axios
             .post("/api/download_pdf",{table_contant:table_contant, title: title, orientation: orientation})
             .then(()=>{
-                toastr.success('Successfull Download.');
+                toastr.success('Download Success.');
             })
             .catch((error)=>{
                 toastr.error('Something went wrong.');
             });
-        }
+        },
 
         app.config.globalProperties.$getMonthName = (monthNumber) => {
             const date = new Date();
             date.setMonth(monthNumber - 1);
             return date.toLocaleString('en-US', { month: 'long' });
+        },
+
+        app.config.globalProperties.$dateConversion = (formate="Y-m-d",separator='-') => {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            let mm = today.getMonth() + 1;
+            let dd = today.getDate();
+
+            if (dd < 10) dd = '0' + dd;
+            if (mm < 10) mm = '0' + mm;
+
+            let formattedDate = '';
+            if(formate=="Y-m-d") formattedDate = yyyy + separator + mm + separator + dd;
+            if(formate=="Y-d-m") formattedDate = yyyy + separator + dd + separator + mm;
+            if(formate=="d-Y-m") formattedDate = dd + separator + yyyy + separator + mm;
+            if(formate=="d-m-Y") formattedDate = dd + separator + mm + separator + yyyy;
+            if(formate=="m-Y-d") formattedDate = mm + separator + yyyy + separator + dd;
+            if(formate=="m-d-Y") formattedDate = mm + separator + dd + separator + yyyy;
+
+            return formattedDate;
         }
     }
 }
