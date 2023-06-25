@@ -67,6 +67,11 @@ import CreateCollection from '../components/collection/Add.vue';
 import ViewCollection from '../components/collection/Show.vue';
 import EditCollection from '../components/collection/Edit.vue';
 
+import Purchase from '../components/purchase/List.vue';
+import CreatePurchase from '../components/purchase/Add.vue';
+import ViewPurchase from '../components/purchase/Show.vue';
+import EditPurchase from '../components/purchase/Edit.vue';
+
 export const routes = [
     { name: 'Home', path: '/', component: Home, meta : {requiresAuth:true} },
     { name: 'Login', path: '/login', component: Login, meta : {requiresGuest:true} },
@@ -136,6 +141,12 @@ export const routes = [
     { name: 'CreateCollection', path: '/collection/create', component: CreateCollection, meta : {requiresAuth:true} },
     { name: 'ViewCollection', path: '/collection/view/:id', component: ViewCollection, meta : {requiresAuth:true} },
     { name: 'EditCollection', path: '/collection/edit/:id', component: EditCollection, meta : {requiresAuth:true} },
+
+    { name: 'Purchase', path: '/purchase', component: Purchase, meta : {requiresAuth:true} },
+    { name: 'CreatePurchase', path: '/purchase/create', component: CreatePurchase, meta : {requiresAuth:true} },
+    { name: 'ViewPurchase', path: '/purchase/view/:id', component: ViewPurchase, meta : {requiresAuth:true} },
+    { name: 'EditPurchase', path: '/purchase/edit/:id', component: EditPurchase, meta : {requiresAuth:true} },
+
 ];
 
 const router = createRouter({

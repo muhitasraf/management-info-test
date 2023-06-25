@@ -12,6 +12,7 @@ use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeSalaryController;
 use App\Http\Controllers\MowzaController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ThanaController;
@@ -152,6 +153,14 @@ Route::get('collection/edit/{id}',[CollectionController::class,'edit']);
 Route::post('collection/update/{id}',[CollectionController::class,'update']);
 Route::post('collection/delete/{id}',[CollectionController::class,'destroy']);
 Route::get('collection_no',[CollectionController::class,'registration_no']);
+
+Route::get('purchase',[PurchaseController::class,'index']);
+Route::post('purchase/create',[PurchaseController::class,'store']);
+Route::get('purchase/view/{id}',[PurchaseController::class,'show']);
+Route::get('purchase/edit/{id}',[PurchaseController::class,'edit']);
+Route::post('purchase/update/{id}',[PurchaseController::class,'update']);
+Route::post('purchase/delete/{id}',[PurchaseController::class,'destroy']);
+Route::get('collection_no',[PurchaseController::class,'registration_no']);
 
 Route::get('get_data/{table}/{column}/{id}',[CommonController::class,'getData']);
 Route::get('get_data/{table}/{column}',[CommonController::class,'getData']);

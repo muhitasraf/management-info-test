@@ -13,10 +13,8 @@ class CommonController extends Controller
         $data = '';
         if(!empty($table)){
             if(!empty($cloumn) && !empty($id)){
-                // $data = collect(DB::select("SELECT * FROM $table WHERE $cloumn = $id"));
                 $data = DB::table($table)->where($cloumn,$id)->get();
             }else{
-                // $data = DB::select("SELECT * FROM $table");
                 $data = DB::table($table)->get();
             }
         }
