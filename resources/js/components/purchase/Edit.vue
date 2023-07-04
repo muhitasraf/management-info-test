@@ -15,6 +15,51 @@
 
                     <div class="card-body">
                         <form @submit.prevent="submit">
+
+                            <div class="row">
+                                <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                    <label class="col-form-label">Employee Name</label>
+                                    <select class="form-select" v-model="fields.employee_id">
+                                        <option value="" disabled>Please select one</option>
+                                        <option v-for="employee in employees" v-bind:value="employee.id">{{ employee.name }}</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                    <label class="col-form-label">Customer Name</label>
+                                    <select class="form-select" v-model="fields.customer_id">
+                                        <option value="" disabled>Please select one</option>
+                                        <option v-for="customer in customers" v-bind:value="customer.id">{{ customer.name }}</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                    <label class="col-form-label">Supplier Name</label>
+                                    <select class="form-select" v-model="fields.supplier_id">
+                                        <option value="" disabled>Please select one</option>
+                                        <option v-for="supplier in suppliers" v-bind:value="supplier.id">{{ supplier.name }}</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                    <label class="col-form-label">Booking No</label>
+                                    <select class="form-select" v-model="fields.booking_id">
+                                        <option value="" disabled>Please select one</option>
+                                        <option v-for="booking in bookings" v-bind:value="booking.id">{{ booking.booking_no }}</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                    <label class="col-form-label">Registration No</label>
+                                    <select class="form-select" v-model="fields.registration_id">
+                                        <option value="" disabled>Please select one</option>
+                                        <option v-for="registration in registrations" v-bind:value="registration.id">{{ registration.registration_no }}</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                    <label class="col-form-label">Purchase Date</label>
+                                    <input type="date" v-model="fields.purchase_date" class="form-control">
+                                    <input type="hidden" v-model="fields.tran_id" class="form-control">
+                                </div>
+                            </div>
+
+                            <hr>
                             <div class="row">
                                 <div class="col-xl col-lg-3 col-md-4 col-sm-12">
 
@@ -153,22 +198,37 @@
                     union_id: '',
                     mowza_id : '',
                     type_id : '',
+                    employee_id : '',
+                    customer_id : '',
+                    supplier_id : '',
+                    booking_id : '',
+                    registration_id : '',
                 },
                 errors : {},
-                units : [],
+                bookings : {},
+                registrations : {},
+                units : {},
                 readonly : 'yes',
-                years : [],
-                mowzas : [],
-                'divisions' : [],
-                'districts' : [],
-                'thanas' : [],
-                'unions' : [],
+                years : {},
+                mowzas : {},
+                'divisions' : {},
+                'districts' : {},
+                'thanas' : {},
+                'unions' : {},
+                employees : {},
+                customers : {},
+                suppliers : {},
             };
         },
         created(){
             this.getUnit();
             this.getMowza();
             this.getDivision();
+            this.getEmployee();
+            this.getCustomer();
+            this.getSupplier();
+            this.getBooking();
+            this.getRegistration();
             this.getPurchase();
         },
         mounted(){
@@ -193,6 +253,14 @@
                 .get("/api/purchase/edit/"+this.$route.params.id)
                 .then((response)=>{
                     this.purchase_data = response.data;
+
+                    this.fields.employee_id = this.purchase_data.emp_id;
+                    this.fields.customer_id = this.purchase_data.customer;
+                    this.fields.supplier_id = this.purchase_data.supplier;
+                    this.fields.booking_id = this.purchase_data.booking_id;
+                    this.fields.registration_id = this.purchase_data.registration_id;
+                    this.fields.purchase_date = this.purchase_data.tran_date;
+                    this.fields.tran_id = this.purchase_data.tran_id;
 
                     this.fields.unit_id = this.purchase_data.unit;
                     this.fields.jl_no = this.purchase_data.jl_no;
@@ -224,6 +292,26 @@
                 })
                 .catch((error)=>{
                     toastr.error('Something went wrong.');
+                });
+            },
+            getBooking(){
+                axios
+                    .get("/api/booking")
+                    .then((response)=>{
+                        this.bookings = response.data;
+                    })
+                    .catch((error)=>{
+                        console.log(error);
+                    });
+            },
+            getRegistration(){
+                axios
+                .get("/api/registration")
+                .then((response)=>{
+                    this.registrations = response.data;
+                })
+                .catch((error)=>{
+                    console.log(error);
                 });
             },
             getUnit(){
@@ -287,6 +375,37 @@
                 .get("/api/get_data/unions/thana_id/"+id)
                 .then((response)=>{
                     this.unions = response.data
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
+            },
+            getEmployee(){
+                // this.loading = true
+                axios
+                .get("/api/employee")
+                .then((response)=>{
+                    this.employees = response.data
+                })
+                .catch((error)=>{
+                    console.log(error);
+                })
+            },
+            getCustomer(){
+                axios
+                .get("/api/customer")
+                .then((response)=>{
+                    this.customers = response.data
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
+            },
+            getSupplier(){
+                axios
+                .get("/api/supplier")
+                .then((response)=>{
+                    this.suppliers = response.data
                 })
                 .catch((error)=>{
                     console.log(error);

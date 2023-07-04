@@ -15,6 +15,7 @@
                                 <thead>
                                     <tr>
                                         <th>SN</th>
+                                        <th>Unit</th>
                                         <th>JL No</th>
                                         <th>Jot No</th>
                                         <th>Dag No</th>
@@ -43,6 +44,7 @@
                                 <tbody>
                                     <tr v-for="(purchase, index) in purchase_data" :key="purchase.id">
                                         <td>{{ index + 1 }}</td>
+                                        <td>{{ purchase.unit_name }}</td>
                                         <td>{{ purchase.jl_no }}</td>
                                         <td>{{ purchase.jot_no }}</td>
                                         <td>{{ purchase.dag_no }}</td>
