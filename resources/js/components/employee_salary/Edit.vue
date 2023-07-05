@@ -95,8 +95,7 @@
             return {
                 fields : {},
                 errors : {},
-                employee_name : '',
-                emp_id : '',
+                employee_data : {},
             };
         },
         mounted(){
@@ -107,11 +106,11 @@
             submit(){
                 console.log(this.fields);
                 axios
-                .post("/api/employee_salary/create", this.fields)
+                .post("/api/employee_salary/update/"+this.emp_id, this.fields)
                 .then((response)=>{
                     this.fields = {};
                     this.errors = {};
-                    toastr.success('Successfully Created.');
+                    toastr.success('Successfully Updated.');
                     this.$router.push('/employee_salary');
                 })
                 .catch((error)=>{
@@ -121,11 +120,20 @@
             },
             getEmployee(id){
                 axios
-                .get("/api/get_data/employee_info/id/"+id)
+                .get("/api/employee_salary/edit/"+id)
                 .then((response)=>{
-                    this.fields.employee_name = response.data[0]['name'];
-                    this.fields.employee_name = response.data[0]['code'];
-                    this.fields.emp_id = response.data[0]['id'];
+                    this.employee_data = response.data;
+                    this.fields.employee_name = this.employee_data.name;
+                    this.fields.emp_code = this.employee_data.code;
+                    this.fields.emp_id = this.employee_data.emp_id;
+                    this.fields.gross = this.employee_data.gross;
+                    this.fields.basic = this.employee_data.basic;
+                    this.fields.house_rent = this.employee_data.house_rent;
+                    this.fields.medical = this.employee_data.medical;
+                    this.fields.allowance = this.employee_data.allowance;
+                    this.fields.conveyance = this.employee_data.conveyance;
+                    this.fields.TA = this.employee_data.TA;
+                    this.fields.mobile = this.employee_data.mobile;
                 })
                 .catch((error)=>{
                     console.log(error);

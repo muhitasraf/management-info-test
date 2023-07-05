@@ -85,13 +85,24 @@
     export default{
         data() {
             return {
-                employee_salary : '',
+                employee_salary : {},
             };
         },
         mounted(){
             this.getEmployeeSalary();
         },
         methods :{
+            getEmployeeSalary(){
+                axios
+                .get("/api/employee_salary")
+                .then((response)=>{
+                    this.employee_salary = response.data;
+                    console.log(this.employee_salary)
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
+            },
             deleteEmployee(employee_id){
                 if(confirm("Do you really want to delete?")){
                     axios
@@ -105,16 +116,6 @@
                         toastr.error('Something went wrong.');
                     });
                 }
-            },
-            getEmployeeSalary(){
-                axios
-                .get("/api/employee_salary")
-                .then((response)=>{
-                    this.employee_salary = response.data;
-                })
-                .catch((error)=>{
-                    console.log(error);
-                });
             },
         },
     }
