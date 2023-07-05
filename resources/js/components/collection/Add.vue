@@ -153,7 +153,7 @@
                         this.fields = {};
                         this.errors = {};
                         this.$router.push('/collection');
-                        toastr.success('Successfully Deleted.');
+                        toastr.success('Successfully Created.');
                     })
                     .catch((error)=>{
                         console.log(error);
