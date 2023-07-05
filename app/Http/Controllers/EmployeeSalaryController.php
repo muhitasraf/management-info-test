@@ -9,20 +9,15 @@ use Illuminate\Support\Facades\DB;
 class EmployeeSalaryController extends Controller
 {
     public function index(){
-        $sql = "SELECT ei.id, ei.name, ei.code,es.*
+        $sql = "SELECT ei.id, ei.name, ei.code, es.*
                 FROM employee_salary es
-                LEFT JOIN employee_info ei ON ei.id = es.emp_id";
+                INNER JOIN employee_info ei ON ei.id = es.emp_id";
         $salary = DB::select($sql);
         return response()->json($salary);
     }
 
     public function store(Request $request){
 
-        // dd($request);
-        // $request->validate([
-        //     'name' => 'required | unique:employee',
-        // ]);
-        // dd($request->input('employee_name'));
         $employee = new EmployeeSalary();
 
         $employee->emp_id = $request->input('emp_id');
@@ -39,12 +34,12 @@ class EmployeeSalaryController extends Controller
     }
 
     public function show($id){
-        $single_employee = EmployeeSalary::where('id',$id)->leftJoin()->first();
+        $single_employee = DB::table('employee_salary')->leftJoin('employee_info','employee_salary.emp_id','=','employee_info.id')->where('employee_salary.id',$id)->first();
         return response()->json($single_employee);
     }
 
     public function edit($id){
-        $single_employee = EmployeeSalary::where('id',$id)->first();
+        $single_employee = DB::table('employee_salary')->leftJoin('employee_info','employee_salary.emp_id','=','employee_info.id')->where('employee_salary.id',$id)->first();
         return response()->json($single_employee);
     }
 
