@@ -151,10 +151,8 @@
                     toastr.success('Successfully Created.');
                 })
                 .catch((error)=>{
-
                     this.errors = error.response.data.errors;
                     toastr.error('Something went wrong.');
-                    // console.log(this.errors);
                 });
             }
         },
