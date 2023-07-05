@@ -72,6 +72,11 @@ import CreatePurchase from '../components/purchase/Add.vue';
 import ViewPurchase from '../components/purchase/Show.vue';
 import EditPurchase from '../components/purchase/Edit.vue';
 
+import Sales from '../components/sales/List.vue';
+import CreateSales from '../components/sales/Add.vue';
+import ViewSales from '../components/sales/Show.vue';
+import EditSales from '../components/sales/Edit.vue';
+
 export const routes = [
     { name: 'Home', path: '/', component: Home, meta : {requiresAuth:true} },
     { name: 'Login', path: '/login', component: Login, meta : {requiresGuest:true} },
@@ -146,6 +151,11 @@ export const routes = [
     { name: 'CreatePurchase', path: '/purchase/create', component: CreatePurchase, meta : {requiresAuth:true} },
     { name: 'ViewPurchase', path: '/purchase/view/:id', component: ViewPurchase, meta : {requiresAuth:true} },
     { name: 'EditPurchase', path: '/purchase/edit/:id', component: EditPurchase, meta : {requiresAuth:true} },
+
+    { name: 'Sales', path: '/sales', component: Sales, meta : {requiresAuth:true} },
+    { name: 'CreateSales', path: '/sales/create', component: CreateSales, meta : {requiresAuth:true} },
+    { name: 'ViewSales', path: '/sales/view/:id', component: ViewSales, meta : {requiresAuth:true} },
+    { name: 'EditSales', path: '/sales/edit/:id', component: EditSales, meta : {requiresAuth:true} },
 
 ];
 
