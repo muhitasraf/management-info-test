@@ -236,10 +236,10 @@
                     this.fields = {};
                     this.errors = {};
                     this.$router.push('/purchase');
-                    toastr.success('Successfully Deleted.');
+                    toastr.success('Successfully Created.');
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    toastr.error('Something went wrong.');
                 });
             },
             getBooking(){
@@ -249,7 +249,7 @@
                         this.bookings = response.data;
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        // console.log(error);
                     });
             },
             getRegistration(){
@@ -259,7 +259,7 @@
                     this.registrations = response.data;
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    // console.log(error);
                 });
             },
             getUnit(){
@@ -269,7 +269,7 @@
                         this.units = response.data;
                     })
                     .catch((error)=>{
-                        console.log(error);
+                        // console.log(error);
                     });
             },
             getMowza(){
@@ -281,7 +281,7 @@
                 })
                 .catch((error)=>{
                     // console.log(error);
-                    toastr.error('Something went wrong.');
+                    // toastr.error('Something went wrong.');
                 });
             },
 
@@ -292,7 +292,7 @@
                     this.divisions = response.data
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    // console.log(error);
                 });
             },
 
@@ -303,7 +303,7 @@
                     this.districts = response.data
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    // console.log(error);
                 });
             },
 
@@ -314,7 +314,7 @@
                     this.thanas = response.data
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    // console.log(error);
                 });
             },
 
@@ -325,7 +325,7 @@
                     this.unions = response.data
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    // console.log(error);
                 });
             },
             getEmployee(){
@@ -336,7 +336,7 @@
                     this.employees = response.data
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    // console.log(error);
                 })
             },
             getCustomer(){
@@ -346,7 +346,7 @@
                     this.customers = response.data
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    // console.log(error);
                 });
             },
             getSupplier(){
@@ -356,7 +356,7 @@
                     this.suppliers = response.data
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    // console.log(error);
                 });
             },
 

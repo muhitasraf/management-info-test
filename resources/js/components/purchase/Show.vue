@@ -157,7 +157,7 @@
                                         <tr>
                                             <td style="width: 120px;font-weight: bold;">Total Price</td>
                                             <td style="width: 10px;">:</td>
-                                            <td>{{ purchase_data.unit_price }}</td>
+                                            <td>{{ purchase_data.total_price }}</td>
                                         </tr>
                                         <tr>
                                             <td style="width: 120px;font-weight: bold;">Remaining Qty</td>

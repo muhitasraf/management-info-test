@@ -242,10 +242,10 @@
                     this.fields = {};
                     this.errors = {};
                     this.$router.push('/purchase');
-                    toastr.success('Successfully Deleted.');
+                    toastr.success('Successfully Updated.');
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    toastr.error('Something went wrong.');
                 });
             },
             getPurchase(){
