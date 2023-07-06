@@ -19,6 +19,34 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                <label class="col-form-label"><b>Employee Name</b></label>
+                                : <br>{{sales_data.emp_name}}
+                            </div>
+                            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                <label class="col-form-label"><b>Customer Name</b></label>
+                                : <br>{{sales_data.customer_name}}
+                            </div>
+                            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                <label class="col-form-label"><b>Supplier Name</b></label>
+                                : <br>{{sales_data.supplier_name}}
+                            </div>
+                            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                <label class="col-form-label"><b>Booking No</b></label>
+                                : <br>{{sales_data.booking_no}}
+                            </div>
+                            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                <label class="col-form-label"><b>Registration No</b></label>
+                                : <br>{{sales_data.registration_no}}
+                            </div>
+                            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                <label class="col-form-label"><b>Purchase Date</b></label>
+                                : <br>{{sales_data.tran_date}}
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="row">
+                            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
                                 <table>
                                     <tbody>
                                         <tr>

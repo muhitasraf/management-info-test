@@ -74,12 +74,17 @@ class SalesController extends Controller
     }
 
     public function show($id){
-        $sql = "SELECT ei.name emp_name, s.id, u.name unit_name, s.tran_id tran_id, s.jl_no, s.jot_no, s.dag_no, s.plot_no, s.cs, s.sa, s.rs, s.brs,
+        $sql = "SELECT ei.name emp_name, c.name customer_name, sp.name supplier_name, b.booking_no, rg.registration_no, s.id,
+                u.name unit_name, s.tran_id tran_id, s.jl_no, s.jot_no, s.dag_no, s.plot_no, s.cs, s.sa, s.rs, s.brs,
                 s.type, s.east, s.west, s.north, s.south, s.qty, s.unit_price, s.total_price, s.remaining_qty, m.name mowza_name,
-                dv.name division_name, dis.name district_name , th.name thana_name, un.name union_name
+                dv.name division_name, dis.name district_name , th.name thana_name, un.name union_name, tm.tran_date
                 FROM sales s
                 LEFT JOIN tran_master tm ON s.tran_id = tm.id
                 LEFT JOIN employee_info ei ON tm.emp_id = ei.id
+                LEFT JOIN customers c ON tm.customer = c.id
+                LEFT JOIN suppliers sp ON tm.supplier = sp.id
+                LEFT JOIN bookings b ON tm.booking_id = b.id
+                LEFT JOIN registrations rg ON tm.registration_id = rg.id
                 LEFT JOIN units u ON s.unit = u.id
                 LEFT JOIN mowzas m ON s.division = m.id
                 LEFT JOIN divisions dv ON s.division = dv.id

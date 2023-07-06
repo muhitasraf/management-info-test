@@ -17,6 +17,35 @@
                 <div class="card">
 
                     <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                <label class="col-form-label"><b>Employee Name</b></label>
+                                : <br>{{purchase_data.emp_name}}
+                            </div>
+                            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                <label class="col-form-label"><b>Customer Name</b></label>
+                                : <br>{{purchase_data.customer_name}}
+                            </div>
+                            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                <label class="col-form-label"><b>Supplier Name</b></label>
+                                : <br>{{purchase_data.supplier_name}}
+                            </div>
+                            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                <label class="col-form-label"><b>Booking No</b></label>
+                                : <br>{{purchase_data.booking_no}}
+                            </div>
+                            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                <label class="col-form-label"><b>Registration No</b></label>
+                                : <br>{{purchase_data.registration_no}}
+                            </div>
+                            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
+                                <label class="col-form-label"><b>Purchase Date</b></label>
+                                : <br>{{purchase_data.tran_date}}
+                            </div>
+                        </div>
+
+                        <hr>
                         <div class="row">
                             <div class="col-xl col-lg-3 col-md-4 col-sm-12">
                                 <table>
@@ -198,6 +227,7 @@
                 .get("/api/purchase/view/"+this.$route.params.id)
                 .then((response)=>{
                     this.purchase_data = response.data
+                    console.log(this.purchase_data);
                 })
                 .catch((error)=>{
                     toastr.error('Something went wrong.');

@@ -74,12 +74,17 @@ class PurchaseController extends Controller
     }
 
     public function show($id){
-        $sql = "SELECT ei.name emp_name, p.id, u.name unit_name, p.tran_id tran_id, p.jl_no, p.jot_no, p.dag_no, p.plot_no, p.cs, p.sa, p.rs, p.brs,
+        $sql = "SELECT ei.name emp_name, c.name customer_name, s.name supplier_name, b.booking_no, rg.registration_no, p.id,
+                u.name unit_name, p.tran_id tran_id, p.jl_no, p.jot_no, p.dag_no, p.plot_no, p.cs, p.sa, p.rs, p.brs,
                 p.type, p.east, p.west, p.north, p.south, p.qty, p.unit_price, p.total_price, p.remaining_qty, m.name mowza_name,
-                dv.name division_name, dis.name district_name , th.name thana_name, un.name union_name
+                dv.name division_name, dis.name district_name , th.name thana_name, un.name union_name, tm.tran_date
                 FROM purchase p
                 LEFT JOIN tran_master tm ON p.tran_id = tm.id
                 LEFT JOIN employee_info ei ON tm.emp_id = ei.id
+                LEFT JOIN customers c ON tm.customer = c.id
+                LEFT JOIN suppliers s ON tm.supplier = s.id
+                LEFT JOIN bookings b ON tm.booking_id = b.id
+                LEFT JOIN registrations rg ON tm.registration_id = rg.id
                 LEFT JOIN units u ON p.unit = u.id
                 LEFT JOIN mowzas m ON p.division = m.id
                 LEFT JOIN divisions dv ON p.division = dv.id
