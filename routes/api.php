@@ -14,6 +14,7 @@ use App\Http\Controllers\EmployeeSalaryController;
 use App\Http\Controllers\MowzaController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ThanaController;
@@ -168,6 +169,9 @@ Route::get('sales/view/{id}',[SalesController::class,'show']);
 Route::get('sales/edit/{id}',[SalesController::class,'edit']);
 Route::post('sales/update/{id}',[SalesController::class,'update']);
 Route::post('sales/delete/{id}',[SalesController::class,'destroy']);
+
+Route::get('monthly_purchase',[ReportsController::class,'monthly_purchase']);
+Route::get('monthly_sales',[ReportsController::class,'monthly_sales']);
 
 Route::get('get_data/{table}/{column}/{id}',[CommonController::class,'getData']);
 Route::get('get_data/{table}/{column}',[CommonController::class,'getData']);

@@ -51,12 +51,6 @@ class CommonController extends Controller
             'orientation' => $orientation,
         ]);
 
-        // Set some header informations for output
-        // $header = [
-        //     'Content-Type' => 'application/pdf',
-        //     'Content-Disposition' => 'inline; filename="'.$documentFileName.'"'
-        // ];
-
         //Add Table Style Here
         $table_contant .= "<style>
                                 table {
