@@ -77,6 +77,9 @@ import CreateSales from '../components/sales/Add.vue';
 import ViewSales from '../components/sales/Show.vue';
 import EditSales from '../components/sales/Edit.vue';
 
+import MonthlyPurchase from '../components/reports/MonthlyPurchase.vue';
+import MonthlySales from '../components/reports/MonthlySales.vue';
+
 export const routes = [
     { name: 'Home', path: '/', component: Home, meta : {requiresAuth:true} },
     { name: 'Login', path: '/login', component: Login, meta : {requiresGuest:true} },
@@ -156,6 +159,12 @@ export const routes = [
     { name: 'CreateSales', path: '/sales/create', component: CreateSales, meta : {requiresAuth:true} },
     { name: 'ViewSales', path: '/sales/view/:id', component: ViewSales, meta : {requiresAuth:true} },
     { name: 'EditSales', path: '/sales/edit/:id', component: EditSales, meta : {requiresAuth:true} },
+
+    { name: 'Sales', path: '/sales', component: Sales, meta : {requiresAuth:true} },
+    { name: 'CreateSales', path: '/sales/create', component: CreateSales, meta : {requiresAuth:true} },
+
+    { name: 'MonthlyPurchase', path: '/monthly_purchase', component: MonthlyPurchase, meta : {requiresAuth:true} },
+    { name: 'MonthlySales', path: '/monthly_sales', component: MonthlySales, meta : {requiresAuth:true} },
 
 ];
 

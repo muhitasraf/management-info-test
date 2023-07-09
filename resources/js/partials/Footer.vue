@@ -42,6 +42,15 @@
             "hideMethod": "fadeOut"
         }
     });
-
+    var startDate = new Date();
+    $('.from_month').datepicker({
+        autoclose: true,
+        minViewMode: 1,
+        format: 'mm'
+    }).on('changeDate', function(selected){
+        startDate = new Date(selected.date.valueOf());
+        startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
+        $('.to').datepicker('setStartDate', startDate);
+    });
     // $('#dataTable').DataTable();
 </script>

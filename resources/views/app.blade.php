@@ -37,7 +37,8 @@
         {{-- <script src="{{asset('global_assets/js/vendor/ui/moment/moment.min.js')}}"></script>
         <script src="{{asset('global_assets/js/vendor/pickers/daterangepicker.js')}}"></script>
         <script src="{{asset('global_assets/js/vendor/pickers/datepicker.min.js')}}"></script> --}}
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"></script>
 
         <!-- Toaster files -->
         <script src="{{asset('global_assets/js/toastr/toastr.min.js')}}"></script>

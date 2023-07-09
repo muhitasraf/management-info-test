@@ -187,6 +187,14 @@
                             <li class="nav-item"><router-link to="/sales" class="nav-item nav-link">List</router-link></li>
                         </ul>
                     </li>
+
+                    <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link"><i class="ph-layout"></i> <span>Report</span></a>
+                        <ul class="nav-group-sub collapse">
+                            <li class="nav-item"><router-link to="/monthly_purchase" class="nav-item nav-link">Monthly Purchase</router-link></li>
+                            <li class="nav-item"><router-link to="/monthly_sales" class="nav-item nav-link">Monthly Sales</router-link></li>
+                        </ul>
+                    </li>
                     <!-- /layout -->
 
                 </ul>
