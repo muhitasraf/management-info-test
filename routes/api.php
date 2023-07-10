@@ -170,8 +170,8 @@ Route::get('sales/edit/{id}',[SalesController::class,'edit']);
 Route::post('sales/update/{id}',[SalesController::class,'update']);
 Route::post('sales/delete/{id}',[SalesController::class,'destroy']);
 
-Route::get('monthly_purchase',[ReportsController::class,'monthly_purchase']);
-Route::get('monthly_sales',[ReportsController::class,'monthly_sales']);
+Route::post('monthly_purchase',[ReportsController::class,'monthly_purchase']);
+Route::post('monthly_sales',[ReportsController::class,'monthly_sales']);
 
 Route::get('get_data/{table}/{column}/{id}',[CommonController::class,'getData']);
 Route::get('get_data/{table}/{column}',[CommonController::class,'getData']);

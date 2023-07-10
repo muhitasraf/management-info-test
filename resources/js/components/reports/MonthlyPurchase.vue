@@ -3,34 +3,21 @@
         <h5 class="mb-0">Monthly Purchase</h5>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
-                <label class="col-form-label">Employee Name</label>
-                <select class="form-select" v-model="fields.employee_id">
-                    <option value="" disabled>Please select one</option>
-                    <option v-for="employee in employees" v-bind:value="employee.id">{{ employee.name }}</option>
-                </select>
+        <form @submit.prevent="submit">
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="col-form-label">From Date</label>
+                    <input type="date" v-model="fields.from_date" class="form-control from_date">
+                </div>
+                <div class="col-md-2">
+                    <label class="col-form-label">To Date</label>
+                    <input type="date" v-model="fields.to_date" class="form-control to_date">
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" value="Search" style="margin-top: 40px;" class="btn btn-info search">
+                </div>
             </div>
-            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
-                <label class="col-form-label">Customer Name</label>
-                <select class="form-select" v-model="fields.customer_id">
-                    <option value="" disabled>Please select one</option>
-                    <option v-for="customer in customers" v-bind:value="customer.id">{{ customer.name }}</option>
-                </select>
-            </div>
-            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
-                <label class="col-form-label">Supplier Name</label>
-                <select class="form-select" v-model="fields.supplier_id">
-                    <option value="" disabled>Please select one</option>
-                    <option v-for="supplier in suppliers" v-bind:value="supplier.id">{{ supplier.name }}</option>
-                </select>
-            </div>
-
-            <div class="col-xl col-lg-3 col-md-4 col-sm-12">
-                <label class="col-form-label">Purchase Date</label>
-                <input type="text" class="form-control from_month">
-            </div>
-        </div>
+        </form>
         <div class="row">
             <div class="col-md-12 pt-2">
                 <div class="card">
@@ -63,11 +50,36 @@
                                         <th>Unit Price</th>
                                         <th>Total Price</th>
                                         <th>Remaining Qty</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr v-for="(purchase, index) in purchase_data" :key="purchase.id">
+                                        <td>{{ index + 1 }}</td>
+                                        <td>{{ purchase.unit_name }}</td>
+                                        <td>{{ purchase.jl_no }}</td>
+                                        <td>{{ purchase.jot_no }}</td>
+                                        <td>{{ purchase.dag_no }}</td>
+                                        <td>{{ purchase.plot_no }}</td>
+                                        <td>{{ purchase.mowza_name }}</td>
+                                        <td>{{ purchase.division_name }}</td>
+                                        <td>{{ purchase.district_name }}</td>
+                                        <td>{{ purchase.thana_name }}</td>
+                                        <td>{{ purchase.union_name }}</td>
+                                        <td>{{ purchase.cs }}</td>
+                                        <td>{{ purchase.sa }}</td>
+                                        <td>{{ purchase.rs }}</td>
+                                        <td>{{ purchase.brs }}</td>
+                                        <td>{{ purchase.type==0 ? 'Plot' : 'Land' }}</td>
+                                        <td>{{ purchase.east }}</td>
+                                        <td>{{ purchase.west }}</td>
+                                        <td>{{ purchase.north }}</td>
+                                        <td>{{ purchase.south }}</td>
+                                        <td>{{ purchase.qty }}</td>
+                                        <td>{{ purchase.unit_price }}</td>
+                                        <td>{{ purchase.total_price }}</td>
+                                        <td>{{ purchase.remaining_qty }}</td>
 
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -83,8 +95,10 @@
         data() {
             return {
                 fields : {
-
+                    from_date : '',
+                    to_date : '',
                 },
+                purchase_data : {},
             };
         },
         mounted(){
@@ -95,64 +109,13 @@
                 axios
                 .post("/api/monthly_purchase", this.fields)
                 .then((response)=>{
-
+                    this.purchase_data = response.data;
+                    console.log(this.purchase_data);
                 })
                 .catch((error)=>{
                     toastr.error('Something went wrong.');
                 });
             },
-            getBooking(){
-                axios
-                    .get("/api/booking")
-                    .then((response)=>{
-                        this.bookings = response.data;
-                    })
-                    .catch((error)=>{
-                        // console.log(error);
-                    });
-            },
-            getRegistration(){
-                axios
-                .get("/api/registration")
-                .then((response)=>{
-                    this.registrations = response.data;
-                })
-                .catch((error)=>{
-                    // console.log(error);
-                });
-            },
-            getEmployee(){
-                // this.loading = true
-                axios
-                .get("/api/employee")
-                .then((response)=>{
-                    this.employees = response.data
-                })
-                .catch((error)=>{
-                    // console.log(error);
-                })
-            },
-            getCustomer(){
-                axios
-                .get("/api/customer")
-                .then((response)=>{
-                    this.customers = response.data
-                })
-                .catch((error)=>{
-                    // console.log(error);
-                });
-            },
-            getSupplier(){
-                axios
-                .get("/api/supplier")
-                .then((response)=>{
-                    this.suppliers = response.data
-                })
-                .catch((error)=>{
-                    // console.log(error);
-                });
-            },
-
         },
     }
 

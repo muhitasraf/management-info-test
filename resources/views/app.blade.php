@@ -34,17 +34,12 @@
         <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 
-        {{-- <script src="{{asset('global_assets/js/vendor/ui/moment/moment.min.js')}}"></script>
-        <script src="{{asset('global_assets/js/vendor/pickers/daterangepicker.js')}}"></script>
-        <script src="{{asset('global_assets/js/vendor/pickers/datepicker.min.js')}}"></script> --}}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"></script>
 
         <!-- Toaster files -->
         <script src="{{asset('global_assets/js/toastr/toastr.min.js')}}"></script>
         <link href="{{asset('global_assets/js/toastr/toastr.css')}}" rel="stylesheet">
-
-        {{-- <script src="{{asset('global_assets/js/vendor/pickers/picker_date.js')}}"></script> --}}
 
         <!-- Theme JS files -->
         <script src="{{asset('assets/js/app.js')}}"></script>
